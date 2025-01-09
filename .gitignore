@@ -1,10 +1,9 @@
 
 .codegpt
-# Loại bỏ tất cả file .log
-*.log
-
-# Loại bỏ thư mục tmp/
-tmp/
-
-# Loại bỏ file cụ thể
-# largefile.zip
+# Loại trừ các thư mục và file không cần thiết
+Temp/
+Library/
+.vscode/
+*.sln
+*.csproj
+*.htm
