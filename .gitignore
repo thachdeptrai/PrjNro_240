@@ -1,0 +1,10 @@
+
+.codegpt
+# Loại bỏ tất cả file .log
+*.log
+
+# Loại bỏ thư mục tmp/
+tmp/
+
+# Loại bỏ file cụ thể
+# largefile.zip
