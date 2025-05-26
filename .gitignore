@@ -7,3 +7,9 @@ Library/
 *.sln
 *.csproj
 *.htm
+Build/
+Library/
+ProjectSettings/
+*.zip
+*.rar
+*.meta

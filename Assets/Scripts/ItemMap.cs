@@ -50,7 +50,7 @@ public class ItemMap : IMapObject
 
 	public int countAura;
 
-	public int countAutoPick = 0;
+	public int countAutoPick;
 
 	public static Image imageFlare = GameCanvas.loadImage("/mainImage/myTexture2dflare.png");
 
@@ -200,7 +200,7 @@ public class ItemMap : IMapObject
 
 	private bool isAuraItem()
 	{
-        if (template.type == 22)
+		if (template.type == 22)
 		{
 			return true;
 		}

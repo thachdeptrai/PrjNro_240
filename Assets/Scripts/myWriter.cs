@@ -45,20 +45,6 @@ public class myWriter
 		writeSByte((sbyte)value);
 	}
 
-	public void writeUnsignedByte(byte value)
-	{
-		writeSByte((sbyte)value);
-	}
-
-	public void writeUnsignedByte(byte[] value)
-	{
-		checkLenght(value.Length);
-		for (int i = 0; i < value.Length; i++)
-		{
-			writeSByteUncheck((sbyte)value[i]);
-		}
-	}
-
 	public void writeSByte(sbyte[] value)
 	{
 		checkLenght(value.Length);
@@ -87,15 +73,6 @@ public class myWriter
 		}
 	}
 
-	public void writeUnsignedShort(ushort value)
-	{
-		checkLenght(2);
-		for (int num = 1; num >= 0; num--)
-		{
-			writeSByteUncheck((sbyte)(value >> num * 8));
-		}
-	}
-
 	public void writeInt(int value)
 	{
 		checkLenght(4);
@@ -105,34 +82,9 @@ public class myWriter
 		}
 	}
 
-	public void writeLong(long value)
-	{
-		checkLenght(8);
-		for (int num = 7; num >= 0; num--)
-		{
-			writeSByteUncheck((sbyte)(value >> num * 8));
-		}
-	}
-
 	public void writeBoolean(bool value)
 	{
 		writeSByte((sbyte)(value ? 1 : 0));
-	}
-
-	public void writeBool(bool value)
-	{
-		writeSByte((sbyte)(value ? 1 : 0));
-	}
-
-	public void writeString(string value)
-	{
-		char[] array = value.ToCharArray();
-		writeShort((short)array.Length);
-		checkLenght(array.Length);
-		for (int i = 0; i < array.Length; i++)
-		{
-			writeSByteUncheck((sbyte)array[i]);
-		}
 	}
 
 	public void writeUTF(string value)
@@ -201,11 +153,6 @@ public class myWriter
 	}
 
 	public void Close()
-	{
-		buffer = null;
-	}
-
-	public void close()
 	{
 		buffer = null;
 	}

@@ -14,11 +14,6 @@ public class MyVector
 		a = new ArrayList();
 	}
 
-	public MyVector(ArrayList a)
-	{
-		this.a = a;
-	}
-
 	public void addElement(object o)
 	{
 		a.Add(o);
@@ -49,14 +44,6 @@ public class MyVector
 			return a[index];
 		}
 		return null;
-	}
-
-	public void set(int index, object obj)
-	{
-		if (index > -1 && index < a.Count)
-		{
-			a[index] = obj;
-		}
 	}
 
 	public void setElementAt(object obj, int index)

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Info : IActionListener
 {
 	public MyVector infoWaitToShow = new MyVector();
@@ -98,7 +96,6 @@ public class Info : IActionListener
 			for (int i = 0; i < says.Length; i++)
 			{
 				mFont mFont2 = mFont.tahoma_7;
-				int num3 = 2;
 				string text = says[i];
 				int num4 = 0;
 				if (says[i].StartsWith("|"))
@@ -111,7 +108,7 @@ public class Info : IActionListener
 					if (array.Length == 4)
 					{
 						text = array[3];
-						num3 = int.Parse(array[2]);
+						int.Parse(array[2]);
 					}
 					num4 = int.Parse(array[1]);
 					num2 = num4;
@@ -175,16 +172,16 @@ public class Info : IActionListener
 					((!info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2).drawString(g, (info.charInfo.isTichXanh ? "     " : string.Empty) + info.charInfo.cName, X + 12, Y + 3, 0);
 					if (info.charInfo.isTichXanh)
 					{
-                        ModFunc.PaintTicks(g, X + 8, Y + 2);
-                    }
+						ModFunc.PaintTicks(g, X + 8, Y + 2);
+					}
 				}
 				else
 				{
 					((!info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2).drawString(g, (info.charInfo.isTichXanh ? "     " : string.Empty) + info.charInfo.cName, X + 12, Y - 3, 0);
 					if (info.charInfo.isTichXanh)
 					{
-                        ModFunc.PaintTicks(g, X + 9, Y - 2);
-                    }
+						ModFunc.PaintTicks(g, X + 9, Y - 2);
+					}
 				}
 				if (!GameCanvas.isTouch)
 				{
@@ -209,9 +206,7 @@ public class Info : IActionListener
 				}
 				GameCanvas.resetTrans(g);
 			}
-			if (info.charInfo == null)
-			{
-			}
+			_ = info.charInfo;
 		}
 		g.translate(-x, -y);
 	}
@@ -247,15 +242,7 @@ public class Info : IActionListener
 		if (info.charInfo != null)
 		{
 			says = new string[1] { info.s };
-			if (mGraphics.zoomLevel == 1)
-			{
-				num = says.Length;
-			}
-			else
-			{
-				string[] array = mFont.tahoma_7_whiteSmall.splitFontArray(info.s, 120);
-				num = array.Length;
-			}
+			num = ((mGraphics.zoomLevel != 1) ? mFont.tahoma_7_whiteSmall.splitFontArray(info.s, 120).Length : says.Length);
 		}
 		else
 		{
@@ -280,8 +267,9 @@ public class Info : IActionListener
 		{
 			infoWaitToShow.removeElementAt(0);
 		}
-		if (infoWaitToShow.size() <= 0 || s.Equals(((InfoItem)infoWaitToShow.lastElement()).s))
+		if (infoWaitToShow.size() > 0)
 		{
+			s.Equals(((InfoItem)infoWaitToShow.lastElement()).s);
 		}
 		InfoItem infoItem = new InfoItem(s);
 		if (type == 0)
@@ -300,7 +288,7 @@ public class Info : IActionListener
 		{
 			infoItem.speed = 300;
 			infoItem.last = mSystem.currentTimeMillis();
-			infoItem.maxTime = infoItem.timeCount = 80;
+			infoItem.maxTime = (infoItem.timeCount = 80);
 		}
 		if (cInfo != null)
 		{
@@ -328,33 +316,11 @@ public class Info : IActionListener
 		}
 	}
 
-	public void addInfo(string s, int speed, mFont f)
-	{
-		if (GameCanvas.w == 128)
-		{
-			limLeft = 1;
-		}
-		if (infoWaitToShow.size() > 10)
-		{
-			infoWaitToShow.removeElementAt(0);
-		}
-		infoWaitToShow.addElement(new InfoItem(s, f, speed));
-	}
-
-	public bool isEmpty()
-	{
-		return p1 == 5 && infoWaitToShow.size() == 0;
-	}
-
 	public void perform(int idAction, object p)
 	{
 		if (idAction == 1000)
 		{
 			ChatTextField.gI().startChat(GameScr.gI(), mResources.chat_player);
 		}
-	}
-
-	public void onCancelChat()
-	{
 	}
 }

@@ -1,6 +1,5 @@
 using System.Threading;
 using Mod.XMAP;
-using UnityEngine;
 
 public class InfoMe
 {
@@ -24,8 +23,6 @@ public class InfoMe
 
 	public int cmvy;
 
-	public int cmyLim;
-
 	public int cmtoX;
 
 	public int cmx;
@@ -33,8 +30,6 @@ public class InfoMe
 	public int cmdx;
 
 	public int cmvx;
-
-	public int cmxLim;
 
 	public bool isDone;
 
@@ -44,11 +39,7 @@ public class InfoMe
 
 	public int playerID;
 
-	public int timeCount;
-
 	public Command cmdChat;
-
-	public bool isShow;
 
 	public InfoMe()
 	{
@@ -86,11 +77,13 @@ public class InfoMe
 		if (info != null)
 		{
 			info.paint(g, cmx, cmy, dir);
-			if (info.info == null || info.info.charInfo == null || cmdChat != null || !GameCanvas.isTouch)
-			{
-			}
 			if (info.info != null && info.info.charInfo != null && cmdChat == null)
 			{
+				_ = GameCanvas.isTouch;
+			}
+			if (info.info != null && info.info.charInfo != null)
+			{
+				_ = cmdChat;
 			}
 		}
 		if (info.info != null && info.info.charInfo == null && charId != null)
@@ -330,7 +323,7 @@ public class InfoMe
 			}
 			else if (s.ToLower().Contains("rương") && s.ToLower().Contains(" đã đầy"))
 			{
-				new Thread(new ThreadStart(ModFunc.GI().CollectAllThuongDe)).Start();
+				new Thread(ModFunc.GI().CollectAllThuongDe).Start();
 				return;
 			}
 		}

@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class ChatPopup : Effect2, IActionListener
 {
@@ -291,7 +290,7 @@ public class ChatPopup : Effect2, IActionListener
 
 	public override void paint(mGraphics g)
 	{
-		if (GameScr.gI().activeRongThan && GameScr.gI().isUseFreez)
+		if (ModFunc.isEditButton || (GameScr.gI().activeRongThan && GameScr.gI().isUseFreez))
 		{
 			return;
 		}
@@ -394,8 +393,7 @@ public class ChatPopup : Effect2, IActionListener
 			}
 			if (says[i].StartsWith("<"))
 			{
-				string[] array2 = Res.split(says[i], "<", 0);
-				string[] array3 = Res.split(array2[1], ">", 1);
+				string[] array3 = Res.split(Res.split(says[i], "<", 0)[1], ">", 1);
 				if (second == 0)
 				{
 					second = int.Parse(array3[1]);
@@ -491,7 +489,7 @@ public class ChatPopup : Effect2, IActionListener
 		int num = cx;
 		int num2 = cy;
 		int num3 = sayWidth;
-		int num4 = ch;
+		_ = ch;
 		int num5 = 0;
 		int num6 = 0;
 		num5 = g.getTranslateX();
@@ -550,8 +548,7 @@ public class ChatPopup : Effect2, IActionListener
 			}
 			if (says[i].StartsWith("<"))
 			{
-				string[] array2 = Res.split(says[i], "<", 0);
-				string[] array3 = Res.split(array2[1], ">", 1);
+				string[] array3 = Res.split(Res.split(says[i], "<", 0)[1], ">", 1);
 				if (second == 0)
 				{
 					second = int.Parse(array3[1]);

@@ -1,6 +1,6 @@
+using System;
 using System.Net.NetworkInformation;
 using System.Threading;
-using Mod.XMAP;
 using UnityEngine;
 
 public class Main : MonoBehaviour
@@ -77,7 +77,7 @@ public class Main : MonoBehaviour
 
 	public static bool isQuitApp;
 
-	private Vector2 lastMousePos = default(Vector2);
+	private Vector2 lastMousePos;
 
 	public static int a = 1;
 
@@ -95,7 +95,7 @@ public class Main : MonoBehaviour
 		}
 		mainThreadName = Thread.CurrentThread.Name;
 		isPC = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer;
-		isIPhone = IphoneVersionApp = Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android;
+		isIPhone = (IphoneVersionApp = Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android);
 		started = true;
 		if (isPC && !isIPhone)
 		{
@@ -108,15 +108,16 @@ public class Main : MonoBehaviour
 			{
 				Screen.SetResolution(1024, 600, fullscreen: false);
 			}
-		} else if (isIPhone)
-        {
+		}
+		else if (isIPhone)
+		{
 			Screen.fullScreen = true;
 			GameCanvas.isTouch = true;
-        }
-        ModFunc.GI().LoadGame();
-    }
+		}
+		ModFunc.GI().LoadGame();
+	}
 
-    private void SetInit()
+	private void SetInit()
 	{
 		base.enabled = true;
 	}
@@ -135,26 +136,33 @@ public class Main : MonoBehaviour
 
 	private void OnGUI()
 	{
-		if (count >= 10)
+		if (count < 10)
 		{
-			if (fps == 0)
-			{
-				timefps = mSystem.currentTimeMillis();
-			}
-			else if (mSystem.currentTimeMillis() - timefps > 1000)
-			{
-				max = fps;
-				fps = 0;
-				timefps = mSystem.currentTimeMillis();
-			}
-			fps++;
-			checkInput();
-			Session_ME.update();
-			Session_ME2.update();
-			if (Event.current.type.Equals(EventType.Repaint) && paintCount <= updateCount)
+			return;
+		}
+		if (fps == 0)
+		{
+			timefps = mSystem.currentTimeMillis();
+		}
+		else if (mSystem.currentTimeMillis() - timefps > 1000)
+		{
+			max = fps;
+			fps = 0;
+			timefps = mSystem.currentTimeMillis();
+		}
+		fps++;
+		checkInput();
+		Session_ME.update();
+		Session_ME2.update();
+		if (Event.current.type.Equals(EventType.Repaint) && paintCount <= updateCount)
+		{
+			if (GameMidlet.gameCanvas != null)
 			{
 				GameMidlet.gameCanvas.paint(g);
-				paintCount++;
+			}
+			paintCount++;
+			if (g != null)
+			{
 				g.reset();
 			}
 		}
@@ -187,12 +195,12 @@ public class Main : MonoBehaviour
 			{
 				Screen.fullScreen = false;
 			}
-            if (isIPhone && !isPC)
-            {
-                Screen.fullScreen = true;
-            }
-            if (isPC)
-            {
+			if (isIPhone && !isPC)
+			{
+				Screen.fullScreen = true;
+			}
+			if (isPC)
+			{
 				typeClient = 4;
 			}
 			if (isWindowsPhone)
@@ -232,7 +240,7 @@ public class Main : MonoBehaviour
 
 	public string GetMacAddress()
 	{
-		string empty = string.Empty;
+		_ = string.Empty;
 		NetworkInterface[] allNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
 		for (int i = 0; i < allNetworkInterfaces.Length; i++)
 		{
@@ -247,15 +255,11 @@ public class Main : MonoBehaviour
 
 	public void doClearRMS()
 	{
-		if (isPC)
+		if (isPC && Rms.loadRMSInt("lastZoomlevel") != mGraphics.zoomLevel)
 		{
-			int num = Rms.loadRMSInt("lastZoomlevel");
-			if (num != mGraphics.zoomLevel)
-			{
-				Rms.clearAll();
-				Rms.saveRMSInt("lastZoomlevel", mGraphics.zoomLevel);
-				Rms.saveRMSInt("levelScreenKN", level);
-			}
+			Rms.clearAll();
+			Rms.saveRMSInt("lastZoomlevel", mGraphics.zoomLevel);
+			Rms.saveRMSInt("levelScreenKN", level);
 		}
 	}
 
@@ -268,8 +272,8 @@ public class Main : MonoBehaviour
 		}
 	}
 
-    [System.Obsolete]
-    private void FixedUpdate()
+	[Obsolete]
+	private void FixedUpdate()
 	{
 		Rms.update();
 		count++;
@@ -287,9 +291,12 @@ public class Main : MonoBehaviour
 			}
 			up++;
 			setsizeChange();
-            updateCount++;
-            ipKeyboard.update();
-			GameMidlet.gameCanvas.update();
+			updateCount++;
+			ipKeyboard.update();
+			if (GameMidlet.gameCanvas != null)
+			{
+				GameMidlet.gameCanvas.update();
+			}
 			Image.update();
 			DataInputStream.update();
 			f++;
@@ -299,13 +306,9 @@ public class Main : MonoBehaviour
 			}
 			if (!isPC)
 			{
-				int num = 1 / a;
+				_ = 1 / a;
 			}
 		}
-	}
-
-	private void Update()
-	{
 	}
 
 	private void checkInput()

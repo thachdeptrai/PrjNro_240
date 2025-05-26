@@ -8,7 +8,7 @@ public class Cout
 	{
 		if (mSystem.isTest)
 		{
-			Debug.Log(((count % 2 != 0) ? "***--- " : ">>>--- ") + s);
+			// Debug.Log(((count % 2 != 0) ? "***--- " : ">>>--- ") + s);
 			count++;
 		}
 	}
@@ -31,9 +31,7 @@ public class Cout
 
 	public static void LogError2(string str)
 	{
-		if (!mSystem.isTest)
-		{
-		}
+		_ = mSystem.isTest;
 	}
 
 	public static void LogError3(string str)

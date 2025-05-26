@@ -72,10 +72,8 @@ public class ServerScr : mScreen, IActionListener
 			Command command = (Command)vecServer.elementAt(i);
 			if (command != null)
 			{
-				int num = GameCanvas.hw - numw * (wc + w2c) / 2;
-				int x = num + i % numw * (wc + w2c);
-				int num2 = GameCanvas.hh - numh * (hc + w2c) / 2;
-				int y = num2 + i / numw * (hc + w2c);
+				int x = GameCanvas.hw - numw * (wc + w2c) / 2 + i % numw * (wc + w2c);
+				int y = GameCanvas.hh - numh * (hc + w2c) / 2 + i / numw * (hc + w2c);
 				command.x = x;
 				command.y = y;
 			}

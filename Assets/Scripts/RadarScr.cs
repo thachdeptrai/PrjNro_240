@@ -3,16 +3,6 @@ using UnityEngine;
 
 public class RadarScr : mScreen
 {
-	public const sbyte SUBCMD_ALL = 0;
-
-	public const sbyte SUBCMD_USE = 1;
-
-	public const sbyte SUBCMD_LEVEL = 2;
-
-	public const sbyte SUBCMD_AMOUNT = 3;
-
-	public const sbyte SUBCMD_AURA = 4;
-
 	public static RadarScr instance;
 
 	public static bool TYPE_UI;
@@ -110,8 +100,6 @@ public class RadarScr : mScreen
 	private int pxx;
 
 	private int pyy;
-
-	private int xClip;
 
 	private int wClip;
 

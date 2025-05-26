@@ -1,7 +1,5 @@
 public class Key
 {
-	public static int NUM0;
-
 	public static int NUM1 = 1;
 
 	public static int NUM2 = 2;

@@ -16,8 +16,6 @@ public class GamePad
 
 	private int R;
 
-	private int r;
-
 	private int d;
 
 	private int xTemp;
@@ -275,7 +273,7 @@ public class GamePad
 			{
 				return false;
 			}
-			return ((GameCanvas.px >= xZone && GameCanvas.px <= wZone && GameCanvas.py >= yZone && GameCanvas.py <= hZone) || GameCanvas.px >= GameCanvas.w - 50);
+			return (GameCanvas.px >= xZone && GameCanvas.px <= wZone && GameCanvas.py >= yZone && GameCanvas.py <= hZone) || GameCanvas.px >= GameCanvas.w - 50;
 		}
 		catch (Exception)
 		{

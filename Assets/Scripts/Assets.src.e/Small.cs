@@ -48,13 +48,6 @@ namespace Assets.src.e
 
 		public void update()
 		{
-		/*	timeUpdate++;
-			if (timeUpdate - timePaint > 1 && !Char.myCharz().isCharBodyImageID(id))
-			{
-				SmallImage.imgNew[id] = null;
-			}*/
 		}
 	}
-
 }
-

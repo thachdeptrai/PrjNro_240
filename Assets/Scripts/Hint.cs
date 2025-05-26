@@ -10,10 +10,6 @@ public class Hint
 
 	public static int t;
 
-	public static int xF;
-
-	public static int yF;
-
 	public static bool isShow;
 
 	public static bool activeClick;
@@ -34,8 +30,6 @@ public class Hint
 
 	public static bool isPaintArrow;
 
-	private int s = 2;
-
 	public static bool isOnTask(int tastId, int index)
 	{
 		if (Char.myCharz().taskMaint != null && Char.myCharz().taskMaint.taskId == tastId && Char.myCharz().taskMaint.index == index)
@@ -43,19 +37,6 @@ public class Hint
 			return true;
 		}
 		return false;
-	}
-
-	public static bool isPaintz()
-	{
-		if (isOnTask(0, 3) && GameCanvas.panel.currentTabIndex == 0 && (GameCanvas.panel.cmy < 0 || GameCanvas.panel.cmy > 30))
-		{
-			return false;
-		}
-		if (isOnTask(2, 0) && GameCanvas.panel.isShow && GameCanvas.panel.currentTabIndex != 0)
-		{
-			return false;
-		}
-		return true;
 	}
 
 	public static void clickNpc()
@@ -109,8 +90,7 @@ public class Hint
 		bool flag = false;
 		for (int i = 0; i < GameScr.vMob.size(); i++)
 		{
-			Mob mob = (Mob)GameScr.vMob.elementAt(i);
-			if (mob.isHintFocus)
+			if (((Mob)GameScr.vMob.elementAt(i)).isHintFocus)
 			{
 				flag = true;
 				break;
@@ -466,7 +446,7 @@ public class Hint
 					{
 						isPaint = false;
 					}
-					if (Char.myCharz().cMP <= 0)
+					if (Char.myCharz().cMP <= 0.0)
 					{
 						x = GameScr.xHP + 5;
 						y = GameScr.yHP + 13;
@@ -516,7 +496,8 @@ public class Hint
 					}
 					else if (!isViewPotential)
 					{
-						int num2 = ((GameCanvas.h <= 300) ? 10 : 15);
+						_ = GameCanvas.h;
+						_ = 300;
 						x = GameCanvas.panel.xScroll + 10 + 108 - 18;
 						y = 65;
 					}
@@ -529,7 +510,7 @@ public class Hint
 					{
 						isPaint = false;
 					}
-					if (Char.myCharz().cMP <= 0)
+					if (Char.myCharz().cMP <= 0.0)
 					{
 						x = GameScr.xHP + 5;
 						y = GameScr.yHP + 13;

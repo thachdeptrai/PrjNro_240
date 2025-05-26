@@ -59,7 +59,6 @@ public class MyKeyMap
 		h.Add(KeyCode.Period, 46);
 		h.Add(KeyCode.At, 64);
 		h.Add(KeyCode.Tab, -26);
-
 		h.Add(KeyCode.KeypadEnter, -5);
 		h.Add(KeyCode.Comma, 44);
 	}

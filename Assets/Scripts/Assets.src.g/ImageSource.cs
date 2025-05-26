@@ -53,42 +53,6 @@ namespace Assets.src.g
 			Service.gI().imageSource(myVector);
 		}
 
-		public static sbyte getVersionRMSByID(string id)
-		{
-			for (int i = 0; i < vRms.size(); i++)
-			{
-				if (id.Equals(((ImageSource)vRms.elementAt(i)).id))
-				{
-					return ((ImageSource)vRms.elementAt(i)).version;
-				}
-			}
-			return -1;
-		}
-
-		public static sbyte getCurrVersionByID(string id)
-		{
-			for (int i = 0; i < vSource.size(); i++)
-			{
-				if (id.Equals(((ImageSource)vSource.elementAt(i)).id))
-				{
-					return ((ImageSource)vSource.elementAt(i)).version;
-				}
-			}
-			return -1;
-		}
-
-		public static bool isExistID(string id)
-		{
-			for (int i = 0; i < vRms.size(); i++)
-			{
-				if (id.Equals(((ImageSource)vRms.elementAt(i)).id))
-				{
-					return true;
-				}
-			}
-			return false;
-		}
-
 		public static void saveRMS()
 		{
 			DataOutputStream dataOutputStream = new DataOutputStream();
@@ -109,6 +73,4 @@ namespace Assets.src.g
 			}
 		}
 	}
-
 }
-

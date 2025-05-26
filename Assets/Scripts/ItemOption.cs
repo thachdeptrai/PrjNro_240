@@ -12,6 +12,15 @@ public class ItemOption
 	{
 	}
 
+	public bool IsValidOption()
+	{
+		if (this != null && optionTemplate != null && optionTemplate.id != 21 && optionTemplate.id != 200 && optionTemplate.id != 72 && optionTemplate.id != 57 && optionTemplate.id != 58 && optionTemplate.id != 34 && optionTemplate.id != 35 && optionTemplate.id != 36 && optionTemplate.id != 102 && optionTemplate.id != 107)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	public ItemOption(int optionTemplateId, int param)
 	{
 		if (optionTemplateId == 22)
@@ -31,11 +40,6 @@ public class ItemOption
 	public string getOptionString()
 	{
 		return NinjaUtil.Replace(optionTemplate.name, "#", param + string.Empty);
-	}
-
-	public string getOptionName()
-	{
-		return NinjaUtil.Replace(optionTemplate.name, "+#", string.Empty);
 	}
 
 	public string getOptiongColor()

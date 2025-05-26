@@ -1,33 +1,12 @@
 using System;
-using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
 public class NinjaUtil
 {
-	public static void onLoadMapComplete()
-	{
-		GameCanvas.endDlg();
-	}
-
-	public void onLoading()
-	{
-		GameCanvas.startWaitDlg(mResources.downloading_data);
-	}
-
 	public static int randomNumber(int max)
 	{
-		MyRandom myRandom = new MyRandom();
-		return myRandom.nextInt(max);
-	}
-
-	public static string Base64Encode(string plainText)
-	{
-		var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-		return System.Convert.ToBase64String(plainTextBytes);
-	}
-
-	public static string Base64Decode(string base64EncodedData)
-	{
-		var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-		return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+		return new MyRandom().nextInt(max);
 	}
 
 	public static sbyte[] readByteArray(Message msg)
@@ -52,8 +31,7 @@ public class NinjaUtil
 	{
 		try
 		{
-			int num = dos.readInt();
-			sbyte[] data = new sbyte[num];
+			sbyte[] data = new sbyte[dos.readInt()];
 			dos.read(ref data);
 			return data;
 		}
@@ -69,32 +47,12 @@ public class NinjaUtil
 		return text.Replace(regex, replacement);
 	}
 
-	public static string NumberTostring(string number)
-	{
-		string text = string.Empty;
-		string text2 = string.Empty;
-		if (number.Equals(string.Empty))
-		{
-			return text;
-		}
-		if (number[0] == '-')
-		{
-			text2 = "-";
-			number = number[1..];
-		}
-		for (int num = number.Length - 1; num >= 0; num--)
-		{
-			text = ((number.Length - 1 - num) % 3 != 0 || number.Length - 1 - num <= 0) ? (number[num] + text) : (number[num] + "." + text);
-		}
-		return text2 + text;
-	}
-
 	public static string getDate(int second)
 	{
 		long num = (long)second * 1000L;
 		DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Add(new TimeSpan(num * 10000)).ToUniversalTime();
 		int hour = dateTime.Hour;
-		int minute = dateTime.Minute;
+		_ = dateTime.Minute;
 		int day = dateTime.Day;
 		int month = dateTime.Month;
 		int year = dateTime.Year;
@@ -151,79 +109,81 @@ public class NinjaUtil
 		}
 		return empty + "0" + timeRemainS;
 	}
-	public static string FormatNumber(double number)
+
+	public static string getMoneys(double value)
 	{
-		if (number == double.PositiveInfinity) return "∞";
-		if (number == double.NegativeInfinity) return "-∞";
-		if (double.IsNaN(number)) return "NaN";
-
-		// Danh sách đơn vị cơ bản
-		string[] baseUnits = { "", " nghìn", " triệu", " tỉ" };
-		List<string> units = new List<string>(baseUnits);
-
-		// Tạo các đơn vị tiếp theo theo mẫu: " tỉ", " tỉ tỉ", " tỉ tỉ tỉ"...
-		while (units.Count < 100) // Giới hạn số đơn vị để tránh vòng lặp vô hạn
+		double TRILLION = 1000000000.0;
+		if (ModFunc.isReadInt)
 		{
-			string lastUnit = units[^1]; // Đơn vị cuối cùng trong danh sách
-			units.Add(" tỉ" + lastUnit); // Thêm " tỉ" vào đơn vị cuối
+			return getMoneysPower(value);
 		}
-
-		int unitIndex = 0;
-
-		// Kiểm tra nếu số lớn hơn giá trị tối đa của kiểu double
-		if (number >= double.MaxValue)
+		if (value < TRILLION)
 		{
-			return $"{double.MaxValue:N0}{units[unitIndex]}";
+			return getMoneysPower(value);
 		}
-
-		// Chia số theo các bậc 1000
-		while (number >= 1000 && unitIndex < units.Count - 1)
+		string[] prefixes = new string[5] { "", "K", "M", "B", "T" };
+		int prefixIndex = 0;
+		int tyCount = 0;
+		while (value >= 1000.0 && prefixIndex < prefixes.Length - 1)
 		{
-			number /= 1000;
-			unitIndex++;
+			if (value >= TRILLION)
+			{
+				value /= TRILLION;
+				tyCount++;
+			}
+			else
+			{
+				value /= 1000.0;
+				prefixIndex++;
+			}
 		}
-
-		// Làm tròn số và ghép với đơn vị tương ứng
-		number = System.Math.Round(number); // Làm tròn để loại bỏ phần thập phân
-
-		// Trả về số đã format với đơn vị tương ứng
-		return $"{number:N0}{units[unitIndex]}";
+		CultureInfo culture = new CultureInfo("vi-VN");
+		StringBuilder result = new StringBuilder();
+		result.Append(value.ToString("0.#", culture)).Append(" ");
+		if (prefixIndex > 0)
+		{
+			result.Append(prefixes[prefixIndex]).Append(" ");
+		}
+		for (int i = 0; i < tyCount; i++)
+		{
+			result.Append("Tỷ ");
+		}
+		return result.ToString().Trim();
 	}
 
-	public static string getMoneys(long m)
+	public static string getMoneysPower(double m)
 	{
 		string text = string.Empty;
-		long num = m / 1000 + 1;
-		for (int i = 0; i < num; i++)
+		double num = m / 1000.0 + 1.0;
+		for (int i = 0; (double)i < num; i++)
 		{
-			if (m >= 1000)
+			if (m >= 1000.0)
 			{
-				long num2 = m % 1000;
-				text = ((num2 != 0) ? ((num2 >= 10) ? ((num2 >= 100) ? ("." + num2 + text) : (".0" + num2 + text)) : (".00" + num2 + text)) : (".000" + text));
-				m /= 1000;
+				double num2 = m % 1000.0;
+				text = ((num2 != 0.0) ? ((num2 >= 10.0) ? ((num2 >= 100.0) ? ("." + (int)num2 + text) : (".0" + (int)num2 + text)) : (".00" + (int)num2 + text)) : (".000" + text));
+				m /= 1000.0;
 				continue;
 			}
-			text = m + text;
+			text = (int)m + text;
 			break;
 		}
 		return text;
 	}
-	 
 
 	public static string getTimeAgo(long timeRemainS)
 	{
-		long num = 0;
+		long num = 0L;
 		if (timeRemainS > 60)
 		{
 			num = timeRemainS / 60;
 		}
-		long num2 = 0;
+		long num2 = 0L;
 		if (num > 60)
 		{
 			num2 = num / 60;
 			num %= 60;
 		}
-		long num3 = 0;
+		long num3 = 0L;
 		if (num2 > 24)
 		{
 			num3 = num2 / 24;
@@ -242,44 +202,11 @@ public class NinjaUtil
 			empty += "h";
 			return empty + num + "'";
 		}
-		if (num == 0)
+		if (num == 0L)
 		{
-			num = 1;
+			num = 1L;
 		}
 		empty += num;
 		return empty + "ph";
-	}
-
-	public static string[] split(string original, string separator)
-	{
-		MyVector myVector = new MyVector();
-		for (int num = original.IndexOf(separator); num >= 0; num = original.IndexOf(separator))
-		{
-			myVector.addElement(original.Substring(0, num));
-			original = original.Substring(num + separator.Length);
-		}
-		myVector.addElement(original);
-		string[] array = new string[myVector.size()];
-		if (myVector.size() > 0)
-		{
-			for (int i = 0; i < myVector.size(); i++)
-			{
-				array[i] = (string)myVector.elementAt(i);
-			}
-		}
-		return array;
-	}
-
-	public static bool checkNumber(string numberStr)
-	{
-		try
-		{
-			int.Parse(numberStr);
-			return true;
-		}
-		catch (Exception)
-		{
-			return false;
-		}
 	}
 }

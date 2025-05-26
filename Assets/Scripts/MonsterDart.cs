@@ -16,8 +16,6 @@ public class MonsterDart : Effect2
 
 	public int y;
 
-	public int z;
-
 	public int xTo;
 
 	public int yTo;
@@ -76,25 +74,6 @@ public class MonsterDart : Effect2
 		}
 	}
 
-	public MonsterDart(int x, int y, bool isBoss, double dame, double dameMp, int xTo, int yTo, int dartType)
-	{
-		info = GameScr.darts[dartType];
-		this.x = x;
-		this.y = y;
-		this.isBoss = isBoss;
-		this.dame = dame;
-		this.dameMp = dameMp;
-		this.xTo = xTo;
-		this.yTo = yTo;
-		va = info.va;
-		setAngle(Res.angle(xTo - x, yTo - y));
-		if (x >= GameScr.cmx && x <= GameScr.cmx + GameCanvas.w)
-		{
-			SoundMn.gI().mobKame(dartType);
-		}
-		c = null;
-	}
-
 	public void setAngle(int angle)
 	{
 		this.angle = angle;
@@ -107,16 +86,11 @@ public class MonsterDart : Effect2
 		Effect2.vEffect2.addElement(new MonsterDart(x, y, isBoss, dame, dameMp, c, dartType));
 	}
 
-	public static void addMonsterDart(int x, int y, bool isBoss, double dame, double dameMp, int xTo, int yTo, int dartType)
-	{
-		Effect2.vEffect2.addElement(new MonsterDart(x, y, isBoss, dame, dameMp, xTo, yTo, dartType));
-	}
-
 	public override void update()
 	{
 		for (int i = 0; i < info.nUpdate; i++)
 		{
-			if (info.tail.Length > 0)
+			if (info.tail.Length != 0)
 			{
 				darts.addElement(new SmallDart(x, y));
 			}
@@ -135,9 +109,9 @@ public class MonsterDart : Effect2
 			}
 			if ((Res.abs(dx) < 16 && Res.abs(dy) < 16) || life > num)
 			{
-				if (c != null && c.charID >= 0 && dameMp != -1)
+				if (c != null && c.charID >= 0 && dameMp != -1.0)
 				{
-					if (dameMp != -100)
+					if (dameMp != -100.0)
 					{
 						c.doInjure(dame, dameMp, isCrit: false, isMob: true);
 					}
@@ -147,7 +121,7 @@ public class MonsterDart : Effect2
 					}
 				}
 				Effect2.vEffect2.removeElement(this);
-				if (dameMp != -100)
+				if (dameMp != -100.0)
 				{
 					ServerEffect.addServerEffect(81, c, 1);
 					if (x >= GameScr.cmx && x <= GameScr.cmx + GameCanvas.w)
@@ -189,9 +163,9 @@ public class MonsterDart : Effect2
 		}
 		for (int j = 0; j < darts.size(); j++)
 		{
-			SmallDart smallDart = (SmallDart)darts.elementAt(j);
-			smallDart.index++;
-			if (smallDart.index >= info.tail.Length)
+			SmallDart obj = (SmallDart)darts.elementAt(j);
+			obj.index++;
+			if (obj.index >= info.tail.Length)
 			{
 				darts.removeElementAt(j);
 			}
@@ -240,10 +214,5 @@ public class MonsterDart : Effect2
 				SmallImage.drawSmallImage(g, (GameCanvas.gameTick % 2 != 0) ? info.xd2[smallDart3.index] : info.xd1[smallDart3.index], smallDart3.x, smallDart3.y, 0, 3);
 			}
 		}
-	}
-
-	public static void addMonsterDart(int x2, int y2, bool checkIsBoss, double dame2, double dameMp2, Mob mobToAttack, sbyte dartType)
-	{
-		addMonsterDart(x2, y2, checkIsBoss, dame2, dameMp2, mobToAttack.x, mobToAttack.y, dartType);
 	}
 }

@@ -10,8 +10,6 @@ public class MobCapcha
 
 	public static int cmvy;
 
-	public static int cmyLim;
-
 	public static int cmtoX;
 
 	public static int cmx;
@@ -19,8 +17,6 @@ public class MobCapcha
 	public static int cmdx;
 
 	public static int cmvx;
-
-	public static int cmxLim;
 
 	public static bool explode;
 

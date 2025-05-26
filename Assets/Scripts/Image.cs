@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using UnityEngine;
 
 public class Image
@@ -36,11 +35,6 @@ public class Image
 
 	public Color colorBlend = Color.black;
 
-	public static Image createEmptyImage()
-	{
-		return __createEmptyImage();
-	}
-
 	public static Image createImage(string filename)
 	{
 		return __createImage(filename);
@@ -51,22 +45,9 @@ public class Image
 		return __createImage(imageData);
 	}
 
-	public static Image createImage(Image src, int x, int y, int w, int h, int transform)
-	{
-		return __createImage(src, x, y, w, h, transform);
-	}
-
 	public static Image createImage(int w, int h)
 	{
 		return __createImage(w, h);
-	}
-
-	public static Image createImage(Image img)
-	{
-		Image image = createImage(img.w, img.h);
-		image.texture = img.texture;
-		image.texture.Apply();
-		return image;
 	}
 
 	public static Image createImage(sbyte[] imageData, int offset, int lenght)
@@ -83,7 +64,6 @@ public class Image
 		return createImage(array);
 	}
 
-
 	public static byte convertSbyteToByte(sbyte var)
 	{
 		if (var > 0)
@@ -91,23 +71,6 @@ public class Image
 			return (byte)var;
 		}
 		return (byte)(var + 256);
-	}
-
-	public static byte[] convertArrSbyteToArrByte(sbyte[] var)
-	{
-		byte[] array = new byte[var.Length];
-		for (int i = 0; i < var.Length; i++)
-		{
-			if (var[i] > 0)
-			{
-				array[i] = (byte)var[i];
-			}
-			else
-			{
-				array[i] = (byte)(var[i] + 256);
-			}
-		}
-		return array;
 	}
 
 	public static Image createRGBImage(int[] rbg, int w, int h, bool bl)
@@ -129,10 +92,7 @@ public class Image
 		int num = rgb & 0xFF;
 		int num2 = (rgb >> 8) & 0xFF;
 		int num3 = (rgb >> 16) & 0xFF;
-		float b = (float)num / 256f;
-		float g = (float)num2 / 256f;
-		float r = (float)num3 / 256f;
-		return new Color(r, g, b);
+		return new Color(b: (float)num / 256f, g: (float)num2 / 256f, r: (float)num3 / 256f);
 	}
 
 	public static void update()
@@ -167,159 +127,6 @@ public class Image
 			imgTemp = __createImage(wtemp, htemp);
 			status = 0;
 		}
-	}
-
-	private static Image _createEmptyImage()
-	{
-		if (status != 0)
-		{
-			Cout.LogError("CANNOT CREATE EMPTY IMAGE WHEN CREATING OTHER IMAGE");
-			return null;
-		}
-		imgTemp = null;
-		status = 2;
-		int i;
-		for (i = 0; i < 500; i++)
-		{
-			Thread.Sleep(5);
-			if (status == 0)
-			{
-				break;
-			}
-		}
-		if (i == 500)
-		{
-			Cout.LogError("TOO LONG FOR CREATE EMPTY IMAGE");
-			status = 0;
-		}
-		return imgTemp;
-	}
-
-	private static Image _createImage(string filename)
-	{
-		if (status != 0)
-		{
-			Cout.LogError("CANNOT CREATE IMAGE " + filename + " WHEN CREATING OTHER IMAGE");
-			return null;
-		}
-		imgTemp = null;
-		filenametemp = filename;
-		status = 3;
-		int i;
-		for (i = 0; i < 500; i++)
-		{
-			Thread.Sleep(5);
-			if (status == 0)
-			{
-				break;
-			}
-		}
-		if (i == 500)
-		{
-			Cout.LogError("TOO LONG FOR CREATE IMAGE " + filename);
-			status = 0;
-		}
-		return imgTemp;
-	}
-
-	private static Image _createImage(byte[] imageData)
-	{
-		if (status != 0)
-		{
-			Cout.LogError("CANNOT CREATE IMAGE(FromArray) WHEN CREATING OTHER IMAGE");
-			return null;
-		}
-		imgTemp = null;
-		datatemp = imageData;
-		status = 4;
-		int i;
-		for (i = 0; i < 500; i++)
-		{
-			Thread.Sleep(5);
-			if (status == 0)
-			{
-				break;
-			}
-		}
-		if (i == 500)
-		{
-			Cout.LogError("TOO LONG FOR CREATE IMAGE(FromArray)");
-			status = 0;
-		}
-		return imgTemp;
-	}
-
-	private static Image _createImage(Image src, int x, int y, int w, int h, int transform)
-	{
-		if (status != 0)
-		{
-			Cout.LogError("CANNOT CREATE IMAGE(FromSrcPart) WHEN CREATING OTHER IMAGE");
-			return null;
-		}
-		imgTemp = null;
-		imgSrcTemp = src;
-		xtemp = x;
-		ytemp = y;
-		wtemp = w;
-		htemp = h;
-		transformtemp = transform;
-		status = 5;
-		int i;
-		for (i = 0; i < 500; i++)
-		{
-			Thread.Sleep(5);
-			if (status == 0)
-			{
-				break;
-			}
-		}
-		if (i == 500)
-		{
-			Cout.LogError("TOO LONG FOR CREATE IMAGE(FromSrcPart)");
-			status = 0;
-		}
-		return imgTemp;
-	}
-
-	private static Image _createImage(int w, int h)
-	{
-		if (status != 0)
-		{
-			Cout.LogError("CANNOT CREATE IMAGE(w,h) WHEN CREATING OTHER IMAGE");
-			return null;
-		}
-		imgTemp = null;
-		wtemp = w;
-		htemp = h;
-		status = 6;
-		int i;
-		for (i = 0; i < 500; i++)
-		{
-			Thread.Sleep(5);
-			if (status == 0)
-			{
-				break;
-			}
-		}
-		if (i == 500)
-		{
-			Cout.LogError("TOO LONG FOR CREATE IMAGE(w,h)");
-			status = 0;
-		}
-		return imgTemp;
-	}
-
-	public static byte[] loadData(string filename)
-	{
-		Image image = new Image();
-		TextAsset textAsset = (TextAsset)Resources.Load(filename, typeof(TextAsset));
-		if (textAsset == null || textAsset.bytes == null || textAsset.bytes.Length == 0)
-		{
-			throw new Exception("NULL POINTER EXCEPTION AT Image __createImage " + filename);
-		}
-		sbyte[] array = ArrayCast.cast(textAsset.bytes);
-		Debug.LogError("CHIEU DAI MANG BYTE IMAGE CREAT = " + array.Length);
-		return textAsset.bytes;
 	}
 
 	private static Image __createImage(string filename)
@@ -391,23 +198,15 @@ public class Image
 
 	public static Image __createImage(int w, int h)
 	{
-		Image image = new Image();
-		image.texture = new Texture2D(w, h, TextureFormat.RGBA32, mipChain: false);
-		setTextureQuality(image);
-		image.w = w;
-		image.h = h;
-		image.texture.Apply();
-		return image;
-	}
-
-	public static int getImageWidth(Image image)
-	{
-		return image.getWidth();
-	}
-
-	public static int getImageHeight(Image image)
-	{
-		return image.getHeight();
+		Image obj = new Image
+		{
+			texture = new Texture2D(w, h, TextureFormat.RGBA32, mipChain: false)
+		};
+		setTextureQuality(obj);
+		obj.w = w;
+		obj.h = h;
+		obj.texture.Apply();
+		return obj;
 	}
 
 	public int getWidth()
@@ -431,11 +230,6 @@ public class Image
 		texture.filterMode = FilterMode.Point;
 		texture.mipMapBias = 0f;
 		texture.wrapMode = TextureWrapMode.Clamp;
-	}
-
-	public Color[] getColor()
-	{
-		return texture.GetPixels();
 	}
 
 	public int getRealImageWidth()

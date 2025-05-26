@@ -58,7 +58,7 @@ public class EffectPanel : Effect2
 
 	public override void update()
 	{
-		if (endTime != 0)
+		if (endTime != 0L)
 		{
 			i0++;
 			if (i0 >= eff.arrEfInfo.Length)

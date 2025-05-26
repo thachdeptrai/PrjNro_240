@@ -38,11 +38,6 @@ public class MyHashTable
 		h.Remove(k);
 	}
 
-	public void Remove(string key)
-	{
-		h.Remove(key);
-	}
-
 	public bool containsKey(object key)
 	{
 		return h.ContainsKey(key);

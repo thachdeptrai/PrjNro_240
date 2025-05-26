@@ -12,11 +12,6 @@ public class Message
 		dos = new myWriter();
 	}
 
-	public Message()
-	{
-		dos = new myWriter();
-	}
-
 	public Message(sbyte command)
 	{
 		this.command = command;
@@ -47,21 +42,6 @@ public class Message
 	public int readInt3Byte()
 	{
 		return dis.readInt();
-	}
-
-	public long readLong()
-	{
-		if (ModFunc.isReadInt)
-		{
-			return dis.readInt();
-		}
-
-		return dis.readLong();
-	}
-
-	public double readDouble()
-	{
-		return dis.readDouble();
 	}
 
 	public void cleanup()

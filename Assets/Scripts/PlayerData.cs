@@ -21,9 +21,4 @@ public class PlayerData
 		this.leg = leg;
 		powpoint = ppoint;
 	}
-
-	public string getInfo()
-	{
-		return name + "\n" + mResources.power_point + " " + powpoint;
-	}
 }

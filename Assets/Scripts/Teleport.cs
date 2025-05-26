@@ -122,24 +122,20 @@ public class Teleport
 		Part part = GameScr.parts[headId];
 		int num = 0;
 		int num2 = 0;
-		int num3 = 0;
 		if (planet == 0)
 		{
 			num = 15;
 			num2 = 40;
-			num3 = 5;
 		}
 		if (planet == 1)
 		{
 			num = 7;
 			num2 = 55;
-			num3 = 20;
 		}
 		if (planet == 2)
 		{
 			num = 18;
 			num2 = 52;
-			num3 = 10;
 		}
 		if (painHead && planet < 3)
 		{
@@ -396,8 +392,7 @@ public class Teleport
 		}
 		if (paintFire && planet < 3 && Res.abs(y - y2) <= 50 && GameCanvas.gameTick % 5 == 0)
 		{
-			Effect me = new Effect(19, x, y2 + 20, 2, 1, -1);
-			EffecMn.addEff(me);
+			EffecMn.addEff(new Effect(19, x, y2 + 20, 2, 1, -1));
 		}
 	}
 }

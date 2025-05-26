@@ -2,8 +2,6 @@ using System;
 
 public class MagicTree : Npc, IActionListener
 {
-	public static Image imgMagicTree;
-
 	public static Image pea = GameCanvas.loadImage("/mainImage/myTexture2dhatdau.png");
 
 	public int id;
@@ -47,8 +45,6 @@ public class MagicTree : Npc, IActionListener
 	public new long last;
 
 	public new long cur;
-
-	private int wPopUp;
 
 	private bool waitToUpdate;
 

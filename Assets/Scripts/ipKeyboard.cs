@@ -18,10 +18,10 @@ public class ipKeyboard
 		act = action;
 		TouchScreenKeyboardType t = ((type == 0 || type == 2) ? TouchScreenKeyboardType.ASCIICapable : TouchScreenKeyboardType.NumberPad);
 		TouchScreenKeyboard.hideInput = false;
-        tk = TouchScreenKeyboard.Open(text, t, false, false, type == 2, false, caption);
-    }
+		tk = TouchScreenKeyboard.Open(text, t, autocorrection: false, multiline: false, type == 2, alert: false, caption);
+	}
 
-    public static void update()
+	public static void update()
 	{
 		try
 		{

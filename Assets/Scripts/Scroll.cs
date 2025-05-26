@@ -77,15 +77,6 @@ public class Scroll
 		return updateKeyScrollLeftRight();
 	}
 
-	public ScrollResult updateKey(bool isGetSelectNow)
-	{
-		if (styleUPDOWN)
-		{
-			return updateKeyScrollUpDown(isGetSelectNow);
-		}
-		return updateKeyScrollLeftRight();
-	}
-
 	private ScrollResult updateKeyScrollUpDown(bool isGetNow)
 	{
 		int num = xPos;
@@ -208,11 +199,12 @@ public class Scroll
 			pointerDownTime = 0;
 			GameCanvas.isPointerJustRelease = false;
 		}
-		ScrollResult scrollResult = new ScrollResult();
-		scrollResult.selected = selectedItem;
-		scrollResult.isFinish = isFinish;
-		scrollResult.isDowning = pointerIsDowning;
-		return scrollResult;
+		return new ScrollResult
+		{
+			selected = selectedItem,
+			isFinish = isFinish,
+			isDowning = pointerIsDowning
+		};
 	}
 
 	private ScrollResult updateKeyScrollLeftRight()
@@ -309,11 +301,12 @@ public class Scroll
 			pointerDownTime = 0;
 			GameCanvas.isPointerJustRelease = false;
 		}
-		ScrollResult scrollResult = new ScrollResult();
-		scrollResult.selected = selectedItem;
-		scrollResult.isFinish = isFinish;
-		scrollResult.isDowning = pointerIsDowning;
-		return scrollResult;
+		return new ScrollResult
+		{
+			selected = selectedItem,
+			isFinish = isFinish,
+			isDowning = pointerIsDowning
+		};
 	}
 
 	public void updatecm()
@@ -436,14 +429,5 @@ public class Scroll
 				cmtoX = cmxLim;
 			}
 		}
-	}
-
-	public static Scroll gIz()
-	{
-		if (gI == null)
-		{
-			gI = new Scroll();
-		}
-		return gI;
 	}
 }

@@ -18,9 +18,4 @@ public class MyRandom
 	{
 		return r.Next(a);
 	}
-
-	public int nextInt(int a, int b)
-	{
-		return r.Next(a, b);
-	}
 }

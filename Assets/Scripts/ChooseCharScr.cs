@@ -66,8 +66,9 @@ public class ChooseCharScr : mScreen, IActionListener
 					focus = j;
 					break;
 				}
-				if (GameCanvas.isPointerJustRelease && !GameCanvas.isPointerClick)
+				if (GameCanvas.isPointerJustRelease)
 				{
+					_ = GameCanvas.isPointerClick;
 				}
 			}
 		}
@@ -112,7 +113,7 @@ public class ChooseCharScr : mScreen, IActionListener
 			}
 		}
 		catch (Exception)
-        {
+		{
 		}
 		base.paint(g);
 	}

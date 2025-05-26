@@ -19,14 +19,4 @@ public class ArrayCast
 		}
 		return array;
 	}
-
-	public static char[] ToCharArray(sbyte[] data)
-	{
-		char[] array = new char[data.Length];
-		for (int i = 0; i < array.Length; i++)
-		{
-			array[i] = (char)data[i];
-		}
-		return array;
-	}
 }

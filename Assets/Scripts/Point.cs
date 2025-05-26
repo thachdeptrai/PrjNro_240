@@ -131,64 +131,11 @@ public class Point
 		6, 6, 6, 2
 	};
 
-	public Point()
-	{
-	}
-
-	public Point(int x, int y)
-	{
-		this.x = x;
-		this.y = y;
-	}
-
-	public Point(int x, int y, int goc)
-	{
-		this.x = x;
-		this.y = y;
-		this.goc = goc;
-	}
-
 	public void update()
 	{
 		f++;
 		x += vx;
 		y += vy;
-	}
-
-	public void update_not_f()
-	{
-		x += vx;
-		y += vy;
-	}
-
-	public void paint(mGraphics g)
-	{
-		if (!isRemove)
-		{
-			int num = 0;
-			if (isSmall && f >= fSmall)
-			{
-				num = 1;
-			}
-			FraEffInMap[color].drawFrame(frame / 2 + num, x, y, dis, 3, g);
-		}
-	}
-
-	public void updateInMap()
-	{
-		f++;
-		if (maxframe > 1)
-		{
-			frame++;
-			if (frame / 2 >= maxframe)
-			{
-				frame = 0;
-			}
-		}
-		if (f >= fRe)
-		{
-			isRemove = true;
-		}
 	}
 
 	public int setFrameAngle(int goc)

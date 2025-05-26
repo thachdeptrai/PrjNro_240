@@ -11,14 +11,4 @@ public class ItemTemplates
 	{
 		return (ItemTemplate)itemTemplates.get(id);
 	}
-
-	public static short getPart(short itemTemplateID)
-	{
-		return get(itemTemplateID).part;
-	}
-
-	public static short getIcon(short itemTemplateID)
-	{
-		return get(itemTemplateID).iconID;
-	}
 }

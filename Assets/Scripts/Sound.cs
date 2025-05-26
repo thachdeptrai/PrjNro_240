@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Sound
 {
-	private const int INTERVAL = 5;
-
-	private const int MAXTIME = 100;
-
 	public static int status;
 
 	public static int postem;
-
-	public static int timestart;
 
 	private static string filenametemp;
 
@@ -24,8 +18,6 @@ public class Sound
 
 	public static bool stopAll;
 
-	public static AudioSource SoundWater;
-
 	public static AudioSource SoundRun;
 
 	public static AudioSource SoundBGLoop;
@@ -33,8 +25,6 @@ public class Sound
 	public static AudioClip[] music;
 
 	public static GameObject[] player;
-
-	public static sbyte MLogin;
 
 	public static sbyte MBClick = 1;
 
@@ -104,26 +94,6 @@ public class Sound
 
 	public static int l1;
 
-	public static void setActivity(SoundMn.AssetManager ac)
-	{
-	}
-
-	public static void stop()
-	{
-		for (int i = 0; i < player.Length; i++)
-		{
-			if (player[i] != null)
-			{
-				player[i].GetComponent<AudioSource>().Pause();
-			}
-		}
-	}
-
-	public static bool isPlaying()
-	{
-		return false;
-	}
-
 	public static void init()
 	{
 		GameObject gameObject = new GameObject();
@@ -143,8 +113,7 @@ public class Sound
 			music = new AudioClip[musicID.Length + sID.Length];
 			for (int i = 0; i < player.Length; i++)
 			{
-				string fileName = ((i >= l1) ? ("/sound/" + (i - l1)) : ("/music/" + i));
-				getAssetSoundFile(fileName, i);
+				getAssetSoundFile((i >= l1) ? ("/sound/" + (i - l1)) : ("/music/" + i), i);
 			}
 		}
 	}
@@ -162,15 +131,14 @@ public class Sound
 	public static void getAssetSoundFile(string fileName, int pos)
 	{
 		try
-        {
+		{
 			stop(pos);
-			string empty = string.Empty;
-			empty = Main.res + fileName;
-			load(empty, pos);
+			_ = string.Empty;
+			load(Main.res + fileName, pos);
 		}
 		catch (Exception)
-        {
-        }
+		{
+		}
 	}
 
 	public static void stopAllz()
@@ -179,61 +147,34 @@ public class Sound
 		{
 			stop(i);
 		}
-        sTopSoundBG();
-    }
-
-	public static void stopAllBg()
-	{
-		for (int i = 0; i < music.Length; i++)
-		{
-			stop(i);
-		}
-        sTopSoundBG();
-        sTopSoundRun();
-		stopSoundNatural(0);
+		sTopSoundBG();
 	}
 
-    public static void PlayMusic(int id)
-    {
-        if (GameCanvas.isPlaySound)
-        {
-            if (SoundBGLoop == null)
-            {
-                return;
-            }
-            if (id < 0 || id >= ModFunc.musics.Count)
-            {
-                id = 0;
-            }
-            if (isPlayingSoundBG(0) && !ModFunc.isPlayingMusic)
-            {
-                sTopSoundBG();
-            }
-            if (!isPlayingSoundBG(0))
-            {
-                SoundBGLoop.GetComponent<AudioSource>().loop = false;
-                SoundBGLoop.GetComponent<AudioSource>().clip = ModFunc.musics[id];
-                SoundBGLoop.GetComponent<AudioSource>().volume = 0.4f;
-                SoundBGLoop.GetComponent<AudioSource>().Play();
-                ModFunc.isPlayingMusic = true;
-            }
-            else
-            {
-                SoundBGLoop.GetComponent<AudioSource>().Stop();
-                ModFunc.isPlayingMusic = false;
-            }
-        }
-    }
-
-    public static void update()
+	public static void PlayMusic(int id)
 	{
-	}
-
-	public static void stopMusic(int x)
-	{
-		if (GameCanvas.isPlaySound)
+		if (GameCanvas.isPlaySound && !(SoundBGLoop == null))
 		{
-			stop(x);
+			if (id < 0 || id >= ModFunc.musics.Count)
+			{
+				id = 0;
+			}
+			if (isPlayingSoundBG(0) && !ModFunc.isPlayingMusic)
+			{
+				sTopSoundBG();
+			}
+			if (!isPlayingSoundBG(0))
+			{
+				SoundBGLoop.GetComponent<AudioSource>().loop = false;
+				SoundBGLoop.GetComponent<AudioSource>().clip = ModFunc.musics[id];
+				SoundBGLoop.GetComponent<AudioSource>().volume = 0.4f;
+				SoundBGLoop.GetComponent<AudioSource>().Play();
+				ModFunc.isPlayingMusic = true;
+			}
+			else
+			{
+				SoundBGLoop.GetComponent<AudioSource>().Stop();
+				ModFunc.isPlayingMusic = false;
+			}
 		}
 	}
 
@@ -245,22 +186,6 @@ public class Sound
 		}
 	}
 
-	public static void playSoundRun(int id, float volume)
-	{
-		if (GameCanvas.isPlaySound && !(SoundRun == null))
-		{
-			SoundRun.GetComponent<AudioSource>().loop = true;
-			SoundRun.GetComponent<AudioSource>().clip = music[id];
-			SoundRun.GetComponent<AudioSource>().volume = volume;
-			SoundRun.GetComponent<AudioSource>().Play();
-		}
-	}
-
-	public static void sTopSoundRun()
-	{
-		SoundRun.GetComponent<AudioSource>().Stop();
-	}
-
 	public static bool isPlayingSound()
 	{
 		if (SoundRun == null)
@@ -268,31 +193,6 @@ public class Sound
 			return false;
 		}
 		return SoundRun.GetComponent<AudioSource>().isPlaying;
-	}
-
-	public static void playSoundNatural(int id, float volume, bool isLoop)
-	{
-		if (GameCanvas.isPlaySound && !(SoundBGLoop == null))
-		{
-			SoundWater.GetComponent<AudioSource>().loop = isLoop;
-			SoundWater.GetComponent<AudioSource>().clip = music[id];
-			SoundWater.GetComponent<AudioSource>().volume = volume;
-			SoundWater.GetComponent<AudioSource>().Play();
-		}
-	}
-
-	public static void stopSoundNatural(int id)
-	{
-		SoundWater.GetComponent<AudioSource>().Stop();
-	}
-
-	public static bool isPlayingSoundatural(int id)
-	{
-		if (SoundWater == null)
-		{
-			return false;
-		}
-		return SoundWater.GetComponent<AudioSource>().isPlaying;
 	}
 
 	public static void playMus(int type, float vl, bool loop)
@@ -326,15 +226,14 @@ public class Sound
 		}
 	}
 
-    public static void sTopSoundBG()
-    {
-        SoundBGLoop.GetComponent<AudioSource>().Stop();
-        if (ModFunc.isPlayingMusic)
-        {
-            PlayMusic(UnityEngine.Random.Range(0, 3));
-            return;
-        }
-    }
+	public static void sTopSoundBG()
+	{
+		SoundBGLoop.GetComponent<AudioSource>().Stop();
+		if (ModFunc.isPlayingMusic)
+		{
+			PlayMusic(UnityEngine.Random.Range(0, 3));
+		}
+	}
 
 	public static bool isPlayingSoundBG(int id)
 	{
@@ -412,8 +311,7 @@ public class Sound
 		volumetem = volume;
 		postem = pos;
 		status = 3;
-		int i;
-		for (i = 0; i < 100; i++)
+		for (int i = 0; i < 100; i++)
 		{
 			Thread.Sleep(5);
 			if (status == 0)

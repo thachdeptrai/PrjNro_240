@@ -40,17 +40,7 @@ public class PlayerDart
 		va = info.va;
 		this.x = x;
 		this.y = y;
-		object obj;
-		if (charBelong.mobFocus == null)
-		{
-			IMapObject charFocus = charBelong.charFocus;
-			obj = charFocus;
-		}
-		else
-		{
-			obj = charBelong.mobFocus;
-		}
-		IMapObject mapObject = (IMapObject)obj;
+		IMapObject mapObject = ((charBelong.mobFocus != null) ? ((IMapObject)charBelong.mobFocus) : ((IMapObject)charBelong.charFocus));
 		setAngle(Res.angle(mapObject.getX() - x, mapObject.getY() - y));
 	}
 
@@ -72,20 +62,11 @@ public class PlayerDart
 			endMe();
 			return;
 		}
-		object obj;
-		if (charBelong.mobFocus == null)
-		{
-			IMapObject charFocus = charBelong.charFocus;
-			obj = charFocus;
-		}
-		else
-		{
-			obj = charBelong.mobFocus;
-		}
+		object obj = ((charBelong.mobFocus != null) ? ((IMapObject)charBelong.mobFocus) : ((IMapObject)charBelong.charFocus));
 		IMapObject mapObject = (IMapObject)obj;
 		for (int i = 0; i < info.nUpdate; i++)
 		{
-			if (info.tail.Length > 0)
+			if (info.tail.Length != 0)
 			{
 				darts.addElement(new SmallDart(x, y));
 			}
@@ -97,7 +78,7 @@ public class PlayerDart
 			{
 				if (charBelong.charFocus != null && charBelong.charFocus.me)
 				{
-					charBelong.charFocus.doInjure(charBelong.charFocus.damHP, 0, charBelong.charFocus.isCrit, charBelong.charFocus.isMob);
+					charBelong.charFocus.doInjure(charBelong.charFocus.damHP, 0.0, charBelong.charFocus.isCrit, charBelong.charFocus.isMob);
 				}
 				endMe();
 				return;
@@ -135,9 +116,9 @@ public class PlayerDart
 		}
 		for (int j = 0; j < darts.size(); j++)
 		{
-			SmallDart smallDart = (SmallDart)darts.elementAt(j);
-			smallDart.index++;
-			if (smallDart.index >= info.tail.Length)
+			SmallDart obj2 = (SmallDart)darts.elementAt(j);
+			obj2.index++;
+			if (obj2.index >= info.tail.Length)
 			{
 				darts.removeElementAt(j);
 			}

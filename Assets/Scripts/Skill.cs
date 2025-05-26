@@ -73,8 +73,7 @@ public class Skill
 	public void paint(int x, int y, mGraphics g)
 	{
 		SmallImage.drawSmallImage(g, template.iconId, x, y, 0, StaticObj.VCENTER_HCENTER);
-		long num = mSystem.currentTimeMillis();
-		long num2 = num - lastTimeUseThisSkill;
+		long num2 = mSystem.currentTimeMillis() - lastTimeUseThisSkill;
 		if (num2 < coolDown)
 		{
 			g.setColor(2721889, 0.7f);

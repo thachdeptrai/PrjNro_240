@@ -97,6 +97,15 @@ public class mGraphics
 
 	private Material lineMaterial;
 
+	public float boderSize;
+
+
+	private float flipProgress;
+
+	public static bool isFlipping = false;
+
+	private float flipSpeed = 5f;
+
 	private void cache(string key, Texture value)
 	{
 		if (cachedTextures.Count > 400)
@@ -117,17 +126,6 @@ public class mGraphics
 		translateY += ty;
 		isTranslate = true;
 		if (translateX == 0 && translateY == 0)
-		{
-			isTranslate = false;
-		}
-	}
-
-	public void translate(float x, float y)
-	{
-		translateXf += x;
-		translateYf += y;
-		isTranslate = true;
-		if (translateXf == 0f && translateYf == 0f)
 		{
 			isTranslate = false;
 		}
@@ -231,8 +229,7 @@ public class mGraphics
 			cache(key, texture2D);
 		}
 		Vector2 vector = new Vector2(x1, y1);
-		Vector2 vector2 = new Vector2(x2, y2);
-		Vector2 vector3 = vector2 - vector;
+		Vector2 vector3 = new Vector2(x2, y2) - vector;
 		float num3 = 57.29578f * Mathf.Atan(vector3.y / vector3.x);
 		if (vector3.x < 0f)
 		{
@@ -268,25 +265,6 @@ public class mGraphics
 		GUIUtility.RotateAroundPivot(0f - num3, vector);
 	}
 
-	public Color setColorMiniMap(int rgb)
-	{
-		int num = rgb & 0xFF;
-		int num2 = (rgb >> 8) & 0xFF;
-		int num3 = (rgb >> 16) & 0xFF;
-		float num4 = (float)num / 256f;
-		float num5 = (float)num2 / 256f;
-		float num6 = (float)num3 / 256f;
-		return new Color(num6, num5, num4);
-	}
-
-	public float[] getRGB(Color cl)
-	{
-		float num = 256f * cl.r;
-		float num2 = 256f * cl.g;
-		float num3 = 256f * cl.b;
-		return new float[3] { num, num2, num3 };
-	}
-
 	public void drawRect(int x, int y, int w, int h)
 	{
 		int num = 1;
@@ -294,6 +272,52 @@ public class mGraphics
 		fillRect(x, y, num, h);
 		fillRect(x + w, y, num, h + 1);
 		fillRect(x, y + h, w + 1, num);
+	}
+
+	public void fillRect(int x, int y, int w, int h, int border)
+	{
+		border *= zoomLevel;
+		float num = x * zoomLevel;
+		float num2 = y * zoomLevel;
+		w *= zoomLevel;
+		h *= zoomLevel;
+		if (isTranslate)
+		{
+			num += (float)translateX;
+			num2 += (float)translateY;
+		}
+		int _ = 1;
+		string key = "fr" + _ + _ + r + g + b + a;
+		Texture2D texture2D = (Texture2D)cachedTextures[key];
+		if (texture2D == null)
+		{
+			texture2D = new Texture2D(_, _);
+			Color color = new Color(r, g, b, a);
+			texture2D.SetPixel(0, 0, color);
+			Image.setTextureQuality(texture2D);
+			texture2D.Apply();
+			cache(key, texture2D);
+		}
+		int num3 = 0;
+		int num4 = 0;
+		if (isClip)
+		{
+			num3 = clipX;
+			num4 = clipY;
+			int num5 = clipW;
+			int num6 = clipH;
+			if (isTranslate)
+			{
+				num3 += clipTX;
+				num4 += clipTY;
+			}
+			GUI.BeginGroup(new Rect(num3, num4, num5, num6));
+		}
+		GUI.DrawTexture(new Rect(num - (float)num3, num2 - (float)num4, w, h), texture2D, ScaleMode.StretchToFill, alphaBlend: false, 0f, Color.white, new Vector4(boderSize, boderSize, boderSize, boderSize), new Vector4(border, border, border, border));
+		if (isClip)
+		{
+			GUI.EndGroup();
+		}
 	}
 
 	public void fillRect(int x, int y, int w, int h)
@@ -368,21 +392,6 @@ public class mGraphics
 		r = color.r;
 	}
 
-	public void setBgColor(int rgb)
-	{
-		if (rgb != currentBGColor)
-		{
-			currentBGColor = rgb;
-			int num = rgb & 0xFF;
-			int num2 = (rgb >> 8) & 0xFF;
-			int num3 = (rgb >> 16) & 0xFF;
-			b = (float)num / 256f;
-			g = (float)num2 / 256f;
-			r = (float)num3 / 256f;
-			Main.main.GetComponent<Camera>().backgroundColor = new Color(r, g, b);
-		}
-	}
-
 	public void drawString(string s, int x, int y, GUIStyle style)
 	{
 		x *= zoomLevel;
@@ -430,42 +439,6 @@ public class mGraphics
 		a = alpha;
 	}
 
-	public void drawString(string s, int x, int y, GUIStyle style, int w)
-	{
-		x *= zoomLevel;
-		y *= zoomLevel;
-		if (isTranslate)
-		{
-			x += translateX;
-			y += translateY;
-		}
-		int num = 0;
-		int num2 = 0;
-		int num3 = 0;
-		int num4 = 0;
-		if (isClip)
-		{
-			num = clipX;
-			num2 = clipY;
-			num3 = clipW;
-			num4 = clipH;
-			if (isTranslate)
-			{
-				num += clipTX;
-				num2 += clipTY;
-			}
-		}
-		if (isClip)
-		{
-			GUI.BeginGroup(new Rect(num, num2, num3, num4));
-		}
-		GUI.Label(new Rect(x - num, y - num2 - 4, w, 100f), s, style);
-		if (isClip)
-		{
-			GUI.EndGroup();
-		}
-	}
-
 	private void UpdatePos(int anchor)
 	{
 		Vector2 vector = new Vector2(0f, 0f);
@@ -505,20 +478,6 @@ public class mGraphics
 	}
 
 	public void drawRegion(Image arg0, int x0, int y0, int w0, int h0, int arg5, int x, int y, int arg8)
-	{
-		if (arg0 != null)
-		{
-			x *= zoomLevel;
-			y *= zoomLevel;
-			x0 *= zoomLevel;
-			y0 *= zoomLevel;
-			w0 *= zoomLevel;
-			h0 *= zoomLevel;
-			_drawRegion(arg0, x0, y0, w0, h0, arg5, x, y, arg8);
-		}
-	}
-
-	public void drawRegion(Image arg0, long x0, long y0, int w0, int h0, int arg5, int x, int y, int arg8)
 	{
 		if (arg0 != null)
 		{
@@ -851,96 +810,34 @@ public class mGraphics
 		}
 	}
 
-	public void drawRegionGui(Image image, float x0, float y0, int w, int h, int transform, float x, float y, int anchor)
-	{
-		GUI.color = setColorMiniMap(807956);
-		x *= (float)zoomLevel;
-		y *= (float)zoomLevel;
-		x0 *= (float)zoomLevel;
-		y0 *= (float)zoomLevel;
-		w *= zoomLevel;
-		h *= zoomLevel;
-	}
-
-	public void drawRegion2(Image image, float x0, float y0, int w, int h, int transform, int x, int y, int anchor)
-	{
-		GUI.color = image.colorBlend;
-		if (isTranslate)
-		{
-			x += translateX;
-			y += translateY;
-		}
-		string key = "dg" + x0 + y0 + w + h + transform + image.GetHashCode();
-		Texture2D texture2D = (Texture2D)cachedTextures[key];
-		if (texture2D == null)
-		{
-			Image image2 = Image.createImage(image, (int)x0, (int)y0, w, h, transform);
-			texture2D = image2.texture;
-			cache(key, texture2D);
-		}
-		int num = 0;
-		int num2 = 0;
-		int num3 = 0;
-		int num4 = 0;
-		float num5 = w;
-		float num6 = h;
-		float num7 = 0f;
-		float num8 = 0f;
-		if ((anchor & HCENTER) == HCENTER)
-		{
-			num7 -= num5 / 2f;
-		}
-		if ((anchor & VCENTER) == VCENTER)
-		{
-			num8 -= num6 / 2f;
-		}
-		if ((anchor & RIGHT) == RIGHT)
-		{
-			num7 -= num5;
-		}
-		if ((anchor & BOTTOM) == BOTTOM)
-		{
-			num8 -= num6;
-		}
-		x += (int)num7;
-		y += (int)num8;
-		if (isClip)
-		{
-			num = clipX;
-			num2 = clipY;
-			num3 = clipW;
-			num4 = clipH;
-			if (isTranslate)
-			{
-				num += clipTX;
-				num2 += clipTY;
-			}
-		}
-		if (isClip)
-		{
-			GUI.BeginGroup(new Rect(num, num2, num3, num4));
-		}
-		GUI.DrawTexture(new Rect(x - num, y - num2, w, h), texture2D);
-		if (isClip)
-		{
-			GUI.EndGroup();
-		}
-		GUI.color = new Color(1f, 1f, 1f, 1f);
-	}
-
-	public void drawImagaByDrawTexture(Image image, float x, float y)
-	{
-		x *= (float)zoomLevel;
-		y *= (float)zoomLevel;
-		GUI.DrawTexture(new Rect(x + (float)translateX, y + (float)translateY, image.getRealImageWidth(), image.getRealImageHeight()), image.texture);
-	}
-
 	public void drawImage(Image image, int x, int y, int anchor)
 	{
 		if (image != null)
 		{
 			drawRegion(image, 0, 0, getImageWidth(image), getImageHeight(image), 0, x, y, anchor);
 		}
+	}
+
+	public void drawImageFlipped(Image image, float x, float y)
+	{
+		x *= (float)zoomLevel;
+		y *= (float)zoomLevel;
+		if (!isFlipping)
+		{
+			isFlipping = true;
+			flipProgress = 0f;
+		}
+		else if (flipProgress < 1f)
+		{
+			flipProgress += Time.deltaTime * flipSpeed;
+			if (flipProgress > 1f)
+			{
+				flipProgress = 1f;
+			}
+		}
+		float width = Mathf.Lerp(image.getRealImageWidth(), -image.getRealImageWidth(), flipProgress);
+		float xOffset = flipProgress * (float)image.getRealImageWidth();
+		GUI.DrawTexture(new Rect(x + (float)translateX + xOffset, y + (float)translateY, width, image.getRealImageHeight()), image.texture);
 	}
 
 	public void drawImageFog(Image image, int x, int y, int anchor)
@@ -965,16 +862,6 @@ public class mGraphics
 		{
 			drawRegion(image, 0, 0, getImageWidth(image), getImageHeight(image), 0, x, y, anchor);
 		}
-	}
-
-	public void drawRoundRect(int x, int y, int w, int h, int arcWidth, int arcHeight)
-	{
-		drawRect(x, y, w, h);
-	}
-
-	public void fillRoundRect(int x, int y, int width, int height, int arcWidth, int arcHeight)
-	{
-		fillRect(x, y, width, height);
 	}
 
 	public void reset()
@@ -1037,28 +924,6 @@ public class mGraphics
 		if (image != null)
 		{
 			Graphics.DrawTexture(new Rect(x + translateX, y + translateY, (tranform != 0) ? (-w) : w, h), image.texture);
-		}
-	}
-
-    public void drawImageScale(Image image, int x, int y, int w, int h)
-    {
-        x *= zoomLevel;
-        y *= zoomLevel;
-        w *= zoomLevel;
-        h *= zoomLevel;
-        if (image != null)
-        {
-            Graphics.DrawTexture(new Rect(x, y, w, h), image.texture);
-        }
-    }
-
-    public void drawImageSimple(Image image, int x, int y)
-	{
-		x *= zoomLevel;
-		y *= zoomLevel;
-		if (image != null)
-		{
-			Graphics.DrawTexture(new Rect(x, y, image.w, image.h), image.texture);
 		}
 	}
 
@@ -1144,10 +1009,7 @@ public class mGraphics
 		int num = rgb & 0xFF;
 		int num2 = (rgb >> 8) & 0xFF;
 		int num3 = (rgb >> 16) & 0xFF;
-		float num4 = (float)num / 256f;
-		float num5 = (float)num2 / 256f;
-		float num6 = (float)num3 / 256f;
-		return new Color(num6, num5, num4);
+		return new Color(b: (float)num / 256f, g: (float)num2 / 256f, r: (float)num3 / 256f);
 	}
 
 	public void fillTrans(Image imgTrans, int x, int y, int w, int h)
@@ -1185,6 +1047,7 @@ public class mGraphics
 		if (num6 < 0f)
 		{
 			num6 = 0f;
+			
 		}
 		if (num6 > 255f)
 		{
@@ -1220,60 +1083,12 @@ public class mGraphics
 	{
 		if (!lineMaterial)
 		{
-            lineMaterial = new Material(Shader.Find("Lines/Colored Blended"))
-            {
-                hideFlags = HideFlags.HideAndDontSave
-            };
-            lineMaterial.shader.hideFlags = HideFlags.HideAndDontSave;
-		}
-	}
-
-	public void drawlineGL(MyVector totalLine)
-	{
-		lineMaterial.SetPass(0);
-		GL.PushMatrix();
-		GL.Begin(1);
-		for (int i = 0; i < totalLine.size(); i++)
-		{
-			mLine mLine2 = (mLine)totalLine.elementAt(i);
-			GL.Color(new Color(mLine2.r, mLine2.g, mLine2.b, mLine2.a));
-			int num = mLine2.x1 * zoomLevel;
-			int num2 = mLine2.y1 * zoomLevel;
-			int num3 = mLine2.x2 * zoomLevel;
-			int num4 = mLine2.y2 * zoomLevel;
-			if (isTranslate)
+			lineMaterial = new Material(Shader.Find("Lines/Colored Blended"))
 			{
-				num += translateX;
-				num2 += translateY;
-				num3 += translateX;
-				num4 += translateY;
-			}
-			for (int j = 0; j < zoomLevel; j++)
-			{
-				GL.Vertex(new Vector2(num + j, num2 + j));
-				GL.Vertex(new Vector2(num3 + j, num4 + j));
-				if (j > 0)
-				{
-					GL.Vertex(new Vector2(num + j, num2));
-					GL.Vertex(new Vector2(num3 + j, num4));
-					GL.Vertex(new Vector2(num, num2 + j));
-					GL.Vertex(new Vector2(num3, num4 + j));
-				}
-			}
+				hideFlags = HideFlags.HideAndDontSave
+			};
+			lineMaterial.shader.hideFlags = HideFlags.HideAndDontSave;
 		}
-		GL.End();
-		GL.PopMatrix();
-		totalLine.removeAllElements();
-	}
-
-	public void drawLine(mGraphics g, int x, int y, int xTo, int yTo, int nLine, int color)
-	{
-		MyVector myVector = new MyVector();
-		for (int i = 0; i < nLine; i++)
-		{
-			myVector.addElement(new mLine(x, y, xTo + i, yTo + i, color));
-		}
-		g.drawlineGL(myVector);
 	}
 
 	internal void drawRegion(Small img, int p1, int p2, int p3, int p4, int transform, int x, int y, int anchor)

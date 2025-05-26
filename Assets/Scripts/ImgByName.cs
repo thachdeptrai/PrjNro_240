@@ -40,10 +40,10 @@ public class ImgByName
 
 	public static MainImage getFromRms(string nameImg)
 	{
-		string text = mGraphics.zoomLevel + "ImgByName_" + nameImg;
+		string filename = mGraphics.zoomLevel + "ImgByName_" + nameImg;
 		MainImage result = null;
 		sbyte[] array = null;
-		array = Rms.loadRMS(text);
+		array = Rms.loadRMS(filename);
 		if (array == null)
 		{
 			return result;
@@ -53,15 +53,13 @@ public class ImgByName
 			result = new MainImage();
 			result.nFrame = array[0];
 			result.img = Image.createImage(array, 1, array.Length - 1);
-			if (result.img != null)
-			{
-			}
+			_ = result.img;
+			return result;
 		}
 		catch (Exception)
 		{
 			return null;
 		}
-		return result;
 	}
 
 	public static void saveRMS(string nameImg, sbyte nFrame, sbyte[] data)

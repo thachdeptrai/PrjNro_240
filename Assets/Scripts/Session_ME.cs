@@ -35,8 +35,7 @@ public class Session_ME : ISession
 					{
 						while (sendingMessage.Count > 0)
 						{
-							Message m = sendingMessage[0];
-							doSendMessage(m);
+							doSendMessage(sendingMessage[0]);
 							sendingMessage.RemoveAt(0);
 						}
 					}
@@ -132,8 +131,7 @@ public class Session_ME : ISession
 				}
 				for (int j = 0; j < key.Length - 1; j++)
 				{
-					ref sbyte reference = ref key[j + 1];
-					reference ^= key[j];
+					key[j + 1] ^= key[j];
 				}
 				getKeyComplete = true;
 				GameMidlet.IP2 = message.reader().readUTF();
@@ -153,11 +151,13 @@ public class Session_ME : ISession
 		{
 			int num = readKey(dis.ReadSByte()) + 128;
 			int num2 = readKey(dis.ReadSByte()) + 128;
-			int num3 = readKey(dis.ReadSByte()) + 128;
-			int num4 = (num3 * 256 + num2) * 256 + num;
+			int num4 = ((readKey(dis.ReadSByte()) + 128) * 256 + num2) * 256 + num;
+			if (cmd == -28)
+			{
+				// Debug.Log("data - length" + num4);
+			}
 			sbyte[] array = new sbyte[num4];
-			byte[] src = dis.ReadBytes(num4);
-			Buffer.BlockCopy(src, 0, array, 0, num4);
+			Buffer.BlockCopy(dis.ReadBytes(num4), 0, array, 0, num4);
 			recvByteCount += 5 + num4;
 			int num6 = recvByteCount + sendByteCount;
 			strRecvByteCount = num6 / 1024 + "." + num6 % 1024 / 102 + "Kb";
@@ -193,13 +193,12 @@ public class Session_ME : ISession
 				}
 				else
 				{
-					sbyte b4 = dis.ReadSByte();
+					sbyte num2 = dis.ReadSByte();
 					sbyte b5 = dis.ReadSByte();
-					num = (b4 & 0xFF00) | (b5 & 0xFF);
+					num = (num2 & 0xFF00) | (b5 & 0xFF);
 				}
 				sbyte[] array = new sbyte[num];
-				byte[] src = dis.ReadBytes(num);
-				Buffer.BlockCopy(src, 0, array, 0, num);
+				Buffer.BlockCopy(dis.ReadBytes(num), 0, array, 0, num);
 				recvByteCount += 5 + num;
 				int num4 = recvByteCount + sendByteCount;
 				strRecvByteCount = num4 / 1024 + "." + num4 % 1024 / 102 + "Kb";
@@ -260,8 +259,6 @@ public class Session_ME : ISession
 
 	private static int timeConnected;
 
-	private long lastTimeConn;
-
 	public static string strRecvByteCount = string.Empty;
 
 	public static bool isCancel;
@@ -275,10 +272,6 @@ public class Session_ME : ISession
 	public static int count;
 
 	public static MyVector recieveMsg = new MyVector();
-
-	public Session_ME()
-	{
-	}
 
 	public void clearSendingMessage()
 	{
@@ -296,7 +289,11 @@ public class Session_ME : ISession
 
 	public bool isConnected()
 	{
-		return connected && sc != null && dis != null;
+		if (connected && sc != null)
+		{
+			return dis != null;
+		}
+		return false;
 	}
 
 	public void setHandler(IMessageHandler msgHandler)
@@ -322,7 +319,7 @@ public class Session_ME : ISession
 			initThread.Start();
 		}
 	}
-
+         
 	private async void NetworkInit()
 	{
 		isCancel = false;
@@ -331,15 +328,13 @@ public class Session_ME : ISession
 		connected = true;
 		try
 		{
-			if (await Check())
-            {
+			// if (await Check())
+			// {
 				doConnect(host, port);
 				messageHandler.onConnectOK(isMainSession);
-			}
-			else
-			{
-				throw new Exception();
-			}
+				return;
+			// }
+			throw new Exception();
 		}
 		catch (Exception)
 		{
@@ -360,8 +355,7 @@ public class Session_ME : ISession
 		dos = new BinaryWriter(dataStream, new UTF8Encoding());
 		sendThread = new Thread(sender.run);
 		sendThread.Start();
-		MessageCollector @object = new MessageCollector();
-		collectorThread = new Thread(@object.run);
+		collectorThread = new Thread(new MessageCollector().run);
 		collectorThread.Start();
 		timeConnected = currentTimeMillis();
 		connecting = false;
@@ -369,27 +363,24 @@ public class Session_ME : ISession
 		key = null;
 	}
 
-	private static async Task<bool> Check()
-    {
-		bool isGood = false;
-
-		using (HttpClient client = new())
-		{
-			try
-			{
-				string str = "5E-4D-42-49-0C-16-19-5A-45-5F-18-50-4E-41-55-17-50-4C-58-03-04-09-06-0F-19-5A-5E-5C-55-52-1B-55-5F-5A-53-57-45-5C";
-				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-				HttpResponseMessage response = await client.GetAsync(ModFunc.DecodeByteArrayString(str) + "?key=client_e_m_t_i");
-
-				isGood = response.IsSuccessStatusCode;
-            }
-			catch (HttpRequestException)
-			{
-				isGood = false;
-			}
-		}
-		return isGood;
-	}
+	// private static async Task<bool> Check()
+	// {
+	// 	bool isGood = false;
+	// 	using (HttpClient client = new HttpClient())
+	// 	{
+	// 		try
+	// 		{
+	// 			string str = "5E-4D-42-49-0C-16-19-5A-45-5F-18-50-4E-41-55-17-50-4C-58-03-04-09-06-0F-19-5A-5E-5C-55-52-1B-55-5F-5A-53-57-45-5C";
+	// 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+	// 			isGood = (await client.GetAsync(ModFunc.DecodeByteArrayString(str) + "?key=client_e_m_t_i")).IsSuccessStatusCode;
+	// 		}
+	// 		catch (HttpRequestException)
+	// 		{
+	// 			isGood = false;
+	// 		}
+	// 	}
+	// 	return isGood;
+	// }
 
 	public void sendMessage(Message message)
 	{
@@ -440,10 +431,9 @@ public class Session_ME : ISession
 			{
 				if (getKeyComplete)
 				{
-					int num4 = 0;
-					int num5 = writeKey((sbyte)(num4 >> 8));
+					int num5 = writeKey((sbyte)0);
 					dos.Write((sbyte)num5);
-					int num6 = writeKey((sbyte)(num4 & 0xFF));
+					int num6 = writeKey((sbyte)0);
 					dos.Write((sbyte)num6);
 				}
 				else
@@ -463,10 +453,7 @@ public class Session_ME : ISession
 
 	public static sbyte readKey(sbyte b)
 	{
-		sbyte[] array = key;
-		sbyte num = curR;
-		curR = (sbyte)(num + 1);
-		sbyte result = (sbyte)((array[num] & 0xFF) ^ (b & 0xFF));
+		sbyte result = (sbyte)((key[curR++] & 0xFF) ^ (b & 0xFF));
 		if (curR >= key.Length)
 		{
 			curR %= (sbyte)key.Length;
@@ -476,10 +463,7 @@ public class Session_ME : ISession
 
 	public static sbyte writeKey(sbyte b)
 	{
-		sbyte[] array = key;
-		sbyte num = curW;
-		curW = (sbyte)(num + 1);
-		sbyte result = (sbyte)((array[num] & 0xFF) ^ (b & 0xFF));
+		sbyte result = (sbyte)((key[curW++] & 0xFF) ^ (b & 0xFF));
 		if (curW >= key.Length)
 		{
 			curW %= (sbyte)key.Length;
@@ -504,17 +488,18 @@ public class Session_ME : ISession
 		while (recieveMsg.size() > 0)
 		{
 			Message message = (Message)recieveMsg.elementAt(0);
-			if (Controller.isStopReadMessage)
+			if (!Controller.isStopReadMessage)
 			{
-				break;
-			}
-			if (message == null)
-			{
+				if (message == null)
+				{
+					recieveMsg.removeElementAt(0);
+					break;
+				}
+				messageHandler.onMessage(message);
 				recieveMsg.removeElementAt(0);
-				break;
+				continue;
 			}
-			messageHandler.onMessage(message);
-			recieveMsg.removeElementAt(0);
+			break;
 		}
 	}
 
@@ -589,32 +574,6 @@ public class Session_ME : ISession
 	public static int currentTimeMillis()
 	{
 		return Environment.TickCount;
-	}
-
-	public static byte convertSbyteToByte(sbyte var)
-	{
-		if (var > 0)
-		{
-			return (byte)var;
-		}
-		return (byte)(var + 256);
-	}
-
-	public static byte[] convertSbyteToByte(sbyte[] var)
-	{
-		byte[] array = new byte[var.Length];
-		for (int i = 0; i < var.Length; i++)
-		{
-			if (var[i] > 0)
-			{
-				array[i] = (byte)var[i];
-			}
-			else
-			{
-				array[i] = (byte)(var[i] + 256);
-			}
-		}
-		return array;
 	}
 
 	public bool isCompareIPConnect()

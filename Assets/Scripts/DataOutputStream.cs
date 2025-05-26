@@ -16,16 +16,6 @@ public class DataOutputStream
 		w.writeShort(i);
 	}
 
-	public void writeInt(int i)
-	{
-		w.writeInt(i);
-	}
-
-	public void write(sbyte[] data)
-	{
-		w.writeSByte(data);
-	}
-
 	public sbyte[] toByteArray()
 	{
 		return w.getData();
@@ -44,10 +34,5 @@ public class DataOutputStream
 	public void writeUTF(string name)
 	{
 		w.writeUTF(name);
-	}
-
-	public void writeBoolean(bool b)
-	{
-		w.writeBoolean(b);
 	}
 }

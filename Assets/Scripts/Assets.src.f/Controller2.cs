@@ -1201,6 +1201,7 @@ namespace Assets.src.f
 			}
 		}
 
+
 		private static void readInfoEffChar(Message msg)
 		{
 			try
@@ -1232,6 +1233,7 @@ namespace Assets.src.f
 			{
 			}
 		}
+
 
 		private static void readActionBoss(Message msg, int actionBoss)
 		{
@@ -1292,4 +1294,3 @@ namespace Assets.src.f
 	}
 
 }
-

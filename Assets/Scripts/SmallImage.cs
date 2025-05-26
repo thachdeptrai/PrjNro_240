@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Assets.src.e;
-using UnityEngine;
 
 public class SmallImage
 {
@@ -45,12 +44,6 @@ public class SmallImage
 		}
 	}
 
-	public static void freeBig()
-	{
-		imgbig = null;
-		mSystem.gcc();
-	}
-
 	public static void loadBigImage()
 	{
 		imgEmpty = Image.createRGBImage(new int[1], 1, 1, bl: true);
@@ -60,10 +53,6 @@ public class SmallImage
 	{
 		instance = null;
 		instance = new SmallImage();
-	}
-
-	public void readData(byte[] data)
-	{
 	}
 
 	public void readImage()
@@ -119,19 +108,19 @@ public class SmallImage
 			return;
 		}
 		bool flag = false;
-        if (imageRaw.ContainsKey(id))
+		if (imageRaw.ContainsKey(id))
 		{
 			Image img = null;
 			imageRaw.TryGetValue(id, out img);
-			if(img != null)
+			if (img != null)
 			{
-                imgNew[id] = new Small(img, id);
-            }
+				imgNew[id] = new Small(img, id);
+			}
 			else
 			{
 				flag = true;
 			}
-        }
+		}
 		else
 		{
 			flag = true;

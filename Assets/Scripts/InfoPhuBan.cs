@@ -26,8 +26,6 @@ public class InfoPhuBan
 
 	public short timeSecond;
 
-	public short timepaintSecond;
-
 	public short maxtimeSecond = 1;
 
 	public byte owner;

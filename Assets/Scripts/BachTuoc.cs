@@ -10,12 +10,6 @@ public class BachTuoc : Mob, IMapObject
 
 	public int yTo;
 
-	public bool haftBody;
-
-	public bool change;
-
-	private Mob mob1;
-
 	public new int xSd;
 
 	public new int ySd;
@@ -32,31 +26,11 @@ public class BachTuoc : Mob, IMapObject
 
 	public new static Image imgHP = GameCanvas.loadImage("/mainImage/myTexture2dmobHP.png");
 
-	private bool wy;
-
-	private int wt;
-
 	private int fy;
-
-	private int ty;
-
-	public new int typeSuperEff;
-
-	private Char focus;
-
-	private bool flyUp;
-
-	private bool flyDown;
-
-	private int dy;
-
-	public bool changePos;
 
 	private int tShock;
 
 	public new bool isBusyAttackSomeOne = true;
-
-	private int tA;
 
 	private Char[] charAttack;
 
@@ -94,35 +68,7 @@ public class BachTuoc : Mob, IMapObject
 
 	private sbyte[] cou = new sbyte[2] { -1, 1 };
 
-	public new Char injureBy;
-
-	public new bool injureThenDie;
-
-	public new Mob mobToAttack;
-
 	public new int forceWait;
-
-	public new bool blindEff;
-
-	public new bool sleepEff;
-
-	public BachTuoc(int id, short px, short py, int templateID, int hp, int maxHp, int s)
-	{
-		mobId = id;
-		xFirst = (x = px + 20);
-		yFirst = (y = py);
-		xTo = x;
-		yTo = y;
-		base.maxHp = maxHp;
-		base.hp = hp;
-		templateId = templateID;
-		w_hp_bar = 100;
-		h_hp_bar = 6;
-		len = w_hp_bar;
-		updateHp_bar();
-		getDataB();
-		status = 2;
-	}
 
 	public BachTuoc(int id, short px, short py, int templateID, double hp, double maxHp, int s)
 	{
@@ -171,19 +117,6 @@ public class BachTuoc : Mob, IMapObject
 		changBody = false;
 	}
 
-	public new static bool isExistNewMob(string id)
-	{
-		for (int i = 0; i < Mob.newMob.size(); i++)
-		{
-			string text = (string)Mob.newMob.elementAt(i);
-			if (text.Equals(id))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public new void checkFrameTick(int[] array)
 	{
 		tick++;
@@ -230,13 +163,9 @@ public class BachTuoc : Mob, IMapObject
 
 	private void paintShadow(mGraphics g)
 	{
-		int num = TileMap.size;
+		_ = TileMap.size;
 		g.drawImage(shadowBig, xSd, yFirst, 3);
 		g.setClip(GameScr.cmx, GameScr.cmy - GameCanvas.transY, GameScr.gW, GameScr.gH + 2 * GameCanvas.transY);
-	}
-
-	public new void updateSuperEff()
-	{
 	}
 
 	public override void update()
@@ -295,49 +224,6 @@ public class BachTuoc : Mob, IMapObject
 		}
 	}
 
-	public new void setInjure()
-	{
-	}
-
-	public new void setAttack(Char cFocus)
-	{
-		isBusyAttackSomeOne = true;
-		mobToAttack = null;
-		base.cFocus = cFocus;
-		p1 = 0;
-		p2 = 0;
-		status = 3;
-		tick = 0;
-		dir = ((cFocus.cx > x) ? 1 : (-1));
-		int cx = cFocus.cx;
-		int cy = cFocus.cy;
-		if (Res.abs(cx - x) < w * 2 && Res.abs(cy - y) < h * 2)
-		{
-			if (x < cx)
-			{
-				x = cx - w;
-			}
-			else
-			{
-				x = cx + w;
-			}
-			p3 = 0;
-		}
-		else
-		{
-			p3 = 1;
-		}
-	}
-
-	private bool isSpecial()
-	{
-		if ((templateId >= 58 && templateId <= 65) || templateId == 67 || templateId == 68)
-		{
-			return true;
-		}
-		return false;
-	}
-
 	private void updateInjure()
 	{
 	}
@@ -350,12 +236,6 @@ public class BachTuoc : Mob, IMapObject
 			x += (xTo - x) / 4;
 			y += (yTo - y) / 4;
 		}
-	}
-
-	public void setFly()
-	{
-		status = 4;
-		flyUp = true;
 	}
 
 	public void setAttack(Char[] cAttack, int[] dame, sbyte type)
@@ -383,7 +263,7 @@ public class BachTuoc : Mob, IMapObject
 			{
 				for (int i = 0; i < charAttack.Length; i++)
 				{
-					charAttack[i].doInjure(dameHP[i], 0, isCrit: false, isMob: false);
+					charAttack[i].doInjure(dameHP[i], 0.0, isCrit: false, isMob: false);
 					ServerEffect.addServerEffect(102, charAttack[i].cx, charAttack[i].cy, 1);
 				}
 			}
@@ -402,7 +282,7 @@ public class BachTuoc : Mob, IMapObject
 		{
 			for (int j = 0; j < charAttack.Length; j++)
 			{
-				charAttack[j].doInjure(dameHP[j], 0, isCrit: false, isMob: false);
+				charAttack[j].doInjure(dameHP[j], 0.0, isCrit: false, isMob: false);
 				ServerEffect.addServerEffect(102, charAttack[j].cx, charAttack[j].cy, 1);
 			}
 		}
@@ -421,31 +301,6 @@ public class BachTuoc : Mob, IMapObject
 		}
 	}
 
-	public new bool isPaint()
-	{
-		if (x < GameScr.cmx)
-		{
-			return false;
-		}
-		if (x > GameScr.cmx + GameScr.gW)
-		{
-			return false;
-		}
-		if (y < GameScr.cmy)
-		{
-			return false;
-		}
-		if (y > GameScr.cmy + GameScr.gH + 30)
-		{
-			return false;
-		}
-		if (status == 0)
-		{
-			return false;
-		}
-		return true;
-	}
-
 	public new bool isUpdate()
 	{
 		if (status == 0)
@@ -453,15 +308,6 @@ public class BachTuoc : Mob, IMapObject
 			return false;
 		}
 		return true;
-	}
-
-	public new bool checkIsBoss()
-	{
-		if (isBoss || levelBoss > 0)
-		{
-			return true;
-		}
-		return false;
 	}
 
 	public override void paint(mGraphics g)
@@ -523,61 +369,13 @@ public class BachTuoc : Mob, IMapObject
 		if (shock)
 		{
 			tShock++;
-			Effect me = new Effect((type != 2) ? 22 : 19, x + tShock * 50, y + 25, 2, 1, -1);
-			EffecMn.addEff(me);
-			Effect me2 = new Effect((type != 2) ? 22 : 19, x - tShock * 50, y + 25, 2, 1, -1);
-			EffecMn.addEff(me2);
+			EffecMn.addEff(new Effect((type != 2) ? 22 : 19, x + tShock * 50, y + 25, 2, 1, -1));
+			EffecMn.addEff(new Effect((type != 2) ? 22 : 19, x - tShock * 50, y + 25, 2, 1, -1));
 			if (tShock == 50)
 			{
 				tShock = 0;
 				shock = false;
 			}
-		}
-	}
-
-	public new int getHPColor()
-	{
-		return 16711680;
-	}
-
-	public new void startDie()
-	{
-		hp = 0;
-		injureThenDie = true;
-		hp = 0;
-		status = 1;
-		p1 = -3;
-		p2 = -dir;
-		p3 = 0;
-	}
-
-	public new void attackOtherMob(Mob mobToAttack)
-	{
-		this.mobToAttack = mobToAttack;
-		isBusyAttackSomeOne = true;
-		cFocus = null;
-		p1 = 0;
-		p2 = 0;
-		status = 3;
-		tick = 0;
-		dir = ((mobToAttack.x > x) ? 1 : (-1));
-		int num = mobToAttack.x;
-		int num2 = mobToAttack.y;
-		if (Res.abs(num - x) < w * 2 && Res.abs(num2 - y) < h * 2)
-		{
-			if (x < num)
-			{
-				x = num - w;
-			}
-			else
-			{
-				x = num + w;
-			}
-			p3 = 0;
-		}
-		else
-		{
-			p3 = 1;
 		}
 	}
 
@@ -613,25 +411,11 @@ public class BachTuoc : Mob, IMapObject
 
 	public new bool isInvisible()
 	{
-		return status == 0 || status == 1;
-	}
-
-	public new void removeHoldEff()
-	{
-		if (holdEffID != 0)
+		if (status != 0)
 		{
-			holdEffID = 0;
+			return status == 1;
 		}
-	}
-
-	public new void removeBlindEff()
-	{
-		blindEff = false;
-	}
-
-	public new void removeSleepEff()
-	{
-		sleepEff = false;
+		return true;
 	}
 
 	public new void move(short xMoveTo)

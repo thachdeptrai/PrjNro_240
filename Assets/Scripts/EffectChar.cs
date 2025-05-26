@@ -2,8 +2,6 @@ public class EffectChar
 {
 	public static EffectTemplate[] effTemplates;
 
-	public static sbyte EFF_ME;
-
 	public static sbyte EFF_FRIEND = 1;
 
 	public int timeStart;

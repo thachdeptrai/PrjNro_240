@@ -196,6 +196,4 @@ namespace Assets.src.g
 			GameScr.instance.switchToMe();
 		}
 	}
-
 }
-

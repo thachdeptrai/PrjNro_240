@@ -21,9 +21,4 @@ public class DartInfo
 	public int va;
 
 	public short loop;
-
-	public DartInfo clone()
-	{
-		return null;
-	}
 }

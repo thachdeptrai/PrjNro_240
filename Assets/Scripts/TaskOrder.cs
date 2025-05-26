@@ -1,9 +1,5 @@
 public class TaskOrder
 {
-	public const sbyte TASK_DAY = 0;
-
-	public const sbyte TASK_BOSS = 1;
-
 	public int taskId;
 
 	public int count;

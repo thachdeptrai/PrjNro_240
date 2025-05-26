@@ -35,10 +35,6 @@ public class mScreen
 	{
 	}
 
-	public static void initPos()
-	{
-	}
-
 	public virtual void keyPress(int keyCode)
 	{
 	}

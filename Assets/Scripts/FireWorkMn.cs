@@ -30,12 +30,12 @@ public class FireWorkMn
 	{
 		for (int i = 0; i < fw.size(); i++)
 		{
-			Firework firework = (Firework)fw.elementAt(i);
-			if (firework.y < -200)
+			Firework obj = (Firework)fw.elementAt(i);
+			if (obj.y < -200)
 			{
 				fw.removeElementAt(i);
 			}
-			firework.paint(g);
+			obj.paint(g);
 		}
 	}
 }

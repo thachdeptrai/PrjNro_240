@@ -10,8 +10,6 @@ public class SplashScr : mScreen
 
 	public static SplashScr instance;
 
-    public long TIMEOUT;
-
 	public SplashScr()
 	{
 		instance = this;
@@ -24,12 +22,13 @@ public class SplashScr : mScreen
 
 	public override void update()
 	{
+		ServerListScreen.updateDeleteData();
 		if (splashScrStat == 30 && !isCheckConnect)
 		{
 			isCheckConnect = true;
 			if (Rms.loadRMSInt("serverchat") != -1)
 			{
-				GameScr.isPaintChatVip = ((Rms.loadRMSInt("serverchat") == 0) ? true : false);
+				GameScr.isPaintChatVip = Rms.loadRMSInt("serverchat") == 0;
 			}
 			if (Rms.loadRMSInt("isPlaySound") != -1)
 			{
@@ -42,8 +41,7 @@ public class SplashScr : mScreen
 			SoundMn.gI().getStrOption();
 			if (Rms.loadRMSInt("svselect") == -1)
 			{
-				string linkDefault = ServerListScreen.linkDefault;
-				string[] array = Res.split(linkDefault.Trim(), ",", 0);
+				string[] array = Res.split(ServerListScreen.linkDefault.Trim(), ",", 0);
 				mResources.loadLanguague(sbyte.Parse(array[array.Length - 2]));
 				ServerListScreen.nameServer = new string[array.Length - 2];
 				ServerListScreen.address = new string[array.Length - 2];
@@ -66,7 +64,6 @@ public class SplashScr : mScreen
 			}
 		}
 		splashScrStat++;
-		ServerListScreen.updateDeleteData();
 		if (splashScrStat >= 150)
 		{
 			if (Session_ME.gI().isConnected())
@@ -130,23 +127,18 @@ public class SplashScr : mScreen
 		{
 			g.setColor(0);
 			g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-            //g.drawImage(imgLogo, GameCanvas.w / 2, GameCanvas.h / 2, 3);
-
-            int imgW = ModFunc.imgLogoBig.getWidth() * mGraphics.zoomLevel / 4;
-            int imgH = ModFunc.imgLogoBig.getHeight() * mGraphics.zoomLevel / 4;
-            g.drawImageScale(ModFunc.imgLogoBig, (GameCanvas.w - imgW) / 2, (GameCanvas.h - imgH) / 2, imgW, imgH);
-        }
+			ModFunc.PaintLogoGif(g, GameCanvas.w / 2, GameCanvas.h / 2, 3);
+		}
 		if (nData != -1)
 		{
 			g.setColor(0);
 			g.fillRect(0, 0, GameCanvas.w, GameCanvas.h);
-            //g.drawImage(imgLogo, GameCanvas.w / 2, GameCanvas.h / 2 - 24, StaticObj.BOTTOM_HCENTER);
-
-            int imgW = ModFunc.imgLogoBig.getWidth() * mGraphics.zoomLevel / 4;
-            int imgH = ModFunc.imgLogoBig.getHeight() * mGraphics.zoomLevel / 4;
-            g.drawImageScale(ModFunc.imgLogoBig, (GameCanvas.w - imgW) / 2, (GameCanvas.h - imgH) / 2 - 24, imgW, imgH);
-
-            GameCanvas.paintShukiren(GameCanvas.hw, GameCanvas.h / 2 + 24, g);
+			ModFunc.PaintLogoGif(g, GameCanvas.w / 2, GameCanvas.h / 2 - 24, StaticObj.BOTTOM_HCENTER);
+			if (ServerListScreen.cmdDeleteRMS != null)
+			{
+				mFont.tahoma_7_white.drawStringBorder(g, mResources.xoadulieu, GameCanvas.w - 2, GameCanvas.h - 15, 1, mFont.tahoma_7_grey);
+			}
+			GameCanvas.paintShukiren(GameCanvas.hw, GameCanvas.h / 2 + 24, g);
 			mFont.tahoma_7b_white.drawString(g, mResources.downloading_data + nData * 100 / maxData + "%", GameCanvas.w / 2, GameCanvas.h / 2, 2);
 		}
 		else if (splashScrStat >= 30)
@@ -164,6 +156,9 @@ public class SplashScr : mScreen
 	public static void LoadImg()
 	{
 		ModFunc.LoadLogoImages();
-        ModFunc.LoadTickImages();
-    }
+		ModFunc.LoadTickImages();
+		ModFunc.LoadLogoGif();
+		ModFunc.LoadImgMenuChat();
+		ModFunc.LoadLogoGifMenu();
+	}
 }

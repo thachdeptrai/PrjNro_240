@@ -30,6 +30,10 @@ public class EffecMn
 
 	public static void paintBackGroundUnderLayer(mGraphics g, int x, int y, int layer)
 	{
+		if (ModFunc.GiamDungLuong)
+		{
+			return;
+		}
 		for (int i = 0; i < vEff.size(); i++)
 		{
 			if (((Effect)vEff.elementAt(i)).layer == -layer)
@@ -41,6 +45,10 @@ public class EffecMn
 
 	public static void paintLayer1(mGraphics g)
 	{
+		if (ModFunc.GiamDungLuong)
+		{
+			return;
+		}
 		for (int i = 0; i < vEff.size(); i++)
 		{
 			if (((Effect)vEff.elementAt(i)).layer == 1)
@@ -52,6 +60,10 @@ public class EffecMn
 
 	public static void paintLayer2(mGraphics g)
 	{
+		if (ModFunc.GiamDungLuong)
+		{
+			return;
+		}
 		for (int i = 0; i < vEff.size(); i++)
 		{
 			if (((Effect)vEff.elementAt(i)).layer == 2)
@@ -63,6 +75,10 @@ public class EffecMn
 
 	public static void paintLayer3(mGraphics g)
 	{
+		if (ModFunc.GiamDungLuong)
+		{
+			return;
+		}
 		for (int i = 0; i < vEff.size(); i++)
 		{
 			if (((Effect)vEff.elementAt(i)).layer == 3)
@@ -74,6 +90,10 @@ public class EffecMn
 
 	public static void paintLayer4(mGraphics g)
 	{
+		if (ModFunc.GiamDungLuong)
+		{
+			return;
+		}
 		for (int i = 0; i < vEff.size(); i++)
 		{
 			if (((Effect)vEff.elementAt(i)).layer == 4)

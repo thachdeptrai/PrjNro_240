@@ -1,22 +1,21 @@
-﻿using System;
-
 public class Math
 {
-	public const double PI = System.Math.PI;
-
 	public static int abs(int i)
 	{
-		return (i <= 0) ? (-i) : i;
+		if (i > 0)
+		{
+			return i;
+		}
+		return -i;
 	}
 
 	public static int min(int x, int y)
 	{
-		return (x >= y) ? y : x;
-	}
-
-	public static int max(int x, int y)
-	{
-		return (x <= y) ? y : x;
+		if (x < y)
+		{
+			return x;
+		}
+		return y;
 	}
 
 	public static int pow(int data, int x)
@@ -28,5 +27,4 @@ public class Math
 		}
 		return num;
 	}
-
 }

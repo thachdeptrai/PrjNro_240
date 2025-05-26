@@ -11,4 +11,3 @@ namespace Assets.src.g
 		public bool hasRead;
 	}
 }
-

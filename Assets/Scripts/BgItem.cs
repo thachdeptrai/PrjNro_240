@@ -16,8 +16,6 @@ public class BgItem
 
 	public sbyte layer;
 
-	public int nTilenotMove;
-
 	public int[] tileX;
 
 	public int[] tileY;
@@ -27,8 +25,6 @@ public class BgItem
 	public static MyVector vKeysNew = new MyVector();
 
 	public static MyVector vKeysLast = new MyVector();
-
-	private bool isBlur;
 
 	public int transX;
 
@@ -61,21 +57,7 @@ public class BgItem
 	{
 		for (int i = 0; i < vKeysNew.size(); i++)
 		{
-			string text = (string)vKeysNew.elementAt(i);
-			if (text.Equals(keyNew))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static bool isExistKeyLast(string keyLast)
-	{
-		for (int i = 0; i < vKeysLast.size(); i++)
-		{
-			string text = (string)vKeysLast.elementAt(i);
-			if (text.Equals(keyLast))
+			if (((string)vKeysNew.elementAt(i)).Equals(keyNew))
 			{
 				return true;
 			}
@@ -137,7 +119,7 @@ public class BgItem
 
 	public void paint(mGraphics g)
 	{
-		if (Char.isLoadingMap || (idImage == 279 && GameScr.gI().tMabuEff >= 110))
+		if (ModFunc.GiamDungLuong || Char.isLoadingMap || (idImage == 279 && GameScr.gI().tMabuEff >= 110))
 		{
 			return;
 		}

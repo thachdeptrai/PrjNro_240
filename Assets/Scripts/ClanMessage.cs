@@ -111,7 +111,7 @@ public class ClanMessage : IActionListener
 
 	public void update()
 	{
-		if (time != 0)
+		if (time != 0L)
 		{
 			timeAgo = (int)(mSystem.currentTimeMillis() / 1000 - time);
 		}

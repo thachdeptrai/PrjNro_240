@@ -27,12 +27,6 @@ public class InfoDlg
 		isLock = true;
 	}
 
-	public static void showWait(string str)
-	{
-		show(str, null, 700);
-		isLock = true;
-	}
-
 	public static void paint(mGraphics g)
 	{
 		if (isShow && (!isLock || delay <= 4990) && !GameScr.isPaintAlert)

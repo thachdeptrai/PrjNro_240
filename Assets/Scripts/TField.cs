@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using Unity;
 using UnityEngine;
 
 public class TField : IActionListener
@@ -186,12 +185,15 @@ public class TField : IActionListener
 		new int[2] { 44, 108 }
 	};
 
-	public TField(mScreen parentScr)
+	private static string[] telexMap = new string[13]
 	{
-		text = string.Empty;
-		this.parentScr = parentScr;
-		init();
-	}
+		"aw|ă", "aa|â", "dd|đ", "ow|ơ", "oo|ô", "ee|ê", "uw|ư", "w|ư", "s|\u0301", "f|\u0300",
+		"r|\u0309", "x|\u0303", "j|\u0323"
+	};
+
+	private string telexBuffer = "";
+
+	private const int TELEX_BUFFER_LENGTH = 5;
 
 	public TField()
 	{
@@ -199,61 +201,8 @@ public class TField : IActionListener
 		init();
 	}
 
-	public TField(int x, int y, int w, int h)
-	{
-		text = string.Empty;
-		init();
-		this.x = x;
-		this.y = y;
-		width = w;
-		height = h;
-	}
-
-	public TField(string text, int maxLen, int inputType)
-	{
-		this.text = text;
-		maxTextLenght = maxLen;
-		this.inputType = inputType;
-		init();
-		isTfield = true;
-	}
-
-	public static bool setNormal(char ch)
-	{
-		if ((ch < '0' || ch > '9') && (ch < 'A' || ch > 'Z') && (ch < 'a' || ch > 'z'))
-		{
-			return false;
-		}
-		return true;
-	}
-
 	public void doChangeToTextBox()
 	{
-	}
-
-	public static void setVendorTypeMode(int mode)
-	{
-		if (mode == MOTO)
-		{
-			print[0] = "0";
-			print[10] = " *";
-			print[11] = "#";
-			changeModeKey = 35;
-		}
-		else if (mode == NOKIA)
-		{
-			print[0] = " 0";
-			print[10] = "*";
-			print[11] = "#";
-			changeModeKey = 35;
-		}
-		else if (mode == ORTHER)
-		{
-			print[0] = "0";
-			print[10] = "*";
-			print[11] = " #";
-			changeModeKey = 42;
-		}
 	}
 
 	public void init()
@@ -364,7 +313,8 @@ public class TField : IActionListener
 		{
 			indexOfActiveChar = (indexOfActiveChar + 1) % array[keyCode - 48].Length;
 			char c = array[keyCode - 48][indexOfActiveChar];
-			string text = string.Concat(arg1: (mode == 0) ? char.ToLower(c) : ((mode == 1) ? char.ToUpper(c) : ((mode != 2) ? array[keyCode - 48][array[keyCode - 48].Length - 1] : char.ToUpper(c))), arg0: this.text.Substring(0, caretPos - 1));
+			object obj = ((mode == 0) ? char.ToLower(c) : ((mode == 1) ? char.ToUpper(c) : ((mode != 2) ? array[keyCode - 48][array[keyCode - 48].Length - 1] : char.ToUpper(c))));
+			string text = this.text.Substring(0, caretPos - 1) + obj;
 			if (caretPos < this.text.Length)
 			{
 				text += this.text.Substring(caretPos, this.text.Length);
@@ -381,7 +331,8 @@ public class TField : IActionListener
 			}
 			indexOfActiveChar = 0;
 			char c2 = array[keyCode - 48][indexOfActiveChar];
-			string text2 = string.Concat(arg1: (mode == 0) ? char.ToLower(c2) : ((mode == 1) ? char.ToUpper(c2) : ((mode != 2) ? array[keyCode - 48][array[keyCode - 48].Length - 1] : char.ToUpper(c2))), arg0: this.text.Substring(0, caretPos));
+			object obj = ((mode == 0) ? char.ToLower(c2) : ((mode == 1) ? char.ToUpper(c2) : ((mode != 2) ? array[keyCode - 48][array[keyCode - 48].Length - 1] : char.ToUpper(c2))));
+			string text2 = this.text.Substring(0, caretPos) + obj;
 			if (caretPos < this.text.Length)
 			{
 				text2 += this.text.Substring(caretPos, this.text.Length);
@@ -397,11 +348,7 @@ public class TField : IActionListener
 
 	private void keyPressedAscii(int keyCode)
 	{
-		if ((inputType == INPUT_TYPE_PASSWORD || inputType == INPUT_ALPHA_NUMBER_ONLY) && (keyCode < 48 || keyCode > 57) && (keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122))
-		{
-			return;
-		}
-		if (this.text.Length < maxTextLenght)
+		if ((keyCode >= 33 && keyCode <= 47) || (keyCode >= 58 && keyCode <= 64) || (keyCode >= 91 && keyCode <= 96) || (keyCode >= 123 && keyCode <= 126))
 		{
 			string text = this.text.Substring(0, caretPos) + (char)keyCode;
 			if (caretPos < this.text.Length)
@@ -412,22 +359,39 @@ public class TField : IActionListener
 			caretPos++;
 			setPasswordTest();
 			setOffset(0);
+			if (kb != null)
+			{
+				kb.text = this.text;
+			}
 		}
-		if (kb != null)
+		else
 		{
-			kb.text = this.text;
+			if ((inputType == INPUT_TYPE_PASSWORD || inputType == INPUT_ALPHA_NUMBER_ONLY) && (keyCode < 48 || keyCode > 57) && (keyCode < 65 || keyCode > 90) && (keyCode < 97 || keyCode > 122))
+			{
+				return;
+			}
+			if (this.text.Length < maxTextLenght)
+			{
+				char c = (char)keyCode;
+				string text2 = this.text.Substring(0, caretPos) + c;
+				if (caretPos < this.text.Length)
+				{
+					text2 += this.text.Substring(caretPos, this.text.Length - caretPos);
+				}
+				this.text = text2;
+				caretPos++;
+				setPasswordTest();
+				setOffset(0);
+				if (ModFunc.isVietnamese && Main.isPC && inputType == INPUT_TYPE_ANY)
+				{
+					processTelex(c);
+				}
+			}
+			if (kb != null)
+			{
+				kb.text = this.text;
+			}
 		}
-	}
-
-	public static void setMode()
-	{
-		mode++;
-		if (mode > 3)
-		{
-			mode = 0;
-		}
-		lastKey = changeModeKey;
-		timeChangeMode = Environment.TickCount / 1000;
 	}
 
 	private void setDau()
@@ -664,24 +628,6 @@ public class TField : IActionListener
 		return isFocus;
 	}
 
-	public string subString(string str, int index, int indexTo)
-	{
-		if (index >= 0 && indexTo > str.Length - 1)
-		{
-			return str.Substring(index);
-		}
-		if (index < 0 || index > str.Length - 1 || indexTo < 0 || indexTo > str.Length - 1)
-		{
-			return string.Empty;
-		}
-		string text = string.Empty;
-		for (int i = index; i < indexTo; i++)
-		{
-			text += str[i];
-		}
-		return text;
-	}
-
 	private void setPasswordTest()
 	{
 		if (inputType == INPUT_TYPE_PASSWORD)
@@ -698,12 +644,12 @@ public class TField : IActionListener
 		}
 	}
 
-    public void update()
+	public void update()
 	{
 		if (ModFunc.isOpenAccMAnager)
-        {
+		{
 			return;
-        }
+		}
 		isPaintCarret = true;
 		if (Main.isPC)
 		{
@@ -723,8 +669,8 @@ public class TField : IActionListener
 				setText(kb.text);
 			}
 			if (kb.status == TouchScreenKeyboard.Status.Done && cmdDoneAction != null)
-            {
-                cmdDoneAction.performAction();
+			{
+				cmdDoneAction.performAction();
 			}
 		}
 		counter++;
@@ -809,28 +755,30 @@ public class TField : IActionListener
 		{
 			currentTField = null;
 		}
-		if (Thread.CurrentThread.Name == Main.mainThreadName && currentTField != null)
+		if (!(Thread.CurrentThread.Name == Main.mainThreadName) || currentTField == null)
 		{
-			this.isFocus = true;
-            TouchScreenKeyboard.hideInput = !currentTField.showSubTextField;
-			TouchScreenKeyboardType t = TouchScreenKeyboardType.ASCIICapable;
-			if (inputType == INPUT_TYPE_NUMERIC)
+			return;
+		}
+		this.isFocus = true;
+		TouchScreenKeyboard.hideInput = !currentTField.showSubTextField;
+		TouchScreenKeyboardType t = TouchScreenKeyboardType.ASCIICapable;
+		if (inputType == INPUT_TYPE_NUMERIC)
+		{
+			t = TouchScreenKeyboardType.NumberPad;
+		}
+		bool type = false;
+		if (inputType == INPUT_TYPE_PASSWORD)
+		{
+			type = true;
+		}
+		if (!Main.isPC || Main.isIPhone)
+		{
+			kb = TouchScreenKeyboard.Open(currentTField.text, t, autocorrection: false, multiline: false, type, alert: false, currentTField.name);
+			if (kb != null)
 			{
-				t = TouchScreenKeyboardType.NumberPad;
+				kb.text = currentTField.text;
 			}
-			bool type = false;
-			if (inputType == INPUT_TYPE_PASSWORD)
-			{
-				type = true;
-			}
-			if (!Main.isPC || Main.isIPhone) {
-                kb = TouchScreenKeyboard.Open(currentTField.text, t, false, false, type, false, currentTField.name);
-                if (kb != null)
-                {
-                    kb.text = currentTField.text;
-                }
-			}
-        }
+		}
 	}
 
 	public string getText()
@@ -855,37 +803,15 @@ public class TField : IActionListener
 			indexOfActiveChar = 0;
 			this.text = text;
 			paintedText = text;
-			//if (text == string.Empty)
-			//{
-			//	TouchScreenKeyboard.Clear();
-			//}
 			setPasswordTest();
 			caretPos = text.Length;
 			setOffset();
 		}
 	}
 
-	public void insertText(string text)
-	{
-		this.text = this.text.Substring(0, caretPos) + text + this.text.Substring(caretPos);
-		setPasswordTest();
-		caretPos += text.Length;
-		setOffset();
-	}
-
-	public int getMaxTextLenght()
-	{
-		return maxTextLenght;
-	}
-
 	public void setMaxTextLenght(int maxTextLenght)
 	{
 		this.maxTextLenght = maxTextLenght;
-	}
-
-	public int getIputType()
-	{
-		return inputType;
 	}
 
 	public void setIputType(int iputType)
@@ -900,5 +826,116 @@ public class TField : IActionListener
 		{
 			clear();
 		}
+	}
+
+	private void processTelex(char c)
+	{
+		telexBuffer += c;
+		if (telexBuffer.Length > 5)
+		{
+			telexBuffer = telexBuffer.Substring(telexBuffer.Length - 5);
+		}
+		string[] array = telexMap;
+		for (int i = 0; i < array.Length; i++)
+		{
+			string[] array2 = array[i].Split('|');
+			string input = array2[0];
+			string output = array2[1];
+			if (!telexBuffer.EndsWith(input))
+			{
+				continue;
+			}
+			int pos = caretPos - input.Length;
+			if (pos < 0)
+			{
+				continue;
+			}
+			string before = text.Substring(0, pos);
+			string after = ((caretPos < text.Length) ? text.Substring(caretPos) : "");
+			if (input.Length == 1 && "sfrxj".Contains(input))
+			{
+				if (pos > 0)
+				{
+					char prevChar = text[pos - 1];
+					char newChar = addMark(prevChar, output[0]);
+					if (newChar == prevChar)
+					{
+						text = before + input + after;
+						caretPos = pos + 1;
+					}
+					else
+					{
+						text = before.Substring(0, before.Length - 1) + newChar + after;
+						caretPos = pos;
+					}
+					telexBuffer = "";
+					setPasswordTest();
+					setOffset();
+					break;
+				}
+				continue;
+			}
+			if (pos > 0 && input.Length == 2 && "âăêôơư".Contains(text[pos - 1].ToString()))
+			{
+				text = before + input[1] + after;
+				caretPos = pos + 1;
+				telexBuffer = "";
+				setPasswordTest();
+				setOffset();
+			}
+			else
+			{
+				text = before + output + after;
+				caretPos = pos + 1;
+				telexBuffer = "";
+				setPasswordTest();
+				setOffset();
+			}
+			break;
+		}
+	}
+
+	private char addMark(char c, char mark)
+	{
+		if ("aáàảãạâấầẩẫậăắằẳẵặeéèẻẽẹêếềểễệiíìỉĩịoóòỏõọôốồổỗộơớờởỡợuúùủũụưứừửữựyýỳỷỹỵ".IndexOf(c) < 0)
+		{
+			return c;
+		}
+		char baseVowel = c;
+		int markType = getMarkType(mark);
+		string[] array;
+		if ("âăêôơư".Contains(baseVowel.ToString()))
+		{
+			array = new string[6] { "âấầẩẫậ", "ăắằẳẵặ", "êếềểễệ", "ôốồổỗộ", "ơớờởỡợ", "ưứừửữự" };
+			foreach (string specialMark in array)
+			{
+				if (specialMark[0] == baseVowel)
+				{
+					return specialMark[markType + 1];
+				}
+			}
+		}
+		array = new string[6] { "aáàảãạ", "eéèẻẽẹ", "iíìỉĩị", "oóòỏõọ", "uúùủũụ", "yýỳỷỹỵ" };
+		foreach (string markSet in array)
+		{
+			if (markSet.Contains(baseVowel))
+			{
+				return markSet[markType + 1];
+			}
+		}
+		return c;
+	}
+
+	private int getMarkType(char mark)
+	{
+		return mark switch
+		{
+			'\u0301' => 0, 
+			'\u0300' => 1, 
+			'\u0309' => 2, 
+			'\u0303' => 3, 
+			'\u0323' => 4, 
+			_ => 0, 
+		};
 	}
 }

@@ -253,13 +253,13 @@ public class EffectData
 			}
 		}
 		catch (Exception)
-        {
+		{
 		}
 	}
 
 	public void readData(sbyte[] data)
 	{
-		myReader iss = new(data);
+		myReader iss = new myReader(data);
 		readData(iss);
 	}
 

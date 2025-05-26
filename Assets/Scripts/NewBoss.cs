@@ -8,15 +8,9 @@ public class NewBoss : Mob, IMapObject
 
 	public int yTo;
 
-	public bool haftBody;
-
-	public bool change;
-
 	public new int xSd;
 
 	public new int ySd;
-
-	private int wCount;
 
 	public new bool isShadown = true;
 
@@ -26,39 +20,17 @@ public class NewBoss : Mob, IMapObject
 
 	public new static Image imgHP = mSystem.loadImage("/mainImage/myTexture2dmobHP.png");
 
-	private bool wy;
-
-	private int wt;
-
 	private int fy;
-
-	private int ty;
-
-	public new int typeSuperEff;
-
-	private Char focus;
 
 	private bool flyUp;
 
-	private bool flyDown;
-
-	private int dy;
-
-	public bool changePos;
-
-	private int tShock;
-
 	public new bool isBusyAttackSomeOne = true;
-
-	private int tA;
 
 	private Char[] charAttack;
 
 	private int[] dameHP;
 
 	private sbyte type;
-
-	private int ff;
 
 	private int offset;
 
@@ -70,17 +42,7 @@ public class NewBoss : Mob, IMapObject
 
 	private sbyte[] cou = new sbyte[2] { -1, 1 };
 
-	public new Char injureBy;
-
-	public new bool injureThenDie;
-
-	public new Mob mobToAttack;
-
 	public new int forceWait;
-
-	public new bool blindEff;
-
-	public new bool sleepEff;
 
 	private int[][] frameArr = new int[17][]
 	{
@@ -102,62 +64,6 @@ public class NewBoss : Mob, IMapObject
 		new int[8] { 0, 0, 0, 0, 1, 1, 1, 1 },
 		new int[8] { 0, 0, 0, 0, 1, 1, 1, 1 }
 	};
-
-	public new const sbyte stand = 0;
-
-	public const sbyte moveFra = 1;
-
-	public new const sbyte attack1 = 2;
-
-	public new const sbyte attack2 = 3;
-
-	public const sbyte attack3 = 4;
-
-	public const sbyte attack4 = 5;
-
-	public const sbyte attack5 = 6;
-
-	public const sbyte attack6 = 7;
-
-	public const sbyte attack7 = 8;
-
-	public const sbyte attack8 = 9;
-
-	public const sbyte attack9 = 10;
-
-	public const sbyte attack10 = 11;
-
-	public new const sbyte hurt = 12;
-
-	public const sbyte die = 13;
-
-	public const sbyte fly = 14;
-
-	public const sbyte adddame = 15;
-
-	public const sbyte typeEff = 16;
-
-	public NewBoss(int id, short px, short py, int templateID, int hp, int maxHp, int s)
-	{
-		mobId = id;
-		x = (xFirst = px + 20);
-		y = (yFirst = py);
-		xTo = x;
-		yTo = y;
-		base.maxHp = maxHp;
-		base.hp = hp;
-		templateId = templateID;
-		h_hp_bar = 6;
-		w_hp_bar = 100;
-		len = w_hp_bar;
-		updateHp_bar();
-		if (Mob.arrMobTemplate[templateId].data == null)
-		{
-			Service.gI().requestModTemplate(templateId);
-		}
-		status = 2;
-		frameArr = null;
-	}
 
 	public NewBoss(int id, short px, short py, int templateID, double hp, double maxHp, int s)
 	{
@@ -190,19 +96,6 @@ public class NewBoss : Mob, IMapObject
 	public override void clearBody()
 	{
 		changBody = false;
-	}
-
-	public new static bool isExistNewMob(string id)
-	{
-		for (int i = 0; i < Mob.newMob.size(); i++)
-		{
-			string text = (string)Mob.newMob.elementAt(i);
-			if (text.Equals(id))
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public new void checkFrameTick(int[] array)
@@ -264,10 +157,6 @@ public class NewBoss : Mob, IMapObject
 		}
 		g.drawImage(shadowBig, xSd, ySd - 5, 3);
 		g.setClip(GameScr.cmx, GameScr.cmy - GameCanvas.transY, GameScr.gW, GameScr.gH + 2 * GameCanvas.transY);
-	}
-
-	public new void updateSuperEff()
-	{
 	}
 
 	public override void update()
@@ -337,35 +226,6 @@ public class NewBoss : Mob, IMapObject
 	{
 	}
 
-	public new void setAttack(Char cFocus)
-	{
-		isBusyAttackSomeOne = true;
-		mobToAttack = null;
-		base.cFocus = cFocus;
-		p1 = 0;
-		p2 = 0;
-		status = 3;
-		tick = 0;
-		int cx = cFocus.cx;
-		int cy = cFocus.cy;
-		if (Res.abs(cx - x) < w * 2 && Res.abs(cy - y) < h * 2)
-		{
-			if (x < cx)
-			{
-				x = cx - w;
-			}
-			else
-			{
-				x = cx + w;
-			}
-			p3 = 0;
-		}
-		else
-		{
-			p3 = 1;
-		}
-	}
-
 	private void updateInjure()
 	{
 	}
@@ -411,7 +271,7 @@ public class NewBoss : Mob, IMapObject
 		{
 			for (int i = 0; i < charAttack.Length; i++)
 			{
-				charAttack[i].doInjure(dameHP[i], 0, isCrit: false, isMob: false);
+				charAttack[i].doInjure(dameHP[i], 0.0, isCrit: false, isMob: false);
 				ServerEffect.addServerEffect(frameArr[16][type - 1], charAttack[i].cx, charAttack[i].cy, 1);
 			}
 		}
@@ -441,31 +301,6 @@ public class NewBoss : Mob, IMapObject
 			x = xTo;
 			status = 2;
 		}
-	}
-
-	public new bool isPaint()
-	{
-		if (x < GameScr.cmx)
-		{
-			return false;
-		}
-		if (x > GameScr.cmx + GameScr.gW)
-		{
-			return false;
-		}
-		if (y < GameScr.cmy)
-		{
-			return false;
-		}
-		if (y > GameScr.cmy + GameScr.gH + 30)
-		{
-			return false;
-		}
-		if (status == 0)
-		{
-			return false;
-		}
-		return true;
 	}
 
 	public new bool isUpdate()
@@ -533,7 +368,7 @@ public class NewBoss : Mob, IMapObject
 			SmallImage.drawSmallImage(g, smallBody, x, y + fy - 9, (dir != 1) ? 2 : 0, mGraphics.BOTTOM | mGraphics.HCENTER);
 		}
 		g.translate(0, -GameCanvas.transY);
-		if (hp <= 0)
+		if (hp <= 0.0)
 		{
 			return;
 		}
@@ -582,51 +417,6 @@ public class NewBoss : Mob, IMapObject
 		g.drawRegion(imgHPtem, 0, 0, num3, imageHeight, 0, num4 + imageWidth, num5, mGraphics.TOP | mGraphics.LEFT);
 	}
 
-	public new int getHPColor()
-	{
-		return 16711680;
-	}
-
-	public new void startDie()
-	{
-		hp = 0;
-		injureThenDie = true;
-		hp = 0;
-		status = 1;
-		p1 = -3;
-		p2 = -dir;
-		p3 = 0;
-	}
-
-	public new void attackOtherMob(Mob mobToAttack)
-	{
-		this.mobToAttack = mobToAttack;
-		isBusyAttackSomeOne = true;
-		cFocus = null;
-		p1 = 0;
-		p2 = 0;
-		status = 3;
-		tick = 0;
-		int num = mobToAttack.x;
-		int num2 = mobToAttack.y;
-		if (Res.abs(num - x) < w * 2 && Res.abs(num2 - y) < h * 2)
-		{
-			if (x < num)
-			{
-				x = num - w;
-			}
-			else
-			{
-				x = num + w;
-			}
-			p3 = 0;
-		}
-		else
-		{
-			p3 = 1;
-		}
-	}
-
 	public new int getX()
 	{
 		return x;
@@ -659,25 +449,11 @@ public class NewBoss : Mob, IMapObject
 
 	public new bool isInvisible()
 	{
-		return status == 0 || status == 1;
-	}
-
-	public new void removeHoldEff()
-	{
-		if (holdEffID != 0)
+		if (status != 0)
 		{
-			holdEffID = 0;
+			return status == 1;
 		}
-	}
-
-	public new void removeBlindEff()
-	{
-		blindEff = false;
-	}
-
-	public new void removeSleepEff()
-	{
-		sleepEff = false;
+		return true;
 	}
 
 	public new void move(short xMoveTo, short yMoveTo)

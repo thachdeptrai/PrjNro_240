@@ -11,10 +11,6 @@ public class Rms
 
 	public static string filename;
 
-	private const int INTERVAL = 5;
-
-	private const int MAXTIME = 500;
-
 	public static void saveRMS(string filename, sbyte[] data)
 	{
 		if (Thread.CurrentThread.Name == Main.mainThreadName)
@@ -57,23 +53,6 @@ public class Rms
 		return null;
 	}
 
-	public static byte[] convertSbyteToByte(sbyte[] var)
-	{
-		byte[] array = new byte[var.Length];
-		for (int i = 0; i < var.Length; i++)
-		{
-			if (var[i] > 0)
-			{
-				array[i] = (byte)var[i];
-			}
-			else
-			{
-				array[i] = (byte)(var[i] + 256);
-			}
-		}
-		return array;
-	}
-
 	public static void saveRMSString(string filename, string data)
 	{
 		DataOutputStream dataOutputStream = new DataOutputStream();
@@ -93,7 +72,7 @@ public class Rms
 	{
 		if (status != 0)
 		{
-			Debug.LogError("Cannot save RMS " + filename + " because current is saving " + Rms.filename);
+			// Debug.LogError("Cannot save RMS " + filename + " because current is saving " + Rms.filename);
 			return;
 		}
 		Rms.filename = filename;
@@ -159,7 +138,11 @@ public class Rms
 	public static int loadRMSInt(string file)
 	{
 		sbyte[] array = loadRMS(file);
-		return (array != null) ? array[0] : (-1);
+		if (array == null)
+		{
+			return -1;
+		}
+		return array[0];
 	}
 
 	public static void saveRMSInt(string file, int x)
@@ -196,7 +179,7 @@ public class Rms
 			byte[] array = new byte[fileStream.Length];
 			fileStream.Read(array, 0, array.Length);
 			fileStream.Close();
-			sbyte[] array2 = ArrayCast.cast(array);
+			ArrayCast.cast(array);
 			return ArrayCast.cast(array);
 		}
 		catch (Exception)
@@ -209,9 +192,9 @@ public class Rms
 	{
 		Cout.LogError3("clean rms");
 		FileInfo[] files = new DirectoryInfo(GetiPhoneDocumentsPath() + "/").GetFiles();
-		foreach (FileInfo fileInfo in files)
+		for (int i = 0; i < files.Length; i++)
 		{
-			fileInfo.Delete();
+			files[i].Delete();
 		}
 	}
 
@@ -224,46 +207,5 @@ public class Rms
 		catch (Exception)
 		{
 		}
-	}
-
-	public static string ByteArrayToString(byte[] ba)
-	{
-		string text = BitConverter.ToString(ba);
-		return text.Replace("-", string.Empty);
-	}
-
-	public static byte[] StringToByteArray(string hex)
-	{
-		int length = hex.Length;
-		byte[] array = new byte[length / 2];
-		for (int i = 0; i < length; i += 2)
-		{
-			array[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-		}
-		return array;
-	}
-
-	public static void deleteRecord(string name)
-	{
-		try
-		{
-			PlayerPrefs.DeleteKey(name);
-		}
-		catch (Exception ex)
-		{
-			Cout.println("loi xoa RMS --------------------------" + ex.ToString());
-		}
-	}
-
-	public static void clearRMS()
-	{
-		deleteRecord("data");
-		deleteRecord("dataVersion");
-		deleteRecord("map");
-		deleteRecord("mapVersion");
-		deleteRecord("skill");
-		deleteRecord("killVersion");
-		deleteRecord("item");
-		deleteRecord("itemVersion");
 	}
 }

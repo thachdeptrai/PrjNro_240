@@ -44,19 +44,6 @@ public class FrameImage
 		}
 	}
 
-	public FrameImage(Image img, int numW, int numH, int numNull)
-	{
-		if (img != null)
-		{
-			imgFrame = img;
-			numWidth = numW;
-			numHeight = numH;
-			frameWidth = imgFrame.getWidth() / numW;
-			frameHeight = imgFrame.getHeight() / numH;
-			nFrame = numW * numH - numNull;
-		}
-	}
-
 	public void drawFrame(int idx, int x, int y, int trans, int anchor, mGraphics g)
 	{
 		try

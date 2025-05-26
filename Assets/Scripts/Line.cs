@@ -14,17 +14,9 @@ public class Line
 
 	public int f;
 
-	public int fRe;
-
-	public int idColor;
-
 	public int type;
 
 	public bool is2Line;
-
-	public FrameImage fraImgEff;
-
-	public int[] frame;
 
 	public void setLine(int x0, int y0, int x1, int y1, int vx, int vy, bool is2Line)
 	{
@@ -44,13 +36,5 @@ public class Line
 		y0 += vy;
 		y1 += vy;
 		f++;
-	}
-
-	public void update_not_F()
-	{
-		x0 += vx;
-		x1 += vx;
-		y0 += vy;
-		y1 += vy;
 	}
 }

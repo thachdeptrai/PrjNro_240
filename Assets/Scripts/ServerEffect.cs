@@ -24,38 +24,38 @@ public class ServerEffect : Effect2
 
 	public static void addServerEffect(int id, int cx, int cy, int loopCount)
 	{
-        ServerEffect serverEffect = new()
-        {
-            eff = GameScr.efs[id - 1],
-            x = cx,
-            y = cy,
-            loopCount = (short)loopCount
-        };
-        vEffect2.addElement(serverEffect);
+		ServerEffect serverEffect = new ServerEffect
+		{
+			eff = GameScr.efs[id - 1],
+			x = cx,
+			y = cy,
+			loopCount = (short)loopCount
+		};
+		Effect2.vEffect2.addElement(serverEffect);
 	}
 
 	public static void addServerEffect(int id, int cx, int cy, int loopCount, int trans)
 	{
-        ServerEffect serverEffect = new()
-        {
-            eff = GameScr.efs[id - 1],
-            x = cx,
-            y = cy,
-            loopCount = (short)loopCount,
-            trans = trans
-        };
-        vEffect2.addElement(serverEffect);
+		ServerEffect serverEffect = new ServerEffect
+		{
+			eff = GameScr.efs[id - 1],
+			x = cx,
+			y = cy,
+			loopCount = (short)loopCount,
+			trans = trans
+		};
+		Effect2.vEffect2.addElement(serverEffect);
 	}
 
 	public static void addServerEffect(int id, Mob m, int loopCount)
 	{
-        ServerEffect serverEffect = new()
-        {
-            eff = GameScr.efs[id - 1],
-            m = m,
-            loopCount = (short)loopCount
-        };
-        vEffect2.addElement(serverEffect);
+		ServerEffect serverEffect = new ServerEffect
+		{
+			eff = GameScr.efs[id - 1],
+			m = m,
+			loopCount = (short)loopCount
+		};
+		Effect2.vEffect2.addElement(serverEffect);
 	}
 
 	public static void addServerEffect(int id, Char c, int loopCount)
@@ -64,35 +64,6 @@ public class ServerEffect : Effect2
 		serverEffect.eff = GameScr.efs[id - 1];
 		serverEffect.c = c;
 		serverEffect.loopCount = (short)loopCount;
-		Effect2.vEffect2.addElement(serverEffect);
-	}
-
-	public static void addServerEffect(int id, Char c, int loopCount, int trans)
-	{
-		ServerEffect serverEffect = new ServerEffect();
-		serverEffect.eff = GameScr.efs[id - 1];
-		serverEffect.c = c;
-		serverEffect.loopCount = (short)loopCount;
-		serverEffect.trans = trans;
-		Effect2.vEffect2.addElement(serverEffect);
-	}
-
-	public static void addServerEffectWithTime(int id, int cx, int cy, int timeLengthInSecond)
-	{
-		ServerEffect serverEffect = new ServerEffect();
-		serverEffect.eff = GameScr.efs[id - 1];
-		serverEffect.x = cx;
-		serverEffect.y = cy;
-		serverEffect.endTime = mSystem.currentTimeMillis() + timeLengthInSecond * 1000;
-		Effect2.vEffect2.addElement(serverEffect);
-	}
-
-	public static void addServerEffectWithTime(int id, Char c, int timeLengthInSecond)
-	{
-		ServerEffect serverEffect = new ServerEffect();
-		serverEffect.eff = GameScr.efs[id - 1];
-		serverEffect.c = c;
-		serverEffect.endTime = mSystem.currentTimeMillis() + timeLengthInSecond * 1000;
 		Effect2.vEffect2.addElement(serverEffect);
 	}
 
@@ -125,7 +96,7 @@ public class ServerEffect : Effect2
 
 	public override void update()
 	{
-		if (endTime != 0)
+		if (endTime != 0L)
 		{
 			i0++;
 			if (i0 >= eff.arrEfInfo.Length)

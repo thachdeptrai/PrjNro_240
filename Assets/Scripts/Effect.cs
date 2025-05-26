@@ -132,10 +132,6 @@ public class Effect
 
 	public long cur_time_cLastStatusMe;
 
-	public Effect()
-	{
-	}
-
 	public Effect(int id, Char c, int layer, int loop, int loopCount, sbyte isStand)
 	{
 		this.c = c;
@@ -155,8 +151,7 @@ public class Effect
 				id = 106;
 			}
 			string text = "/x" + mGraphics.zoomLevel + "/effectdata/" + id + "/data";
-			DataInputStream dataInputStream = MyStream.readFile(text);
-			if (dataInputStream != null)
+			if (MyStream.readFile(text) != null)
 			{
 				if (id > 100 && id < 200)
 				{
@@ -203,8 +198,7 @@ public class Effect
 				id = 106;
 			}
 			string text = "/x" + mGraphics.zoomLevel + "/effectdata/" + id + "/data";
-			DataInputStream dataInputStream = MyStream.readFile(text);
-			if (dataInputStream != null)
+			if (MyStream.readFile(text) != null)
 			{
 				if (id > 100 && id < 200)
 				{
@@ -286,8 +280,7 @@ public class Effect
 	{
 		for (int i = 0; i < newEff.size(); i++)
 		{
-			string text = (string)newEff.elementAt(i);
-			if (text.Equals(id))
+			if (((string)newEff.elementAt(i)).Equals(id))
 			{
 				return true;
 			}
@@ -297,6 +290,10 @@ public class Effect
 
 	public bool isPaintz()
 	{
+		if (ModFunc.GiamDungLuong)
+		{
+			return false;
+		}
 		if (!isPaint)
 		{
 			return false;
@@ -343,7 +340,7 @@ public class Effect
 
 	public void paint(mGraphics g)
 	{
-		if (!isPaint || getEffDataById(effId) == null || getEffDataById(effId).img == null)
+		if (ModFunc.GiamDungLuong || !isPaint || getEffDataById(effId) == null || getEffDataById(effId).img == null)
 		{
 			return;
 		}
@@ -553,10 +550,5 @@ public class Effect
 		{
 			EffecMn.vEff.removeElement(this);
 		}
-	}
-
-	public int getnFrame()
-	{
-		return data.Length;
 	}
 }

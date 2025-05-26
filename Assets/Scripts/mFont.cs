@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class mFont
@@ -44,36 +43,9 @@ public class mFont
 
 	public static int[] colorJava = new int[31]
 	{
-		0,
-		16711680,
-		6520319,
-		16777215,
-		16755200,
-		5449989,
-		21285,
-		52224,
-		7386228,
-		16771788,
-		0,
-		65535,
-		21285,
-		16776960,
-		5592405,
-		16742263,
-		33023,
-		8701737,
-		15723503,
-		7999781,
-		16768815,
-		14961237,
-		4124899,
-		4671303,
-		16096312,
-		16711680,
-		16755200,
-		52224,
-		16777215,
-		6520319,
+		0, 16711680, 6520319, 16777215, 16755200, 5449989, 21285, 52224, 7386228, 16771788,
+		0, 65535, 21285, 16776960, 5592405, 16742263, 33023, 8701737, 15723503, 7999781,
+		16768815, 14961237, 4124899, 4671303, 16096312, 16711680, 16755200, 52224, 16777215, 6520319,
 		16096312
 	};
 
@@ -97,9 +69,9 @@ public class mFont
 
 	public static mFont tahoma_7b_focus;
 
-    public static mFont tahoma_7b_pink;
+	public static mFont tahoma_7b_pink;
 
-    public static mFont tahoma_7b_unfocus;
+	public static mFont tahoma_7b_unfocus;
 
 	public static mFont tahoma_7;
 
@@ -111,9 +83,9 @@ public class mFont
 
 	public static mFont tahoma_7_yellow;
 
-    public static mFont tahoma_7_orange;
+	public static mFont tahoma_7_orange;
 
-    public static mFont tahoma_7_grey;
+	public static mFont tahoma_7_grey;
 
 	public static mFont tahoma_7_red;
 
@@ -282,8 +254,8 @@ public class mFont
 			tahoma_7_blue1 = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_blue1.png", "/myfont/tahoma_7", 0);
 			tahoma_7_green2 = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_green2.png", "/myfont/tahoma_7", 0);
 			tahoma_7_yellow = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_yellow.png", "/myfont/tahoma_7", 0);
-            tahoma_7_orange = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_orange.png", "/myfont/tahoma_7", 0);
-            tahoma_7_grey = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_grey.png", "/myfont/tahoma_7", 0);
+			tahoma_7_orange = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_orange.png", "/myfont/tahoma_7", 0);
+			tahoma_7_grey = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_grey.png", "/myfont/tahoma_7", 0);
 			tahoma_7_red = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_red.png", "/myfont/tahoma_7", 0);
 			tahoma_7_blue = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_blue.png", "/myfont/tahoma_7", 0);
 			tahoma_7_green = new mFont(" 0123456789+-*='_?.,<>/[]{}!@#$%^&*():aáàảãạâấầẩẫậăắằẳẵặbcdđeéèẻẽẹêếềểễệfghiíìỉĩịjklmnoóòỏõọôốồổỗộơớờởỡợpqrstuúùủũụưứừửữựvxyýỳỷỹỵzwAÁÀẢÃẠĂẰẮẲẴẶÂẤẦẨẪẬBCDĐEÉÈẺẼẸÊẾỀỂỄỆFGHIÍÌỈĨỊJKLMNOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢPQRSTUÚÙỦŨỤƯỨỪỬỮỰVXYÝỲỶỸỴZW", "/myfont/tahoma_7_green.png", "/myfont/tahoma_7", 0);
@@ -371,15 +343,12 @@ public class mFont
 		int num = rgb & 0xFF;
 		int num2 = (rgb >> 8) & 0xFF;
 		int num3 = (rgb >> 16) & 0xFF;
-		float b = num / 256f;
-        float g = num2 / 256f;
-        float r = num3 / 256f;
-		return new Color(r, g, b);
+		return new Color(b: (float)num / 256f, g: (float)num2 / 256f, r: (float)num3 / 256f);
 	}
 
 	public Color bigColor(int id)
 	{
-		Color[] array = new Color[7]
+		return (new Color[7]
 		{
 			Color.red,
 			Color.yellow,
@@ -388,8 +357,7 @@ public class mFont
 			setColor(40404),
 			Color.red,
 			Color.black
-		};
-		return array[id - 25];
+		})[id - 25];
 	}
 
 	public void setColorByID(int ID)
@@ -602,111 +570,6 @@ public class mFont
 		return myVector;
 	}
 
-	public string splitFirst(string str)
-	{
-		string text = string.Empty;
-		bool flag = false;
-		for (int i = 0; i < str.Length; i++)
-		{
-			if (!flag)
-			{
-				string text2 = str.Substring(i);
-				text = ((!compare(text2, " ")) ? (text + text2) : (text + str[i] + "-"));
-				flag = true;
-			}
-			else if (str[i] == ' ')
-			{
-				flag = false;
-			}
-		}
-		return text;
-	}
-
-	public string[] splitStrInLine(string src, int lineWidth)
-	{
-		ArrayList arrayList = splitStrInLineA(src, lineWidth);
-		string[] array = new string[arrayList.Count];
-		for (int i = 0; i < arrayList.Count; i++)
-		{
-			array[i] = (string)arrayList[i];
-		}
-		return array;
-	}
-
-	public ArrayList splitStrInLineA(string src, int lineWidth)
-	{
-		ArrayList arrayList = new ArrayList();
-		int i = 0;
-		int num = 0;
-		int length = src.Length;
-		if (length < 5)
-		{
-			arrayList.Add(src);
-			return arrayList;
-		}
-		string text = string.Empty;
-		try
-		{
-			while (true)
-			{
-				if (getWidthNotExactOf(text) < lineWidth)
-				{
-					text += src[num];
-					num++;
-					if (src[num] != '\n')
-					{
-						if (num < length - 1)
-						{
-							continue;
-						}
-						num = length - 1;
-					}
-				}
-				if (num != length - 1 && src[num + 1] != ' ')
-				{
-					int num2 = num;
-					while (src[num + 1] != '\n' && (src[num + 1] != ' ' || src[num] == ' ') && num != i)
-					{
-						num--;
-					}
-					if (num == i)
-					{
-						num = num2;
-					}
-				}
-				string text2 = src.Substring(i, num + 1 - i);
-				if (text2[0] == '\n')
-				{
-					text2 = text2.Substring(1, text2.Length - 1);
-				}
-				if (text2[text2.Length - 1] == '\n')
-				{
-					text2 = text2.Substring(0, text2.Length - 1);
-				}
-				arrayList.Add(text2);
-				if (num == length - 1)
-				{
-					break;
-				}
-				for (i = num + 1; i != length - 1 && src[i] == ' '; i++)
-				{
-				}
-				if (i == length - 1)
-				{
-					break;
-				}
-				num = i;
-				text = string.Empty;
-			}
-		}
-		catch (Exception ex)
-		{
-			Cout.LogWarning("EXCEPTION WHEN REAL SPLIT " + src + "\nend=" + num + "\n" + ex.Message + "\n" + ex.StackTrace);
-			arrayList.Add(src);
-		}
-		return arrayList;
-	}
-
 	public string[] splitFontArray(string src, int lineWidth)
 	{
 		MyVector myVector = splitFontVector(src, lineWidth);
@@ -716,18 +579,6 @@ public class mFont
 			array[i] = (string)myVector.elementAt(i);
 		}
 		return array;
-	}
-
-	public bool compare(string strSource, string str)
-	{
-		for (int i = 0; i < strSource.Length; i++)
-		{
-			if ((string.Empty + strSource[i]).Equals(str))
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public int getWidth(string s)
@@ -753,9 +604,10 @@ public class mFont
 	{
 		try
 		{
-			GUIStyle gUIStyle = new GUIStyle();
-			gUIStyle.font = myFont;
-			return (int)gUIStyle.CalcSize(new GUIContent(s)).x / mGraphics.zoomLevel;
+			return (int)new GUIStyle
+			{
+				font = myFont
+			}.CalcSize(new GUIContent(s)).x / mGraphics.zoomLevel;
 		}
 		catch (Exception ex)
 		{
@@ -823,42 +675,11 @@ public class mFont
 		g.drawString(st, (int)num, (int)num2, gUIStyle);
 	}
 
-	public static string[] splitStringSv(string _text, string _searchStr)
-	{
-		int num = 0;
-		int startIndex = 0;
-		int length = _searchStr.Length;
-		int num2 = _text.IndexOf(_searchStr, startIndex);
-		while (num2 != -1)
-		{
-			startIndex = num2 + length;
-			num2 = _text.IndexOf(_searchStr, startIndex);
-			num++;
-		}
-		string[] array = new string[num + 1];
-		int num3 = _text.IndexOf(_searchStr);
-		int num4 = 0;
-		int num5 = 0;
-		while (num3 != -1)
-		{
-			array[num5] = _text.Substring(num4, num3 - num4);
-			num4 = num3 + length;
-			num3 = _text.IndexOf(_searchStr, num4);
-			num5++;
-		}
-		array[num5] = _text.Substring(num4, _text.Length - num4);
-		return array;
-	}
-
 	public void reloadImage()
 	{
 		if (mGraphics.zoomLevel == 1)
 		{
 			imgFont = GameCanvas.loadImage(pathImage);
 		}
-	}
-
-	public void freeImage()
-	{
 	}
 }

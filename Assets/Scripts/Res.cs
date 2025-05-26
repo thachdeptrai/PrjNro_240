@@ -29,12 +29,6 @@ public class Res
 		string.Empty
 	};
 
-	public static int count;
-
-	public static bool isIcon;
-
-	public static bool isBig;
-
 	public static MyVector debug = new MyVector();
 
 	public static MyRandom r = new MyRandom();
@@ -93,24 +87,6 @@ public class Res
 		return cosz[360 - a];
 	}
 
-	public static int tan(int a)
-	{
-		a = fixangle(a);
-		if (a >= 0 && a < 90)
-		{
-			return tanz[a];
-		}
-		if (a >= 90 && a < 180)
-		{
-			return -tanz[180 - a];
-		}
-		if (a >= 180 && a < 270)
-		{
-			return tanz[a - 180];
-		}
-		return -tanz[360 - a];
-	}
-
 	public static int atan(int a)
 	{
 		for (int i = 0; i <= 90; i++)
@@ -128,8 +104,7 @@ public class Res
 		int num;
 		if (dx != 0)
 		{
-			int a = Math.abs((dy << 10) / dx);
-			num = atan(a);
+			num = atan(Math.abs((dy << 10) / dx));
 			if (dy >= 0 && dx < 0)
 			{
 				num = 180 - num;
@@ -163,24 +138,11 @@ public class Res
 		return angle;
 	}
 
-	public static sbyte[] TakeSnapShot()
-	{
-		return null;
-	}
-
 	public static void outz(string s)
 	{
 		if (mSystem.isTest)
 		{
 			Debug.Log(s);
-		}
-	}
-
-	public static void outz(string s, int logIndex)
-	{
-		if (mSystem.isTest)
-		{
-			Debug.Log(LOG_CAT[logIndex] + s);
 		}
 	}
 
@@ -193,10 +155,6 @@ public class Res
 	}
 
 	public static void outz2(string s)
-	{
-	}
-
-	public static void onScreenDebug(string s)
 	{
 	}
 
@@ -216,16 +174,6 @@ public class Res
 	public static string replace(string _text, string _searchStr, string _replacementStr)
 	{
 		return _text.Replace(_searchStr, _replacementStr);
-	}
-
-	public static int xetVX(int goc, int d)
-	{
-		return cos(fixangle(goc)) * d >> 10;
-	}
-
-	public static int xetVY(int goc, int d)
-	{
-		return sin(fixangle(goc)) * d >> 10;
 	}
 
 	public static int random(int a, int b)
@@ -261,17 +209,6 @@ public class Res
 		return num;
 	}
 
-	public static int s2tick(int currentTimeMillis)
-	{
-		int num = 0;
-		num = currentTimeMillis * 16 / 1000;
-		if (currentTimeMillis * 16 % 1000 >= 5)
-		{
-			num++;
-		}
-		return num;
-	}
-
 	public static int distance(int x1, int y1, int x2, int y2)
 	{
 		return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
@@ -299,19 +236,22 @@ public class Res
 		return num;
 	}
 
-	public static int rnd(int a)
-	{
-		return r.nextInt(a);
-	}
-
 	public static int abs(int i)
 	{
-		return (i <= 0) ? (-i) : i;
+		if (i > 0)
+		{
+			return i;
+		}
+		return -i;
 	}
 
 	public static bool inRect(int x1, int y1, int width, int height, int x2, int y2)
 	{
-		return x2 >= x1 && x2 <= x1 + width && y2 >= y1 && y2 <= y1 + height;
+		if (x2 >= x1 && x2 <= x1 + width && y2 >= y1)
+		{
+			return y2 <= y1 + height;
+		}
+		return false;
 	}
 
 	public static string[] split(string original, string separator, int count)
@@ -344,8 +284,7 @@ public class Res
 			empty = number + string.Empty;
 			if (num > 0)
 			{
-				string text = empty;
-				return text + "," + num + empty2;
+				return empty + "," + num + empty2;
 			}
 			return empty + empty2;
 		}
@@ -357,158 +296,78 @@ public class Res
 			empty = number + string.Empty;
 			if (num2 > 0)
 			{
-				string text = empty;
-				return text + "," + num2 + empty2;
+				return empty + "," + num2 + empty2;
 			}
 			return empty + empty2;
 		}
 		return number + string.Empty;
 	}
 
-	public static string formatNumber2(long number)
-	{
-		string empty = string.Empty;
-		string empty2 = string.Empty;
-		empty = string.Empty;
-		if (number >= 1000000000)
-		{
-			empty2 = mResources.billion;
-			long num = number % 1000000000 / 10000000;
-			number /= 1000000000;
-			empty = number + string.Empty;
-			if (num >= 10)
-			{
-				if (num % 10 == 0)
-				{
-					num /= 10;
-				}
-				string text = empty;
-				return text + "," + num + empty2;
-			}
-			if (num > 0)
-			{
-				string text = empty;
-				return text + ",0" + num + empty2;
-			}
-			return empty + empty2;
-		}
-		if (number >= 1000000)
-		{
-			empty2 = mResources.million;
-			long num2 = number % 1000000 / 10000;
-			number /= 1000000;
-			empty = number + string.Empty;
-			if (num2 >= 10)
-			{
-				if (num2 % 10 == 0)
-				{
-					num2 /= 10;
-				}
-				string text = empty;
-				return text + "," + num2 + empty2;
-			}
-			if (num2 > 0)
-			{
-				string text = empty;
-				return text + ",0" + num2 + empty2;
-			}
-			return empty + empty2;
-		}
-		if (number >= 10000)
-		{
-			empty2 = "k";
-			long num3 = number % 1000 / 10;
-			number /= 1000;
-			empty = number + string.Empty;
-			if (num3 >= 10)
-			{
-				if (num3 % 10 == 0)
-				{
-					num3 /= 10;
-				}
-				string text = empty;
-				return text + "," + num3 + empty2;
-			}
-			if (num3 > 0)
-			{
-				string text = empty;
-				return text + ",0" + num3 + empty2;
-			}
-			return empty + empty2;
-		}
-		return number + string.Empty;
-	}
 	public static string formatNumber2(double number)
 	{
 		string empty = string.Empty;
 		string empty2 = string.Empty;
 		empty = string.Empty;
-		if (number >= 1000000000)
+		if (number >= 1000000000.0)
 		{
 			empty2 = mResources.billion;
-			double num = number % 1000000000 / 10000000;
-			number /= 1000000000;
+			double num = number % 1000000000.0 / 10000000.0;
+			number /= 1000000000.0;
 			empty = number + string.Empty;
-			if (num >= 10)
+			if (num >= 10.0)
 			{
-				if (num % 10 == 0)
+				if (num % 10.0 == 0.0)
 				{
-					num /= 10;
+					num /= 10.0;
 				}
-				string text = empty;
-				return text + "," + num + empty2;
+				return empty + "," + num + empty2;
 			}
-			if (num > 0)
+			if (num > 0.0)
 			{
-				string text = empty;
-				return text + ",0" + num + empty2;
+				return empty + ",0" + num + empty2;
 			}
 			return empty + empty2;
 		}
-		if (number >= 1000000)
+		if (number >= 1000000.0)
 		{
 			empty2 = mResources.million;
-			double num2 = number % 1000000 / 10000;
-			number /= 1000000;
+			double num2 = number % 1000000.0 / 10000.0;
+			number /= 1000000.0;
 			empty = number + string.Empty;
-			if (num2 >= 10)
+			if (num2 >= 10.0)
 			{
-				if (num2 % 10 == 0)
+				if (num2 % 10.0 == 0.0)
 				{
-					num2 /= 10;
+					num2 /= 10.0;
 				}
-				string text = empty;
-				return text + "," + num2 + empty2;
+				return empty + "," + num2 + empty2;
 			}
-			if (num2 > 0)
+			if (num2 > 0.0)
 			{
-				string text = empty;
-				return text + ",0" + num2 + empty2;
+				return empty + ",0" + num2 + empty2;
 			}
 			return empty + empty2;
 		}
-		if (number >= 10000)
+		if (number >= 10000.0)
 		{
 			empty2 = "k";
-			double num3 = number % 1000 / 10;
-			number /= 1000;
+			double num3 = number % 1000.0 / 10.0;
+			number /= 1000.0;
 			empty = number + string.Empty;
-			if (num3 >= 10)
+			if (num3 >= 10.0)
 			{
-				if (num3 % 10 == 0)
+				if (num3 % 10.0 == 0.0)
 				{
-					num3 /= 10;
+					num3 /= 10.0;
 				}
-				string text = empty;
-				return text + "," + num3 + empty2;
+				return empty + "," + num3 + empty2;
 			}
-			if (num3 > 0)
+			if (num3 > 0.0)
 			{
-				string text = empty;
-				return text + ",0" + num3 + empty2;
+				return empty + ",0" + num3 + empty2;
 			}
 			return empty + empty2;
 		}
-		return System.Math.Round(number) + string.Empty;
+		return number + string.Empty;
 	}
 }

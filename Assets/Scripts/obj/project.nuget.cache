@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "GbmbxT3FXJlqY24STL+Ju5hB1CcSbxw5OiXPgoJ/CnTKq0bEvZr7lAf/n3QHeHV4vp/hxngNL3RdZ1BJEEG99g==",
+  "dgSpecHash": "I3eqj/9c5ys=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Desktop\\EMTI_0405\\Assets\\Scripts\\Assembly-CSharp.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "E:\\Download\\PROJECT_240\\Assets\\Scripts\\Assembly-CSharp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kagam\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\kagam\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net40\\1.0.3\\microsoft.netframework.referenceassemblies.net40.1.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

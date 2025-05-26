@@ -10,12 +10,6 @@ public class BigBoss2 : Mob, IMapObject
 
 	public int yTo;
 
-	public bool haftBody;
-
-	public bool change;
-
-	private Mob mob1;
-
 	public new int xSd;
 
 	public new int ySd;
@@ -32,19 +26,7 @@ public class BigBoss2 : Mob, IMapObject
 
 	public new static Image imgHP = GameCanvas.loadImage("/mainImage/myTexture2dmobHP.png");
 
-	private bool wy;
-
-	private int wt;
-
 	private int fy;
-
-	private int ty;
-
-	public new int typeSuperEff;
-
-	private Char focus;
-
-	private int timeDead;
 
 	private bool flyUp;
 
@@ -52,13 +34,9 @@ public class BigBoss2 : Mob, IMapObject
 
 	private int dy;
 
-	public bool changePos;
-
 	private int tShock;
 
 	public new bool isBusyAttackSomeOne = true;
-
-	private int tA;
 
 	private Char[] charAttack;
 
@@ -116,38 +94,7 @@ public class BigBoss2 : Mob, IMapObject
 
 	private sbyte[] cou = new sbyte[2] { -1, 1 };
 
-	public new Char injureBy;
-
-	public new bool injureThenDie;
-
-	public new Mob mobToAttack;
-
 	public new int forceWait;
-
-	public new bool blindEff;
-
-	public new bool sleepEff;
-
-	public BigBoss2(int id, short px, short py, int templateID, int hp, int maxHp, int s)
-	{
-		if (shadowBig == null)
-		{
-			shadowBig = GameCanvas.loadImage("/mainImage/shadowBig.png");
-		}
-		mobId = id;
-		xTo = (x = px + 20);
-		yTo = (y = py);
-		yFirst = py;
-		base.hp = hp;
-		base.maxHp = maxHp;
-		templateId = templateID;
-		w_hp_bar = 100;
-		h_hp_bar = 6;
-		len = w_hp_bar;
-		updateHp_bar();
-		getDataB();
-		status = 2;
-	}
 
 	public BigBoss2(int id, short px, short py, int templateID, double hp, double maxHp, int s)
 	{
@@ -199,19 +146,6 @@ public class BigBoss2 : Mob, IMapObject
 		changBody = false;
 	}
 
-	public new static bool isExistNewMob(string id)
-	{
-		for (int i = 0; i < Mob.newMob.size(); i++)
-		{
-			string text = (string)Mob.newMob.elementAt(i);
-			if (text.Equals(id))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public new void checkFrameTick(int[] array)
 	{
 		tick++;
@@ -258,13 +192,9 @@ public class BigBoss2 : Mob, IMapObject
 
 	private void paintShadow(mGraphics g)
 	{
-		int num = TileMap.size;
+		_ = TileMap.size;
 		g.drawImage(shadowBig, xSd, yFirst, 3);
 		g.setClip(GameScr.cmx, GameScr.cmy - GameCanvas.transY, GameScr.gW, GameScr.gH + 2 * GameCanvas.transY);
-	}
-
-	public new void updateSuperEff()
-	{
 	}
 
 	public override void update()
@@ -357,49 +287,6 @@ public class BigBoss2 : Mob, IMapObject
 		}
 	}
 
-	public new void setInjure()
-	{
-	}
-
-	public new void setAttack(Char cFocus)
-	{
-		isBusyAttackSomeOne = true;
-		mobToAttack = null;
-		base.cFocus = cFocus;
-		p1 = 0;
-		p2 = 0;
-		status = 3;
-		tick = 0;
-		dir = ((cFocus.cx > x) ? 1 : (-1));
-		int cx = cFocus.cx;
-		int cy = cFocus.cy;
-		if (Res.abs(cx - x) < w * 2 && Res.abs(cy - y) < h * 2)
-		{
-			if (x < cx)
-			{
-				x = cx - w;
-			}
-			else
-			{
-				x = cx + w;
-			}
-			p3 = 0;
-		}
-		else
-		{
-			p3 = 1;
-		}
-	}
-
-	private bool isSpecial()
-	{
-		if ((templateId >= 58 && templateId <= 65) || templateId == 67 || templateId == 68)
-		{
-			return true;
-		}
-		return false;
-	}
-
 	private void updateInjure()
 	{
 	}
@@ -412,12 +299,6 @@ public class BigBoss2 : Mob, IMapObject
 			x += (xTo - x) / 4;
 			y += (yTo - y) / 4;
 		}
-	}
-
-	public void setFly()
-	{
-		status = 4;
-		flyUp = true;
 	}
 
 	public void setAttack(Char[] cAttack, int[] dame, sbyte type)
@@ -446,7 +327,7 @@ public class BigBoss2 : Mob, IMapObject
 			{
 				for (int i = 0; i < charAttack.Length; i++)
 				{
-					charAttack[i].doInjure(dameHP[i], 0, isCrit: false, isMob: false);
+					charAttack[i].doInjure(dameHP[i], 0.0, isCrit: false, isMob: false);
 					ServerEffect.addServerEffect(102, charAttack[i].cx, charAttack[i].cy, 1);
 				}
 			}
@@ -463,7 +344,7 @@ public class BigBoss2 : Mob, IMapObject
 			{
 				for (int j = 0; j < charAttack.Length; j++)
 				{
-					MonsterDart.addMonsterDart(x + ((dir != 1) ? (-45) : 45), y - 25, isBoss: true, dameHP[j], 0, charAttack[j], 24);
+					MonsterDart.addMonsterDart(x + ((dir != 1) ? (-45) : 45), y - 25, isBoss: true, dameHP[j], 0.0, charAttack[j], 24);
 				}
 			}
 		}
@@ -484,7 +365,7 @@ public class BigBoss2 : Mob, IMapObject
 		{
 			for (int k = 0; k < charAttack.Length; k++)
 			{
-				charAttack[k].doInjure(dameHP[k], 0, isCrit: false, isMob: false);
+				charAttack[k].doInjure(dameHP[k], 0.0, isCrit: false, isMob: false);
 				ServerEffect.addServerEffect(102, charAttack[k].cx, charAttack[k].cy, 1);
 			}
 		}
@@ -494,31 +375,6 @@ public class BigBoss2 : Mob, IMapObject
 	{
 	}
 
-	public new bool isPaint()
-	{
-		if (x < GameScr.cmx)
-		{
-			return false;
-		}
-		if (x > GameScr.cmx + GameScr.gW)
-		{
-			return false;
-		}
-		if (y < GameScr.cmy)
-		{
-			return false;
-		}
-		if (y > GameScr.cmy + GameScr.gH + 30)
-		{
-			return false;
-		}
-		if (status == 0)
-		{
-			return false;
-		}
-		return true;
-	}
-
 	public new bool isUpdate()
 	{
 		if (status == 0)
@@ -526,15 +382,6 @@ public class BigBoss2 : Mob, IMapObject
 			return false;
 		}
 		return true;
-	}
-
-	public new bool checkIsBoss()
-	{
-		if (isBoss || levelBoss > 0)
-		{
-			return true;
-		}
-		return false;
 	}
 
 	public override void paint(mGraphics g)
@@ -596,61 +443,13 @@ public class BigBoss2 : Mob, IMapObject
 		if (shock)
 		{
 			tShock++;
-			Effect me = new Effect((type != 2) ? 22 : 19, x + tShock * 50, y + 25, 2, 1, -1);
-			EffecMn.addEff(me);
-			Effect me2 = new Effect((type != 2) ? 22 : 19, x - tShock * 50, y + 25, 2, 1, -1);
-			EffecMn.addEff(me2);
+			EffecMn.addEff(new Effect((type != 2) ? 22 : 19, x + tShock * 50, y + 25, 2, 1, -1));
+			EffecMn.addEff(new Effect((type != 2) ? 22 : 19, x - tShock * 50, y + 25, 2, 1, -1));
 			if (tShock == 50)
 			{
 				tShock = 0;
 				shock = false;
 			}
-		}
-	}
-
-	public new int getHPColor()
-	{
-		return 16711680;
-	}
-
-	public new void startDie()
-	{
-		hp = 0;
-		injureThenDie = true;
-		hp = 0;
-		status = 1;
-		p1 = -3;
-		p2 = -dir;
-		p3 = 0;
-	}
-
-	public new void attackOtherMob(Mob mobToAttack)
-	{
-		this.mobToAttack = mobToAttack;
-		isBusyAttackSomeOne = true;
-		cFocus = null;
-		p1 = 0;
-		p2 = 0;
-		status = 3;
-		tick = 0;
-		dir = ((mobToAttack.x > x) ? 1 : (-1));
-		int num = mobToAttack.x;
-		int num2 = mobToAttack.y;
-		if (Res.abs(num - x) < w * 2 && Res.abs(num2 - y) < h * 2)
-		{
-			if (x < num)
-			{
-				x = num - w;
-			}
-			else
-			{
-				x = num + w;
-			}
-			p3 = 0;
-		}
-		else
-		{
-			p3 = 1;
 		}
 	}
 
@@ -686,24 +485,10 @@ public class BigBoss2 : Mob, IMapObject
 
 	public new bool isInvisible()
 	{
-		return status == 0 || status == 1;
-	}
-
-	public new void removeHoldEff()
-	{
-		if (holdEffID != 0)
+		if (status != 0)
 		{
-			holdEffID = 0;
+			return status == 1;
 		}
-	}
-
-	public new void removeBlindEff()
-	{
-		blindEff = false;
-	}
-
-	public new void removeSleepEff()
-	{
-		sleepEff = false;
+		return true;
 	}
 }

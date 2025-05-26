@@ -14,8 +14,6 @@ namespace Assets.src.g
 
 		public bool haftBody;
 
-		public bool change;
-
 		public new int xSd;
 
 		public new int ySd;
@@ -30,17 +28,7 @@ namespace Assets.src.g
 
 		private int frame;
 
-		private bool wy;
-
-		private int wt;
-
 		private int fy;
-
-		private int ty;
-
-		public new int typeSuperEff;
-
-		private Char focus;
 
 		private bool flyUp;
 
@@ -48,13 +36,9 @@ namespace Assets.src.g
 
 		private int dy;
 
-		public bool changePos;
-
 		private int tShock;
 
 		public new bool isBusyAttackSomeOne = true;
-
-		private int tA;
 
 		private Char[] charAttack;
 
@@ -64,109 +48,71 @@ namespace Assets.src.g
 
 		public new int[] stand = new int[12]
 		{
-		0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-		1, 1
+			0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+			1, 1
 		};
 
 		public int[] stand_1 = new int[17]
 		{
-		37, 37, 37, 38, 38, 38, 39, 39, 40, 40,
-		40, 39, 39, 39, 38, 38, 38
+			37, 37, 37, 38, 38, 38, 39, 39, 40, 40,
+			40, 39, 39, 39, 38, 38, 38
 		};
 
 		public new int[] move = new int[15]
 		{
-		1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
-		3, 3, 2, 2, 2
+			1, 1, 1, 1, 2, 2, 2, 2, 3, 3,
+			3, 3, 2, 2, 2
 		};
 
 		public new int[] moveFast = new int[7] { 1, 1, 2, 2, 3, 3, 2 };
 
 		public new int[] attack1 = new int[12]
 		{
-		0, 0, 34, 34, 35, 35, 36, 36, 2, 2,
-		1, 1
+			0, 0, 34, 34, 35, 35, 36, 36, 2, 2,
+			1, 1
 		};
 
 		public new int[] attack2 = new int[23]
 		{
-		0, 0, 0, 4, 4, 6, 6, 9, 9, 10,
-		10, 13, 13, 15, 15, 17, 17, 19, 19, 21,
-		21, 23, 23
+			0, 0, 0, 4, 4, 6, 6, 9, 9, 10,
+			10, 13, 13, 15, 15, 17, 17, 19, 19, 21,
+			21, 23, 23
 		};
 
 		public int[] attack3 = new int[24]
 		{
-		0, 0, 1, 1, 4, 4, 6, 6, 8, 8,
-		25, 25, 26, 26, 28, 28, 30, 30, 32, 32,
-		2, 2, 1, 1
+			0, 0, 1, 1, 4, 4, 6, 6, 8, 8,
+			25, 25, 26, 26, 28, 28, 30, 30, 32, 32,
+			2, 2, 1, 1
 		};
 
 		public int[] attack2_1 = new int[20]
 		{
-		37, 37, 5, 5, 7, 7, 11, 11, 14, 14,
-		16, 16, 18, 18, 20, 20, 22, 22, 24, 24
+			37, 37, 5, 5, 7, 7, 11, 11, 14, 14,
+			16, 16, 18, 18, 20, 20, 22, 22, 24, 24
 		};
 
 		public int[] attack3_1 = new int[21]
 		{
-		37, 37, 37, 38, 38, 5, 5, 7, 7, 11,
-		11, 27, 27, 29, 29, 31, 31, 33, 33, 38,
-		38
+			37, 37, 37, 38, 38, 5, 5, 7, 7, 11,
+			11, 27, 27, 29, 29, 31, 31, 33, 33, 38,
+			38
 		};
 
 		public int[] fly = new int[8] { 8, 8, 9, 9, 10, 10, 12, 12 };
 
 		public int[] hitground = new int[24]
 		{
-		0, 0, 1, 1, 4, 4, 6, 6, 8, 8,
-		25, 25, 26, 26, 28, 28, 30, 30, 32, 32,
-		2, 2, 1, 1
+			0, 0, 1, 1, 4, 4, 6, 6, 8, 8,
+			25, 25, 26, 26, 28, 28, 30, 30, 32, 32,
+			2, 2, 1, 1
 		};
 
 		private bool shock;
 
 		private sbyte[] cou = new sbyte[2] { -1, 1 };
 
-		public new Char injureBy;
-
-		public new bool injureThenDie;
-
-		public new Mob mobToAttack;
-
 		public new int forceWait;
-
-		public new bool blindEff;
-
-		public new bool sleepEff;
-
-		public BigBoss(int id, short px, short py, int templateID, int hp, int maxhp, int s)
-		{
-			xFirst = (x = px + 20);
-			yFirst = (y = py);
-			mobId = id;
-			base.hp = hp;
-			maxHp = maxhp;
-			templateId = templateID;
-			w_hp_bar = 100;
-			h_hp_bar = 6;
-			len = w_hp_bar;
-			updateHp_bar();
-			if (s == 0)
-			{
-				getDataB();
-			}
-			if (s == 1)
-			{
-				getDataB2();
-			}
-			if (s == 2)
-			{
-				getDataB2();
-				haftBody = true;
-			}
-			status = 2;
-		}
 
 		public BigBoss(int id, short px, short py, int templateID, double hp, double maxhp, int s)
 		{
@@ -244,19 +190,6 @@ namespace Assets.src.g
 			changBody = false;
 		}
 
-		public new static bool isExistNewMob(string id)
-		{
-			for (int i = 0; i < Mob.newMob.size(); i++)
-			{
-				string text = (string)Mob.newMob.elementAt(i);
-				if (text.Equals(id))
-				{
-					return true;
-				}
-			}
-			return false;
-		}
-
 		public new void checkFrameTick(int[] array)
 		{
 			tick++;
@@ -307,10 +240,6 @@ namespace Assets.src.g
 			g.setClip(GameScr.cmx, GameScr.cmy - GameCanvas.transY, GameScr.gW, GameScr.gH + 2 * GameCanvas.transY);
 		}
 
-		public new void updateSuperEff()
-		{
-		}
-
 		public override void update()
 		{
 			if (!isUpdate())
@@ -320,38 +249,38 @@ namespace Assets.src.g
 			updateShadown();
 			switch (status)
 			{
-				case 2:
-					updateMobStandWait();
-					break;
-				case 4:
-					timeStatus = 0;
-					updateMobFly();
-					break;
-				case 3:
-					updateMobAttack();
-					break;
-				case 5:
-					timeStatus = 0;
-					updateMobWalk();
-					break;
-				case 6:
-					timeStatus = 0;
-					p1++;
-					y += p1;
-					if (y >= yFirst)
-					{
-						y = yFirst;
-						p1 = 0;
-						status = 5;
-					}
-					break;
-				case 7:
-					updateInjure();
-					break;
-				case 0:
-				case 1:
-					updateDead();
-					break;
+			case 2:
+				updateMobStandWait();
+				break;
+			case 4:
+				timeStatus = 0;
+				updateMobFly();
+				break;
+			case 3:
+				updateMobAttack();
+				break;
+			case 5:
+				timeStatus = 0;
+				updateMobWalk();
+				break;
+			case 6:
+				timeStatus = 0;
+				p1++;
+				y += p1;
+				if (y >= yFirst)
+				{
+					y = yFirst;
+					p1 = 0;
+					status = 5;
+				}
+				break;
+			case 7:
+				updateInjure();
+				break;
+			case 0:
+			case 1:
+				updateDead();
+				break;
 			}
 		}
 
@@ -401,49 +330,6 @@ namespace Assets.src.g
 			}
 		}
 
-		public new void setInjure()
-		{
-		}
-
-		public new void setAttack(Char cFocus)
-		{
-			isBusyAttackSomeOne = true;
-			mobToAttack = null;
-			base.cFocus = cFocus;
-			p1 = 0;
-			p2 = 0;
-			status = 3;
-			tick = 0;
-			dir = ((cFocus.cx > x) ? 1 : (-1));
-			int cx = cFocus.cx;
-			int cy = cFocus.cy;
-			if (Res.abs(cx - x) < w * 2 && Res.abs(cy - y) < h * 2)
-			{
-				if (x < cx)
-				{
-					x = cx - w;
-				}
-				else
-				{
-					x = cx + w;
-				}
-				p3 = 0;
-			}
-			else
-			{
-				p3 = 1;
-			}
-		}
-
-		private bool isSpecial()
-		{
-			if ((templateId >= 58 && templateId <= 65) || templateId == 67 || templateId == 68)
-			{
-				return true;
-			}
-			return false;
-		}
-
 		private void updateInjure()
 		{
 		}
@@ -483,7 +369,7 @@ namespace Assets.src.g
 			{
 				for (int i = 0; i < charAttack.Length; i++)
 				{
-					charAttack[i].doInjure(dameHP[i], 0, isCrit: false, isMob: false);
+					charAttack[i].doInjure(dameHP[i], 0.0, isCrit: false, isMob: false);
 				}
 			}
 			if (type == 7)
@@ -518,7 +404,7 @@ namespace Assets.src.g
 				{
 					for (int i = 0; i < charAttack.Length; i++)
 					{
-						MonsterDart.addMonsterDart(x + ((dir != 1) ? (-45) : 45), y - 30, isBoss: true, dameHP[i], 0, charAttack[i], 24);
+						MonsterDart.addMonsterDart(x + ((dir != 1) ? (-45) : 45), y - 30, isBoss: true, dameHP[i], 0.0, charAttack[i], 24);
 					}
 				}
 			}
@@ -536,14 +422,13 @@ namespace Assets.src.g
 				{
 					for (int j = 0; j < charAttack.Length; j++)
 					{
-						charAttack[j].doInjure(dameHP[j], 0, isCrit: false, isMob: false);
+						charAttack[j].doInjure(dameHP[j], 0.0, isCrit: false, isMob: false);
 						ServerEffect.addServerEffect(102, charAttack[j].cx, charAttack[j].cy, 1);
 					}
 				}
 			}
-			if (type == 8)
-			{
-			}
+			_ = type;
+			_ = 8;
 			if (type != 2)
 			{
 				return;
@@ -560,38 +445,13 @@ namespace Assets.src.g
 				shock = true;
 				for (int k = 0; k < charAttack.Length; k++)
 				{
-					charAttack[k].doInjure(dameHP[k], 0, isCrit: false, isMob: false);
+					charAttack[k].doInjure(dameHP[k], 0.0, isCrit: false, isMob: false);
 				}
 			}
 		}
 
 		public new void updateMobWalk()
 		{
-		}
-
-		public new bool isPaint()
-		{
-			if (x < GameScr.cmx)
-			{
-				return false;
-			}
-			if (x > GameScr.cmx + GameScr.gW)
-			{
-				return false;
-			}
-			if (y < GameScr.cmy)
-			{
-				return false;
-			}
-			if (y > GameScr.cmy + GameScr.gH + 30)
-			{
-				return false;
-			}
-			if (status == 0)
-			{
-				return false;
-			}
-			return true;
 		}
 
 		public new bool isUpdate()
@@ -601,15 +461,6 @@ namespace Assets.src.g
 				return false;
 			}
 			return true;
-		}
-
-		public new bool checkIsBoss()
-		{
-			if (isBoss || levelBoss > 0)
-			{
-				return true;
-			}
-			return false;
 		}
 
 		public override void paint(mGraphics g)
@@ -671,61 +522,13 @@ namespace Assets.src.g
 			if (shock)
 			{
 				tShock++;
-				Effect me = new Effect((type != 2) ? 22 : 19, x + tShock * 50, y + 25, 2, 1, -1);
-				EffecMn.addEff(me);
-				Effect me2 = new Effect((type != 2) ? 22 : 19, x - tShock * 50, y + 25, 2, 1, -1);
-				EffecMn.addEff(me2);
+				EffecMn.addEff(new Effect((type != 2) ? 22 : 19, x + tShock * 50, y + 25, 2, 1, -1));
+				EffecMn.addEff(new Effect((type != 2) ? 22 : 19, x - tShock * 50, y + 25, 2, 1, -1));
 				if (tShock == 50)
 				{
 					tShock = 0;
 					shock = false;
 				}
-			}
-		}
-
-		public new int getHPColor()
-		{
-			return 16711680;
-		}
-
-		public new void startDie()
-		{
-			hp = 0;
-			injureThenDie = true;
-			hp = 0;
-			status = 1;
-			p1 = -3;
-			p2 = -dir;
-			p3 = 0;
-		}
-
-		public new void attackOtherMob(Mob mobToAttack)
-		{
-			this.mobToAttack = mobToAttack;
-			isBusyAttackSomeOne = true;
-			cFocus = null;
-			p1 = 0;
-			p2 = 0;
-			status = 3;
-			tick = 0;
-			dir = ((mobToAttack.x > x) ? 1 : (-1));
-			int num = mobToAttack.x;
-			int num2 = mobToAttack.y;
-			if (Res.abs(num - x) < w * 2 && Res.abs(num2 - y) < h * 2)
-			{
-				if (x < num)
-				{
-					x = num - w;
-				}
-				else
-				{
-					x = num + w;
-				}
-				p3 = 0;
-			}
-			else
-			{
-				p3 = 1;
 			}
 		}
 
@@ -736,7 +539,11 @@ namespace Assets.src.g
 
 		public new int getY()
 		{
-			return (!haftBody) ? (y - 60) : (y - 20);
+			if (haftBody)
+			{
+				return y - 20;
+			}
+			return y - 60;
 		}
 
 		public new int getH()
@@ -761,27 +568,11 @@ namespace Assets.src.g
 
 		public new bool isInvisible()
 		{
-			return status == 0 || status == 1;
-		}
-
-		public new void removeHoldEff()
-		{
-			if (holdEffID != 0)
+			if (status != 0)
 			{
-				holdEffID = 0;
+				return status == 1;
 			}
-		}
-
-		public new void removeBlindEff()
-		{
-			blindEff = false;
-		}
-
-		public new void removeSleepEff()
-		{
-			sleepEff = false;
+			return true;
 		}
 	}
-
 }
-

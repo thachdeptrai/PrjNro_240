@@ -60,22 +60,11 @@ public class ItemTime
 		isPaint_coolDownBar = idIcon == 14;
 	}
 
-	public void initTime(int time, bool isText)
-	{
-		minute = time / 60;
-		second = time % 60;
-		this.time = time;
-		coutTime = time;
-		this.isText = isText;
-		curr = (last = mSystem.currentTimeMillis());
-	}
-
 	public static bool isExistItem(int id)
 	{
 		for (int i = 0; i < Char.vItemTime.size(); i++)
 		{
-			ItemTime itemTime = (ItemTime)Char.vItemTime.elementAt(i);
-			if (itemTime.idIcon == id)
+			if (((ItemTime)Char.vItemTime.elementAt(i)).idIcon == id)
 			{
 				return true;
 			}
@@ -100,8 +89,7 @@ public class ItemTime
 	{
 		for (int i = 0; i < GameScr.textTime.size(); i++)
 		{
-			ItemTime itemTime = (ItemTime)GameScr.textTime.elementAt(i);
-			if (itemTime.idIcon == id)
+			if (((ItemTime)GameScr.textTime.elementAt(i)).idIcon == id)
 			{
 				return true;
 			}
@@ -175,7 +163,7 @@ public class ItemTime
 		{
 			empty = string.Empty;
 		}
-		mFont.tahoma_7b_white.drawString(g, text + " " + empty, x, y, 0, mFont.tahoma_7b_dark);
+		mFont.tahoma_7b_white.drawString(g, text + " " + empty, x, y + 15, 0, mFont.tahoma_7b_dark);
 	}
 
 	public void update()

@@ -1,5 +1,4 @@
 using System;
-using Assets.src.e;
 
 public class BackgroudEffect
 {
@@ -35,8 +34,6 @@ public class BackgroudEffect
 
 	private bool isFly;
 
-	public static Image imgSnow;
-
 	public static Image imgHatMua;
 
 	public static Image imgMua1;
@@ -59,10 +56,6 @@ public class BackgroudEffect
 
 	public int typeEff;
 
-	public int xx;
-
-	public int waterY;
-
 	private bool[] isRainEffect;
 
 	private int[] frame;
@@ -75,38 +68,6 @@ public class BackgroudEffect
 
 	private int colorWater;
 
-	public const int TYPE_MUA = 0;
-
-	public const int TYPE_LATRAIDAT_1 = 1;
-
-	public const int TYPE_LATRAIDAT_2 = 2;
-
-	public const int TYPE_SAMSET = 3;
-
-	public const int TYPE_SAO = 4;
-
-	public const int TYPE_LANAMEK_1 = 5;
-
-	public const int TYPE_LASAYAI_1 = 6;
-
-	public const int TYPE_LANAMEK_2 = 7;
-
-	public const int TYPE_SHIP_TRAIDAT = 8;
-
-	public const int TYPE_HANHTINH = 9;
-
-	public const int TYPE_WATER = 10;
-
-	public const int TYPE_SNOW = 11;
-
-	public const int TYPE_MUA_FRONT = 12;
-
-	public const int TYPE_CLOUD = 13;
-
-	public const int TYPE_FOG = 14;
-
-	public const int TYPE_LUNAR_YEAR = 15;
-
 	public static int PIXEL = 16;
 
 	public static Image water1 = GameCanvas.loadImage("/mainImage/myTexture2dwater1.png");
@@ -118,8 +79,6 @@ public class BackgroudEffect
 	public static Image imgChamTron2;
 
 	public static short id_water1;
-
-	public static short id_water2;
 
 	public static Image water3 = null;
 
@@ -280,8 +239,7 @@ public class BackgroudEffect
 			}
 			if (typeEff == 15)
 			{
-				Small small = SmallImage.imgNew[11120];
-				if (small == null)
+				if (SmallImage.imgNew[11120] == null)
 				{
 					SmallImage.createImage(11120);
 				}
@@ -583,8 +541,6 @@ public class BackgroudEffect
 				}
 				break;
 			}
-			case 3:
-				break;
 			case 0:
 			case 12:
 			{
@@ -758,6 +714,9 @@ public class BackgroudEffect
 			case 14:
 				updateFog();
 				break;
+			case 3:
+			case 13:
+				break;
 			}
 		}
 		catch (Exception)
@@ -771,13 +730,11 @@ public class BackgroudEffect
 		{
 			switch (typeEff)
 			{
-			case 3:
-				break;
 			case 0:
 			case 12:
 			{
-				int cmx = GameScr.cmx;
-				int cmy = GameScr.cmy;
+				_ = GameScr.cmx;
+				_ = GameScr.cmy;
 				for (int i = 0; i < sum; i++)
 				{
 					if (type[i] == 2 && x[i] >= GameScr.cmx && x[i] <= GameCanvas.w + GameScr.cmx && y[i] >= GameScr.cmy && y[i] <= GameCanvas.h + GameScr.cmy)
@@ -814,10 +771,12 @@ public class BackgroudEffect
 				}
 				paintLacay1(g, imgLacay);
 				break;
+			case 3:
 			case 4:
 			case 8:
 			case 9:
 			case 10:
+			case 13:
 			case 14:
 				break;
 			}
@@ -829,8 +788,10 @@ public class BackgroudEffect
 
 	public void paintLacay1(mGraphics g, Image img)
 	{
-		int num = ((typeEff != 11) ? 4 : 3);
-		num = ((typeEff != 15) ? 4 : 4);
+		_ = typeEff;
+		_ = 11;
+		_ = typeEff;
+		_ = 15;
 		for (int i = 0; i < sum; i++)
 		{
 			if (i % 3 == 0 && x[i] >= GameScr.cmx && x[i] <= GameCanvas.w + GameScr.cmx && y[i] >= GameScr.cmy && y[i] <= GameCanvas.h + GameScr.cmy && img != null)
@@ -842,8 +803,10 @@ public class BackgroudEffect
 
 	public void paintLacay2(mGraphics g, Image img)
 	{
-		int num = ((typeEff != 11) ? 4 : 3);
-		num = ((typeEff != 15) ? 4 : 4);
+		_ = typeEff;
+		_ = 11;
+		_ = typeEff;
+		_ = 15;
 		for (int i = 0; i < sum; i++)
 		{
 			if (i % 3 != 0 && x[i] >= GameScr.cmx && x[i] <= GameCanvas.w + GameScr.cmx && y[i] >= GameScr.cmy && y[i] <= GameCanvas.h + GameScr.cmy && img != null)
@@ -855,9 +818,8 @@ public class BackgroudEffect
 
 	public void paintBehindTile(mGraphics g)
 	{
-		switch (typeEff)
+		if (typeEff == 8)
 		{
-		case 8:
 			g.drawRegion(imgShip, 0, 0, imgShip.getWidth(), imgShip.getHeight(), trans, xShip, yShip, 3);
 			if (way == 1 || way == 2)
 			{
@@ -869,7 +831,6 @@ public class BackgroudEffect
 				int num2 = ((trans != 0) ? (-11) : 11);
 				g.drawRegion(imgFire2, 0, frameFire * 18, 8, 18, trans, xShip + num2, yShip + 22, 3);
 			}
-			break;
 		}
 	}
 
@@ -877,12 +838,10 @@ public class BackgroudEffect
 	{
 		switch (typeEff)
 		{
-		case 3:
-			break;
 		case 0:
 		{
-			int cmx = GameScr.cmx;
-			int cmy = GameScr.cmy;
+			_ = GameScr.cmx;
+			_ = GameScr.cmy;
 			g.setColor(10742731);
 			for (int i = 0; i < sum; i++)
 			{
@@ -913,6 +872,7 @@ public class BackgroudEffect
 			}
 			paintLacay2(g, imgLacay);
 			break;
+		case 3:
 		case 4:
 		case 8:
 		case 9:

@@ -1,9 +1,5 @@
 public class Info_RadaScr
 {
-	public const sbyte TYPE_MONSTER = 0;
-
-	public const sbyte TYPE_CHARPART = 1;
-
 	public sbyte rank;
 
 	public sbyte amount;
@@ -81,12 +77,13 @@ public class Info_RadaScr
 
 	public static Char SetCharInfo(int head, int body, int leg, int bag)
 	{
-		Char @char = new Char();
-		@char.head = head;
-		@char.body = body;
-		@char.leg = leg;
-		@char.bag = bag;
-		return @char;
+		return new Char
+		{
+			head = head,
+			body = body,
+			leg = leg,
+			bag = bag
+		};
 	}
 
 	public static Info_RadaScr GetInfo(MyVector vec, int id)
@@ -193,8 +190,8 @@ public class Info_RadaScr
 							text2 = "2";
 						}
 					}
-					string text = empty2;
-					empty2 = text + "\n|" + text2 + "|1|" + empty;
+					string text3 = empty2;
+					empty2 = text3 + "\n|" + text2 + "|1|" + empty;
 				}
 				if (num2 != 0)
 				{

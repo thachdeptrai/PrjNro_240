@@ -151,12 +151,6 @@ public class T1 : mResources
 		mResources.server = "Máy chủ";
 		mResources.planet = "Hành tinh";
 		mResources.MENUME = new string[5] { "Hành trang", "Kỹ năng", "Tiềm năng", "Thông tin", "Trang bị" };
-		//mResources.MENUNEWCHAR = new string[3]
-		//{
-		//	string.Empty,
-		//	"Dân tộc: ",
-		//	"Tóc: "
-		//};
 		mResources.MENUGENDER = new string[3] { "Trái đất", "Namếc", "Xayda" };
 		if (mSystem.clientType == 7)
 		{

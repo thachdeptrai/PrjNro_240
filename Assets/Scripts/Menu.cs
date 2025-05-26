@@ -141,7 +141,7 @@ public class Menu
 			{
 				Command command2 = (Command)menuItems.elementAt(j);
 				command2.isPlaySoundButton = false;
-				int width = mFont.tahoma_7_yellow.getWidth(command2.caption);
+				mFont.tahoma_7_yellow.getWidth(command2.caption);
 				command2.subCaption = mFont.tahoma_7_yellow.splitFontArray(command2.caption, menuW - 10);
 			}
 			menuTemY = new int[menuItems.size()];

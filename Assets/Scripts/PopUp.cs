@@ -16,12 +16,6 @@ public class PopUp
 
 	public int ch;
 
-	public static int f;
-
-	public static int tF;
-
-	public static int dir;
-
 	public bool isWayPoint;
 
 	public int tDelay;
@@ -39,10 +33,6 @@ public class PopUp
 	public static Image imgPopUp;
 
 	public static Image imgPopUp2;
-
-	public Image imgFocus;
-
-	public Image imgUnFocus;
 
 	public PopUp(string info, int x, int y)
 	{
@@ -146,19 +136,9 @@ public class PopUp
 		}
 	}
 
-	public static void addPopUp(int x, int y, string info)
-	{
-		vPopups.addElement(new PopUp(info, x, y));
-	}
-
 	public static void addPopUp(PopUp p)
 	{
 		vPopups.addElement(p);
-	}
-
-	public static void removePopUp(PopUp p)
-	{
-		vPopups.removeElement(p);
 	}
 
 	public void paintClipPopUp(mGraphics g, int x, int y, int w, int h, int color, bool isFocus)

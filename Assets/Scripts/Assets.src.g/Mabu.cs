@@ -22,10 +22,6 @@ namespace Assets.src.g
 
 		public int yTo;
 
-		public bool haftBody;
-
-		public bool change;
-
 		private Char[] charAttack;
 
 		private int[] damageAttack;
@@ -34,22 +30,22 @@ namespace Assets.src.g
 
 		public static int[] skill1 = new int[30]
 		{
-		0, 0, 1, 1, 2, 2, 3, 3, 4, 4,
-		5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-		5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+			0, 0, 1, 1, 2, 2, 3, 3, 4, 4,
+			5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+			5, 5, 5, 5, 5, 5, 5, 5, 5, 5
 		};
 
 		public static int[] skill2 = new int[15]
 		{
-		0, 0, 6, 6, 7, 7, 8, 8, 9, 9,
-		9, 9, 9, 10, 10
+			0, 0, 6, 6, 7, 7, 8, 8, 9, 9,
+			9, 9, 9, 10, 10
 		};
 
 		public static int[] skill3 = new int[26]
 		{
-		0, 0, 1, 1, 2, 2, 3, 3, 4, 4,
-		5, 5, 6, 6, 7, 7, 8, 8, 9, 9,
-		10, 10, 11, 11, 12, 12
+			0, 0, 1, 1, 2, 2, 3, 3, 4, 4,
+			5, 5, 6, 6, 7, 7, 8, 8, 9, 9,
+			10, 10, 11, 11, 12, 12
 		};
 
 		public static int[] skill4 = new int[8] { 13, 13, 14, 14, 15, 15, 16, 16 };
@@ -89,8 +85,7 @@ namespace Assets.src.g
 				if (tick == 11)
 				{
 					addFoot = true;
-					Effect effect = new Effect(19, cx, cy + 20, 2, 1, -1);
-					EffecMn.addEff(effect);
+					EffecMn.addEff(new Effect(19, cx, cy + 20, 2, 1, -1));
 				}
 				if (tick >= array.Length - 1)
 				{
@@ -178,9 +173,10 @@ namespace Assets.src.g
 				if (skillID == 0 && addFoot && GameCanvas.gameTick % 2 == 0)
 				{
 					dx += ((xTo <= cx) ? (-30) : 30);
-					Effect effect = new Effect(103, cx + dx, cy + 20, 2, 1, -1);
-					effect.trans = ((xTo <= cx) ? 1 : 0);
-					EffecMn.addEff(effect);
+					EffecMn.addEff(new Effect(103, cx + dx, cy + 20, 2, 1, -1)
+					{
+						trans = ((xTo <= cx) ? 1 : 0)
+					});
 					if ((cdir == 1 && cx + dx >= xTo) || (cdir == -1 && cx + dx <= xTo))
 					{
 						addFoot = false;
@@ -190,7 +186,7 @@ namespace Assets.src.g
 						cdir = lastDir;
 						for (int i = 0; i < charAttack.Length; i++)
 						{
-							charAttack[i].doInjure(damageAttack[i], 0, isCrit: false, isMob: false);
+							charAttack[i].doInjure(damageAttack[i], 0.0, isCrit: false, isMob: false);
 						}
 					}
 				}
@@ -204,14 +200,13 @@ namespace Assets.src.g
 				cy += (yTo - cy) / 3;
 				if (GameCanvas.gameTick % 5 == 0)
 				{
-					Effect effect2 = new Effect(19, cx, cy, 2, 1, -1);
-					EffecMn.addEff(effect2);
+					EffecMn.addEff(new Effect(19, cx, cy, 2, 1, -1));
 				}
 				if (Res.abs(cx - xTo) <= 20 && Res.abs(cy - yTo) <= 20)
 				{
 					cx = xTo;
 					cy = yTo;
-					charAttack[pIndex].doInjure(damageAttack[pIndex], 0, isCrit: false, isMob: false);
+					charAttack[pIndex].doInjure(damageAttack[pIndex], 0.0, isCrit: false, isMob: false);
 					pIndex++;
 					if (pIndex == charAttack.Length)
 					{
@@ -249,6 +244,4 @@ namespace Assets.src.g
 			}
 		}
 	}
-
 }
-
