@@ -37,7 +37,7 @@ public class ModFunc : IActionListener
 
 	public static bool isReadInt = false;//đag đọc int
 
-	public static bool isReadDouble =true;//true = đọc double
+	public static bool isReadDouble = true;//true = đọc double
 
 	public static bool isActiveTamBao = true;
 
@@ -51,6 +51,7 @@ public class ModFunc : IActionListener
 
 	public static bool isMenuVisible = false;
 
+	public static bool isThongBaoDB = true;
 	public static float arrowRotation = 0f;
 
 	public static float menuX = 0f;
@@ -1395,6 +1396,224 @@ public class ModFunc : IActionListener
 		{
 			PaintMenuChat(g);
 		}
+		if (GameCanvas.isDangerActive && GameCanvas.dangerMessage != null)
+		{
+			int centerX = GameCanvas.hw;
+			int centerY = GameCanvas.hh / 2;
+
+			// === ANIMATION SYSTEM ===
+			int tick = GameCanvas.gameTick;
+			float time = tick * 0.016f; // 60fps conversion
+
+			float breathCycle = (float)System.Math.Sin(time * 2.0f);
+			float breathScale = 1.0f + breathCycle * 0.15f;
+
+			float primaryPulse = 1.0f + (float)System.Math.Sin(time * 4.0f) * 0.12f;
+			float secondaryPulse = 1.0f + (float)System.Math.Sin(time * 6.0f) * 0.08f;
+			float tertiaryPulse = 1.0f + (float)System.Math.Sin(time * 8.0f) * 0.05f;
+
+			float totalScale = breathScale * primaryPulse * secondaryPulse;
+
+			float colorPulse = 0.5f + 0.5f * (float)System.Math.Sin(time * 5.0f);
+			int dynamicRed = (int)(180 + 75 * colorPulse);
+			int borderFlash = (int)(150 + 105 * colorPulse);
+
+			float shakeIntensity = 2.5f;
+			float shakeX = (float)System.Math.Sin(time * 12.0f) * shakeIntensity;
+			float shakeY = (float)System.Math.Sin(time * 8.0f) * shakeIntensity * 0.6f;
+
+			centerX += (int)shakeX;
+			centerY += (int)shakeY;
+
+			int baseWidth = 340;
+			int baseHeight = 65;
+			int scaledWidth = (int)(baseWidth * totalScale);
+			int scaledHeight = (int)(baseHeight * totalScale);
+
+			// === PREMIUM BACKGROUND SYSTEM ===
+			for (int layer = 8; layer >= 1; layer--)
+			{
+				float glowScale = 1.0f + layer * 0.15f;
+				int glowAlpha = (int)(60 - layer * 6);
+				int glowWidth = (int)(scaledWidth * glowScale);
+				int glowHeight = (int)(scaledHeight * glowScale);
+
+				int glowRed = System.Math.Min(255, 80 + layer * 15);
+				g.setColor((glowRed << 16) | (glowAlpha << 24));
+				g.fillRect(centerX - glowWidth / 2, centerY - glowHeight / 2, glowWidth, glowHeight);
+			}
+
+			g.setColor(0x220000);
+			g.fillRect(centerX - scaledWidth / 2 + 6, centerY - scaledHeight / 2 + 6, scaledWidth, scaledHeight);
+
+			int bgSteps = 8;
+			for (int step = 0; step < bgSteps; step++)
+			{
+				float progress = (float)step / bgSteps;
+				int stepHeight = scaledHeight / bgSteps;
+				int stepY = centerY - scaledHeight / 2 + step * stepHeight;
+
+				int gradientRed = (int)(40 + progress * 80 + colorPulse * 30);
+				int gradientColor = (gradientRed << 16) | 0x000000;
+
+				g.setColor(gradientColor);
+				g.fillRect(centerX - scaledWidth / 2, stepY, scaledWidth, stepHeight + 1);
+			}
+
+			// === BORDER SYSTEM ===
+			for (int borderLayer = 0; borderLayer < 3; borderLayer++)
+			{
+				int borderAlpha = borderFlash - borderLayer * 30;
+				g.setColor(0xFF0000 | (System.Math.Max(50, borderAlpha) << 24));
+
+				int borderOffset = borderLayer + 1;
+				g.drawRect(centerX - scaledWidth / 2 - borderOffset,
+						   centerY - scaledHeight / 2 - borderOffset,
+						   scaledWidth + borderOffset * 2,
+						   scaledHeight + borderOffset * 2);
+			}
+
+			g.setColor(0xFFFFFF | (220 << 24));
+			g.drawRect(centerX - scaledWidth / 2 + 4, centerY - scaledHeight / 2 + 4,
+					   scaledWidth - 8, scaledHeight - 8);
+
+			// === CORNER DECORATIONS ===
+			int cornerSize = (int)(16 * totalScale);
+			int cornerThickness = 4;
+			float cornerPulse = 0.7f + 0.3f * (float)System.Math.Sin(time * 7.0f);
+			int cornerAlpha = (int)(200 * cornerPulse);
+			g.setColor(0xFFFF00 | (cornerAlpha << 24));
+
+			int[,] corners = {
+		{centerX - scaledWidth/2 - 3, centerY - scaledHeight/2 - 3},
+		{centerX + scaledWidth/2 + 3, centerY - scaledHeight/2 - 3},
+		{centerX - scaledWidth/2 - 3, centerY + scaledHeight/2 + 3},
+		{centerX + scaledWidth/2 + 3, centerY + scaledHeight/2 + 3}
+	};
+
+			for (int i = 0; i < 4; i++)
+			{
+				int x = corners[i, 0];
+				int y = corners[i, 1];
+				int xDir = (i % 2 == 0) ? 1 : -1;
+				int yDir = (i < 2) ? 1 : -1;
+
+				g.fillRect(x, y, cornerSize * xDir, cornerThickness);
+				g.fillRect(x, y, cornerThickness * xDir, cornerSize * yDir);
+			}
+
+			// === WARNING TRIANGLE ===
+			int triangleX = centerX - scaledWidth / 2 - 45;
+			int triangleY = centerY;
+			float triangleScale = totalScale * tertiaryPulse;
+			int triangleSize = (int)(28 * triangleScale);
+
+			float triangleBreath = 0.8f + 0.4f * (float)System.Math.Sin(time * 3.0f);
+			int triangleAlpha = (int)(200 * triangleBreath);
+
+			for (int glowRadius = 5; glowRadius > 0; glowRadius--)
+			{
+				int glowAlpha = 30 - glowRadius * 4;
+				g.setColor(0xFFFF00 | (glowAlpha << 24));
+
+				int glowSize = triangleSize + glowRadius * 3;
+				for (int y = -glowSize / 2; y <= glowSize / 2; y++)
+				{
+					int width = System.Math.Abs(y) < glowSize / 2 ? (glowSize - System.Math.Abs(y * 2)) : 0;
+					if (width > 0)
+						g.fillRect(triangleX - width / 2, triangleY + y, width, 1);
+				}
+			}
+
+			g.setColor(0xFFFF00 | (triangleAlpha << 24));
+			for (int y = -triangleSize / 2; y <= triangleSize / 2; y++)
+			{
+				int width = triangleSize - System.Math.Abs(y);
+				if (width > 0)
+					g.fillRect(triangleX - width / 2, triangleY + y, width, 1);
+			}
+
+			g.setColor(0x000000);
+			g.drawLine(triangleX, triangleY - triangleSize / 2,
+					   triangleX - triangleSize / 2, triangleY + triangleSize / 2);
+			g.drawLine(triangleX, triangleY - triangleSize / 2,
+					   triangleX + triangleSize / 2, triangleY + triangleSize / 2);
+			g.drawLine(triangleX - triangleSize / 2, triangleY + triangleSize / 2,
+					   triangleX + triangleSize / 2, triangleY + triangleSize / 2);
+
+			float exclamationPulse = 0.8f + 0.2f * (float)System.Math.Sin(time * 8.0f);
+			int exclamationThickness = (int)(3 * exclamationPulse);
+
+			g.setColor(0x000000);
+			g.fillRect(triangleX - exclamationThickness / 2, triangleY - 12,
+					   exclamationThickness, 16);
+			g.fillRect(triangleX - exclamationThickness / 2, triangleY + 8,
+					   exclamationThickness, 4);
+
+			// === EDGE EFFECTS ===
+			double edgePulse = 0.4f + 0.6f * (0.5f + 0.5f * System.Math.Sin(time * 3.0f));
+			int edgeAlpha = (int)(120 * edgePulse);
+			g.setColor(0xFF0000 | (edgeAlpha << 24));
+
+			int edgeThickness = (int)(4 + 2 * System.Math.Sin(time * 4.0f));
+			g.fillRect(0, 0, GameCanvas.w, edgeThickness);
+			g.fillRect(0, GameCanvas.h - edgeThickness, GameCanvas.w, edgeThickness);
+			g.fillRect(0, 0, edgeThickness, GameCanvas.h);
+			g.fillRect(GameCanvas.w - edgeThickness, 0, edgeThickness, GameCanvas.h);
+
+			int dotSize = (int)(6 + 2 * System.Math.Sin(time * 5.0f));
+			g.setColor(0xFFFF00 | (edgeAlpha << 24));
+			int[,] dotPositions = {
+		{10, 10}, {GameCanvas.w - 10, 10},
+		{10, GameCanvas.h - 10}, {GameCanvas.w - 10, GameCanvas.h - 10}
+	};
+			for (int i = 0; i < dotPositions.GetLength(0); i++)
+			{
+				int posX = dotPositions[i, 0];
+				int posY = dotPositions[i, 1];
+				g.fillRect(posX - dotSize / 2, posY - dotSize / 2, dotSize, dotSize);
+			}
+			// === BIG DIAGONAL STRIPES - FULL PANEL ===
+			g.setClip(centerX - scaledWidth / 2, centerY - scaledHeight / 2,
+					scaledWidth, scaledHeight);
+
+			g.setColor((dynamicRed << 16) | (60 << 24)); // đỏ trong suốt, alpha nhẹ
+			int stripeWidth = 6;   // sọc mảnh hơn
+			int stripeSpacing = 18;  // khoảng cách hẹp hơn => nhiều sọc hơn
+			float stripeOffset = (time * 60) % stripeSpacing;
+
+			// Phóng to diện tích vẽ ra gấp đôi panel để không bị hụt
+			int drawWidth = scaledWidth * 2;
+			int drawHeight = scaledHeight * 2;
+
+			for (int x = -drawHeight; x < drawWidth; x += stripeSpacing)
+			{
+				// stripe nghiêng 45°: đi xuyên từ trên trái xuống dưới phải
+				for (int w = 0; w < stripeWidth; w++)
+				{
+					g.drawLine(centerX - drawWidth / 2 + x + w + (int)stripeOffset,
+							centerY - drawHeight / 2,
+							centerX - drawWidth / 2 + x + w + drawHeight,
+							centerY + drawHeight / 2);
+				}
+			}
+
+			// === TEXT ===
+			String dangerText = GameCanvas.dangerMessage;
+			float textPulse = 0.6f + 0.4f * (float)System.Math.Sin(time * 6.0f);
+			int textRed = 255;
+			int textGreen = (int)(150 * textPulse);
+			int textBlue = (int)(50 * textPulse);
+			int textColor = (textRed << 16) | (textGreen << 8) | textBlue;
+
+			g.setColor(textColor);
+			mFont.tahoma_7_white.drawString(g, dangerText, centerX, centerY - 8, mFont.CENTER);
+
+			// Reset clip lại màn hình
+			g.setClip(0, 0, GameCanvas.w, GameCanvas.h);
+
+		}
+
 	}
 
 	private void PaintEditButton(mGraphics g)
@@ -2503,7 +2722,19 @@ public class ModFunc : IActionListener
 			Rms.saveRMSInt("logogif", 1);
 		}
 	}
-
+	public static void changeStatusThongBaoDB()
+	{
+		if (isThongBaoDB)
+		{
+			isThongBaoDB = false;
+			Rms.saveRMSInt("isThongBaoDB", 0);
+		}
+		else
+		{
+			isThongBaoDB = true;
+			Rms.saveRMSInt("isThongBaoDB", 1);
+		}
+	}
 	public static Npc GetNpcByTempId(int tempId)
 	{
 		for (int i = 0; i < GameScr.vNpc.size(); i++)
@@ -2522,7 +2753,7 @@ public class ModFunc : IActionListener
 		imgLogoBig = GameCanvas.loadImage("/logoNormal/1.png");
 		if (imgLogoBig == null)
 		{
-				GameScr.info1.addInfo("Không thể load logo!", 0);
+			GameScr.info1.addInfo("Không thể load logo!", 0);
 			isLogo = false;
 			Rms.saveRMSInt("logo", 0);
 		}

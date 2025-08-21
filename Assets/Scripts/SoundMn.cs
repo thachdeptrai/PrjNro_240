@@ -271,7 +271,7 @@ public class SoundMn
 		{
 			return;
 		}
-		(bool, string)[][] modFuncByTab = new(bool, string)[4][]
+		(bool, string)[][] modFuncByTab = new (bool, string)[4][]
 		{
 			new(bool, string)[5]
 			{
@@ -297,12 +297,13 @@ public class SoundMn
 				(ModFunc.isInventory, ModFunc.strInventoryOFF),
 				(ModFunc.isEffectInven, ModFunc.strEffectOff)
 			},
-			new(bool, string)[4]
+			new(bool, string)[5]
 			{
 				(ModFunc.GI().isIntroOff, ModFunc.strIntroOff),
 				(ModFunc.GiamDungLuong, ModFunc.strGiamDungLuong),
 				(ModFunc.isEditButton, ModFunc.strEditButton),
-				(ModFunc.isFilterItem, "Lọc đồ")
+				(ModFunc.isFilterItem, "Lọc đồ"),
+				(ModFunc.isThongBaoDB, "Hiển Thị Thông Báo Đặc Biệt")
 			}
 		};
 		int currentTab = GameCanvas.panel.currentTabIndex;

@@ -1427,7 +1427,7 @@ public class Char : IMapObject
 		{
 			clevel = strLevel.Length - 1;
 		}
-		string text = strLevel[clevel] + "+" + cLevelPercent / 100.0 + "." + cLevelPercent % 100.0 + "%";
+		string text = strLevel[clevel] + "+" + System.Math.Round(cLevelPercent / 100.0) + "." + System.Math.Round(cLevelPercent % 100.0) + "%";
 		if (text.Length > 23 && text.IndexOf("cấp ") >= 0)
 		{
 			text = Res.replace(text, "cấp ", "c");

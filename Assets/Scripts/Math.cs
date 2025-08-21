@@ -17,7 +17,6 @@ public class Math
 		}
 		return y;
 	}
-
 	public static int pow(int data, int x)
 	{
 		int num = 1;

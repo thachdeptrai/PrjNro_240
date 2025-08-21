@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameCanvas : IActionListener
 {
+	public static string dangerMessage;
+	public static int dangerTick;
+	public static long dangerStartTime;
+	public static bool isDangerActive;
+	public static int dangerDuration = 3000; // ms hiển thị
+	public static int dangerScale = 1; // bắt đầu nhỏ
+	public static int dangerAlpha = 0;       // bắt đầu trong suốt
 	public static bool isLoadRes = false;
 
 	public static long timeNow = 0L;
@@ -404,6 +411,15 @@ public class GameCanvas : IActionListener
 		}
 		initGame();
 	}
+	public static void showDanger(string msg)
+	{
+		isDangerActive = true;
+		dangerMessage = msg;
+		dangerStartTime = mSystem.currentTimeMillis();
+		dangerScale = 1;
+		dangerAlpha = 0;
+	}
+
 
 	public static string getPlatformName()
 	{
@@ -524,6 +540,28 @@ public class GameCanvas : IActionListener
 		{
 			startserverThongBao((string)messageServer.elementAt(0));
 			messageServer.removeElementAt(0);
+		}
+		if (isDangerActive)
+		{
+			long elapsed = mSystem.currentTimeMillis() - dangerStartTime;
+
+			if (elapsed < 500) // 0 → 0.5s: zoom in + fade in
+			{
+				dangerScale = (int)(0.5f + (elapsed / 500f) * 0.5f); // 0.5 → 1.0
+				dangerAlpha = (int)(elapsed / 500f * 255);   // 0 → 255
+			}
+			else if (elapsed > dangerDuration) // bắt đầu fade out
+			{
+				float t = (elapsed - dangerDuration) / 500f; // 0 → 1
+				dangerScale = (int)(1.0f + t * 0.2f);               // phóng to thêm chút khi tan biến
+				dangerAlpha = (int)(255 * (1 - t));          // 255 → 0
+				if (dangerAlpha <= 0) isDangerActive = false;
+			}
+			else
+			{
+				dangerScale = 1;
+				dangerAlpha = 255;
+			}
 		}
 		if (gameTick % 5 == 0)
 		{

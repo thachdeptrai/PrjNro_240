@@ -117,6 +117,30 @@ public class mGraphics
 			cachedTextures.Add(key, value);
 		}
 	}
+public  void drawScaledText(mGraphics g, string text, int x, int y, int align, int scale, int color)
+{
+    g.setColor(color);
+    for (int dx = -scale; dx <= scale; dx++)
+    {
+        for (int dy = -scale; dy <= scale; dy++)
+        {
+            if (dx == 0 && dy == 0) continue;
+            mFont.bigNumber_red.drawString(g, text, x + dx, y + dy, align);
+        }
+    }
+    mFont.bigNumber_red.drawString(g, text, x, y, align);
+}
+
+// Vẽ ảnh Danger với scale tùy chỉnh
+public void drawScaledImage(mGraphics g, Image img, int x, int y, float scale)
+{
+    int w = img.getWidth();
+    int h = img.getHeight();
+    int newW = (int)(w * scale);
+    int newH = (int)(h * scale);
+
+    g.drawRegion(img, 0, 0, w, h, 0, x - newW/2, y - newH/2, 0); // scale region
+}
 
 	public void translate(int tx, int ty)
 	{

@@ -175,6 +175,7 @@ public class Command
 			}
 			return;
 		}
+
 		if (caption != string.Empty)
 		{
 			if (type == 1)

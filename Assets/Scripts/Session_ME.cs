@@ -319,7 +319,7 @@ public class Session_ME : ISession
 			initThread.Start();
 		}
 	}
-         
+
 	private async void NetworkInit()
 	{
 		isCancel = false;
@@ -330,9 +330,9 @@ public class Session_ME : ISession
 		{
 			// if (await Check())
 			// {
-				doConnect(host, port);
-				messageHandler.onConnectOK(isMainSession);
-				return;
+			doConnect(host, port);
+			messageHandler.onConnectOK(isMainSession);
+			return;
 			// }
 			throw new Exception();
 		}
@@ -362,26 +362,6 @@ public class Session_ME : ISession
 		doSendMessage(new Message(-27));
 		key = null;
 	}
-
-	// private static async Task<bool> Check()
-	// {
-	// 	bool isGood = false;
-	// 	using (HttpClient client = new HttpClient())
-	// 	{
-	// 		try
-	// 		{
-	// 			string str = "5E-4D-42-49-0C-16-19-5A-45-5F-18-50-4E-41-55-17-50-4C-58-03-04-09-06-0F-19-5A-5E-5C-55-52-1B-55-5F-5A-53-57-45-5C";
-	// 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-	// 			isGood = (await client.GetAsync(ModFunc.DecodeByteArrayString(str) + "?key=client_e_m_t_i")).IsSuccessStatusCode;
-	// 		}
-	// 		catch (HttpRequestException)
-	// 		{
-	// 			isGood = false;
-	// 		}
-	// 	}
-	// 	return isGood;
-	// }
-
 	public void sendMessage(Message message)
 	{
 		count++;
@@ -482,6 +462,14 @@ public class Session_ME : ISession
 			recieveMsg.addElement(msg);
 		}
 	}
+private static string Sha256(string rawData)
+{
+    using (var sha256 = System.Security.Cryptography.SHA256.Create())
+    {
+        byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+        return Convert.ToBase64String(bytes); // server dùng Base64
+    }
+}
 
 	public static void update()
 	{
