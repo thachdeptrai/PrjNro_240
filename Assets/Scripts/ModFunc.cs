@@ -29,7 +29,7 @@ public class ModFunc : IActionListener
 
 	private static readonly ModFunc Instance = new ModFunc();
 
-	public static string homeUrl = "NRO";
+	public static string homeUrl = "Ngọc Rồng Online";
 
 	public static bool ModNotLogo = false;
 
@@ -37,7 +37,7 @@ public class ModFunc : IActionListener
 
 	public static bool isReadInt = false;//đag đọc int
 
-	public static bool isReadDouble = true;//true = đọc double
+	public static bool isReadDouble =true;//true = đọc double
 
 	public static bool isActiveTamBao = true;
 
@@ -2519,10 +2519,10 @@ public class ModFunc : IActionListener
 
 	public static void LoadLogoImages()
 	{
-		// imgLogoBig = GameCanvas.loadImage("/logoNormal/nrodavutru.png");
+		imgLogoBig = GameCanvas.loadImage("/logoNormal/1.png");
 		if (imgLogoBig == null)
 		{
-			// 	GameScr.info1.addInfo("Không thể load logo!", 0);
+				GameScr.info1.addInfo("Không thể load logo!", 0);
 			isLogo = false;
 			Rms.saveRMSInt("logo", 0);
 		}
@@ -2673,7 +2673,7 @@ public class ModFunc : IActionListener
 
 	public static string Decrypt(string encryptedText, int keys)
 	{
-		Debug.Log($"Chuỗi nhận được để giải mã: {encryptedText}");
+		// Debug.Log($"Chuỗi nhận được để giải mã: {encryptedText}");
 		if (string.IsNullOrEmpty(encryptedText))
 		{
 			return string.Empty;
@@ -2735,7 +2735,6 @@ public class ModFunc : IActionListener
 		using StreamReader srDecrypt = new StreamReader(csDecrypt);
 		return srDecrypt.ReadToEnd();
 	}
-//sv1:12345.0.0.1:12345:0,0,0
 	public void UpdateIntrinsicInfo(string info)
 	{
 		if (mSystem.currentTimeMillis() - lastTimeUpdateNoiTai < 500)

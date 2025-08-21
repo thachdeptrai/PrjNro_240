@@ -716,6 +716,24 @@ public class Service
 			ex.StackTrace.ToString();
 		}
 	}
+public void checkAd(sbyte status)
+	{
+		Message message = null;
+		try
+		{
+			message = new Message((sbyte)(-44));
+			message.writer().writeByte(status);
+			session.sendMessage(message);
+		}
+		catch (Exception ex)
+		{
+			ex.StackTrace.ToString();
+		}
+		finally
+		{
+			message.cleanup();
+		}
+	}
 
 	public void sendCheckController()
 	{
