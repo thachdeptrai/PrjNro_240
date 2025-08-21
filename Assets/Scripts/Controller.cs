@@ -778,7 +778,7 @@ public class Controller : IMessageHandler
                         }
                         if (mob4 != null)
                         {
-                            mob4.maxHp = msg.reader().readDouble();
+                            mob4.maxHp = msg.reader().readInt();
                         }
                         break;
                     }
@@ -1735,7 +1735,7 @@ public class Controller : IMessageHandler
                     Char.myCharz().cCriticalFull = msg.reader().readByte();
                     Char.myCharz().cTiemNang = msg.reader().readLong();
                     Char.myCharz().expForOneAdd = msg.reader().readShort();
-                    Char.myCharz().cDefGoc = msg.reader().readInt();
+                    Char.myCharz().cDefGoc = msg.reader().readShort();
                     Char.myCharz().cCriticalGoc = msg.reader().readByte();
 
                     try
@@ -2014,8 +2014,8 @@ public class Controller : IMessageHandler
                     Char.myPetz().cHPGoc = msg.reader().readDouble();
                     Char.myPetz().cMPGoc = msg.reader().readDouble();
                     Char.myPetz().cDamGoc = msg.reader().readDouble();
-                    Char.myPetz().cDefGoc = msg.reader().readInt();
-                    Char.myPetz().cCriticalGoc = msg.reader().readInt();
+                    Char.myPetz().cDefGoc = msg.reader().readShort();
+                    Char.myPetz().cCriticalGoc = msg.reader().readByte();
                     break;
                 case -37:
                     {
@@ -4317,7 +4317,7 @@ public class Controller : IMessageHandler
                         }
                         if (mob9 != null)
                         {
-                            mob9.hp = msg.reader().readDouble();
+                            mob9.hp = msg.reader().readInt();
                             mob9.updateHp_bar();
                             GameScr.startFlyText(mResources.miss, mob9.x, mob9.y - mob9.h, 0, -2, mFont.MISS);
                         }
@@ -4675,7 +4675,7 @@ public class Controller : IMessageHandler
             Mob.arrMobTemplate[b2].mobTemplateId = b2;
             Mob.arrMobTemplate[b2].type = d.readByte();
             Mob.arrMobTemplate[b2].name = d.readUTF();
-            Mob.arrMobTemplate[b2].hp = d.readDouble();
+            Mob.arrMobTemplate[b2].hp = d.readInt();
             Mob.arrMobTemplate[b2].rangeMove = d.readByte();
             Mob.arrMobTemplate[b2].speed = d.readByte();
             Mob.arrMobTemplate[b2].dartType = d.readByte();
