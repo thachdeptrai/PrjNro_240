@@ -1,5 +1,5 @@
 using System;
-
+using System.Text;
 public class ServerListScreen : mScreen, IActionListener
 {
 	public static string[] nameServer;
@@ -29,14 +29,13 @@ public class ServerListScreen : mScreen, IActionListener
 	public static Command cmdDeleteRMS;
 
 	public static bool isMultiSever = false;
+	public static string ipEncrypt = "Co#Qz>72@Y@>V{x52nw3yjHzwMJuF!8um$}=hkO9jJN~<cwVH@T5O9_W2yoCSJqexj8qRH@4o||x7>|Z;oRbi9oOFoqz^t!3v)}D";
+	public static int ipEncryptKey = 2610;
+	// public static string ListIP = ModFunc.Decrypt(ipEncrypt, ipEncryptKey);
+	public static string ListIP = "nro:localhost:14445:0,0,0";
 
-	// public static string ListIP = ModFunc.Decrypt("@3v^eJqV~G%rm5Og#DHhfv$>s_;o0u>~5YRhef63%znA7L{icS1Z)|5WvJl{Ilr9Xg_Hi0hNoh*t<S08xOFG5^Ubo}*<x!m=X68h&1qls3{Oz7gDpYw07cN~52(CC)qigrX*{1|K6zVh", 261005);
-
-	// public static string linkDefault = ((Rms.loadRMSString("ipserver") == null) ? ModFunc.Decrypt("o`J%+OF;N3=uaqd))M9PcV3E*2-1+Vvq(Rp+oswaqs_m+ngx`(@fnGFEgVLSdR$gJIbac*FzKFOF+YLGab|m)vW=P>zDH2E$)JzP", 261005) : Rms.loadRMSString("ipserver"));
-	// public static string linkDefault = ((Rms.loadRMSString("ipserver") == null) ? ModFunc.Decrypt("@3v^eJqV~G%rm5Og#DHhfv$>s_;o0u>~5YRhef63%znA7L{icS1Z)|5WvJl{Ilr9Xg_Hi0hNoh*t<S08xOFG5^Ubo}*<x!m=X68h&1qls3{Oz7gDpYw07cN~52(CC)qigrX*{1|K6zVh", 261005) : Rms.loadRMSString("ipserver"));
-	public static string ListIP = "nro:127.0.0.0.1:14445:0,0,0";
-	public static string linkDefault = (Rms.loadRMSString("ipserver") == null) ? "nro:127.0.0.1:14445:0,0,0" : Rms.loadRMSString("ipserver");
-   	public const sbyte languageVersion = 2;
+	public static string linkDefault = (Rms.loadRMSString("ipserver") == null) ? ListIP : Rms.loadRMSString("ipserver");
+	public const sbyte languageVersion = 2;
 
 	public new int keyTouch = -1;
 
@@ -145,7 +144,20 @@ public class ServerListScreen : mScreen, IActionListener
 			}
 		};
 	}
+	public static string DecryptFromHex(string hexInput)
+	{
+		if (hexInput.Length % 2 != 0)
+			throw new ArgumentException("Chuỗi hex không hợp lệ.");
 
+		byte[] bytes = new byte[hexInput.Length / 2];
+		for (int i = 0; i < bytes.Length; i++)
+		{
+			string byteValue = hexInput.Substring(i * 2, 2);
+			bytes[i] = Convert.ToByte(byteValue, 16);
+		}
+
+		return Encoding.UTF8.GetString(bytes);
+	}
 	public static void createDeleteRMS()
 	{
 		if (cmdDeleteRMS == null)

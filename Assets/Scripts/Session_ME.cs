@@ -314,7 +314,7 @@ public class Session_ME : ISession
 			this.port = port;
 			getKeyComplete = false;
 			close();
-			Debug.Log("host: " + host + ":" + port);
+			// Debug.Log("host: " + host + ":" + port);
 			initThread = new Thread(NetworkInit);
 			initThread.Start();
 		}

@@ -1735,7 +1735,7 @@ public class Controller : IMessageHandler
                     Char.myCharz().cCriticalFull = msg.reader().readByte();
                     Char.myCharz().cTiemNang = msg.reader().readLong();
                     Char.myCharz().expForOneAdd = msg.reader().readShort();
-                    Char.myCharz().cDefGoc = msg.reader().readInt();
+                    Char.myCharz().cDefGoc = msg.reader().readShort();
                     Char.myCharz().cCriticalGoc = msg.reader().readByte();
 
                     try
@@ -2014,8 +2014,8 @@ public class Controller : IMessageHandler
                     Char.myPetz().cHPGoc = msg.reader().readDouble();
                     Char.myPetz().cMPGoc = msg.reader().readDouble();
                     Char.myPetz().cDamGoc = msg.reader().readDouble();
-                    Char.myPetz().cDefGoc = msg.reader().readInt();
-                    Char.myPetz().cCriticalGoc = msg.reader().readInt();
+                    Char.myPetz().cDefGoc = msg.reader().readShort();
+                    Char.myPetz().cCriticalGoc = msg.reader().readByte();
                     break;
                 case -37:
                     {
@@ -2441,172 +2441,180 @@ public class Controller : IMessageHandler
                         }
                         break;
                     }
-                case -44:
-                    {
-                        bool flag5 = false;
-                        if (GameCanvas.w > 2 * Panel.WIDTH_PANEL)
-                        {
-                            flag5 = true;
-                        }
-                        sbyte type_shop = msg.reader().readByte();
-                        int tabSz = msg.reader().readUnsignedByte();
-                        Char.myCharz().arrItemShop = new Item[tabSz][];
-                        GameCanvas.panel.shopTabName = new string[tabSz + ((!flag5) ? 1 : 0)][];
-                        for (int num58 = 0; num58 < GameCanvas.panel.shopTabName.Length; num58++)
-                        {
-                            GameCanvas.panel.shopTabName[num58] = new string[2];
-                        }
-                        if (type_shop == 2)
-                        {
-                            GameCanvas.panel.maxPageShop = new int[tabSz];
-                            GameCanvas.panel.currPageShop = new int[tabSz];
-                        }
-                        if (!flag5)
-                        {
-                            GameCanvas.panel.shopTabName[tabSz] = mResources.inventory;
-                        }
-                        for (int i = 0; i < tabSz; i++)
-                        {
-                            string[] name = Res.split(msg.reader().readUTF(), "\n", 0);
-                            if (type_shop == 2)
-                            {
-                                GameCanvas.panel.maxPageShop[i] = msg.reader().readUnsignedByte();
-                            }
-                            if (name.Length == 2)
-                            {
-                                GameCanvas.panel.shopTabName[i] = name;
-                            }
-                            if (name.Length == 1)
-                            {
-                                GameCanvas.panel.shopTabName[i][0] = name[0];
-                                GameCanvas.panel.shopTabName[i][1] = string.Empty;
-                            }
-                            int itemSz = msg.reader().readUnsignedByte();
-                            Char.myCharz().arrItemShop[i] = new Item[itemSz];
-                            Panel.strWantToBuy = mResources.say_wat_do_u_want_to_buy;
-                            if (type_shop == 1)
-                            {
-                                Panel.strWantToBuy = mResources.say_wat_do_u_want_to_buy2;
-                            }
-                            for (int num61 = 0; num61 < itemSz; num61++)
-                            {
-                                short itemId = msg.reader().readShort();
-                                if (itemId == -1)
-                                {
-                                    continue;
-                                }
-                                Char.myCharz().arrItemShop[i][num61] = new Item();
-                                Char.myCharz().arrItemShop[i][num61].template = ItemTemplates.get(itemId);
-                                Res.outz("name " + i + " = " + Char.myCharz().arrItemShop[i][num61].template.name + " id templat= " + Char.myCharz().arrItemShop[i][num61].template.id);
-                                if (type_shop == 8)
-                                {
-                                    Char.myCharz().arrItemShop[i][num61].buyCoin = msg.reader().readInt();
-                                    Char.myCharz().arrItemShop[i][num61].buyGold = msg.reader().readInt();
-                                    Char.myCharz().arrItemShop[i][num61].quantity = msg.reader().readInt();
-                                }
-                                else if (type_shop == 4) // Reward
-                                {
-                                    Char.myCharz().arrItemShop[i][num61].reason = msg.reader().readUTF();
-                                }
-                                else if (type_shop == 0) // Normal
-                                {
-                                    Char.myCharz().arrItemShop[i][num61].buyCoin = msg.reader().readInt();
-                                    Char.myCharz().arrItemShop[i][num61].buyGold = msg.reader().readInt();
+			case -44:
+			{
+				bool flag6 = false;
+				if (GameCanvas.w > 2 * Panel.WIDTH_PANEL)
+				{
+					flag6 = true;
+				}
+				sbyte b32 = msg.reader().readByte();
+				int num65 = msg.reader().readUnsignedByte();
+				Char.myCharz().arrItemShop = new Item[num65][];
+				GameCanvas.panel.shopTabName = new string[num65 + ((!flag6) ? 1 : 0)][];
+				for (int num66 = 0; num66 < GameCanvas.panel.shopTabName.Length; num66++)
+				{
+					GameCanvas.panel.shopTabName[num66] = new string[2];
+				}
+				if (b32 == 2)
+				{
+					GameCanvas.panel.maxPageShop = new int[num65];
+					GameCanvas.panel.currPageShop = new int[num65];
+				}
+				if (!flag6)
+				{
+					GameCanvas.panel.shopTabName[num65] = mResources.inventory;
+				}
+				for (int num67 = 0; num67 < num65; num67++)
+				{
+					string[] array5 = Res.split(msg.reader().readUTF(), "\n", 0);
+					if (b32 == 2)
+					{
+						GameCanvas.panel.maxPageShop[num67] = msg.reader().readUnsignedByte();
+					}
+					if (array5.Length == 2)
+					{
+						GameCanvas.panel.shopTabName[num67] = array5;
+					}
+					if (array5.Length == 1)
+					{
+						GameCanvas.panel.shopTabName[num67][0] = array5[0];
+						GameCanvas.panel.shopTabName[num67][1] = string.Empty;
+					}
+					int num68 = msg.reader().readUnsignedByte();
+					Char.myCharz().arrItemShop[num67] = new Item[num68];
+					Panel.strWantToBuy = mResources.say_wat_do_u_want_to_buy;
+					if (b32 == 1)
+					{
+						Panel.strWantToBuy = mResources.say_wat_do_u_want_to_buy2;
+					}
+					for (int num69 = 0; num69 < num68; num69++)
+					{
+						short num70 = msg.reader().readShort();
+						if (num70 == -1)
+						{
+							continue;
+						}
+						Char.myCharz().arrItemShop[num67][num69] = new Item();
+						Char.myCharz().arrItemShop[num67][num69].template = ItemTemplates.get(num70);
+						Res.outz("name " + num67 + " = " + Char.myCharz().arrItemShop[num67][num69].template.name + " id templat= " + Char.myCharz().arrItemShop[num67][num69].template.id);
+						if (b32 == 8)
+						{
+							Char.myCharz().arrItemShop[num67][num69].buyCoin = msg.reader().readInt();
+							Char.myCharz().arrItemShop[num67][num69].buyGold = msg.reader().readInt();
+							Char.myCharz().arrItemShop[num67][num69].quantity = msg.reader().readInt();
+						}
+						else if (b32 == 4)
+						{
+							Char.myCharz().arrItemShop[num67][num69].reason = msg.reader().readUTF();
+						}
+						else if (b32 == 0)
+						{
+							Char.myCharz().arrItemShop[num67][num69].buyCoin = msg.reader().readInt();
+							Char.myCharz().arrItemShop[num67][num69].buyGold = msg.reader().readInt();
+						}
+						else if (b32 == 1)
+						{
+							Char.myCharz().arrItemShop[num67][num69].powerRequire = msg.reader().readLong();
+						}
+						else if (b32 == 2)
+						{
+							Char.myCharz().arrItemShop[num67][num69].itemId = msg.reader().readShort();
+							Char.myCharz().arrItemShop[num67][num69].buyCoin = msg.reader().readInt();
+							Char.myCharz().arrItemShop[num67][num69].buyGold = msg.reader().readInt();
+							Char.myCharz().arrItemShop[num67][num69].buyType = msg.reader().readByte();
+							Char.myCharz().arrItemShop[num67][num69].quantity = msg.reader().readInt();
+							Char.myCharz().arrItemShop[num67][num69].isMe = msg.reader().readByte();
+						}
+						else if (b32 == 3)
+						{
+							Char.myCharz().arrItemShop[num67][num69].isBuySpec = true;
+							Char.myCharz().arrItemShop[num67][num69].iconSpec = msg.reader().readShort();
+							Char.myCharz().arrItemShop[num67][num69].buySpec = msg.reader().readInt();
+						}
+						int num71 = msg.reader().readUnsignedByte();
+						if (num71 != 0)
+						{
+									
+                                    
 
-                                }
-                                else if (type_shop == 1)
-                                {
-                                    Char.myCharz().arrItemShop[i][num61].powerRequire = msg.reader().readLong();
-                                }
-                                else if (type_shop == 2) // Ky gui
-                                {
-                                    Char.myCharz().arrItemShop[i][num61].itemId = msg.reader().readShort();
-                                    Char.myCharz().arrItemShop[i][num61].buyCoin = msg.reader().readInt();
-                                    Char.myCharz().arrItemShop[i][num61].buyGold = msg.reader().readInt();
-                                    Char.myCharz().arrItemShop[i][num61].buyType = msg.reader().readByte();
-                                    Char.myCharz().arrItemShop[i][num61].quantity = msg.reader().readInt();
-                                    Char.myCharz().arrItemShop[i][num61].isMe = msg.reader().readByte();
-                                }
-                                else if (type_shop == 3) // Special
-                                {
-                                    Char.myCharz().arrItemShop[i][num61].isBuySpec = true;
-                                    Char.myCharz().arrItemShop[i][num61].iconSpec = msg.reader().readShort();
-                                    Char.myCharz().arrItemShop[i][num61].buySpec = msg.reader().readInt();
-                                }
-                                int optSz = msg.reader().readUnsignedByte();
-                                if (optSz != 0)
-                                {
-                                    Char.myCharz().arrItemShop[i][num61].itemOption = new ItemOption[optSz];
-                                    for (int j = 0; j < Char.myCharz().arrItemShop[i][num61].itemOption.Length; j++)
+                                    Char.myCharz().arrItemShop[num67][num69].itemOption = new ItemOption[num71];
+							//List<string> t = new List<string>();
+							for (int num72 = 0; num72 < Char.myCharz().arrItemShop[num67][num69].itemOption.Length; num72++)
+							{
+								int num73 = msg.reader().readUnsignedByte();
+								int param5 = msg.reader().readUnsignedShort();
+								if (num73 != -1)
+								{
+									Char.myCharz().arrItemShop[num67][num69].itemOption[num72] = new ItemOption(num73, param5);
+										//	t.Add("["+Char.myCharz().arrItemShop[num67][num69].itemOption[num72].getOptionString()+",optionId="+num73+",param="+param5+"]");
+									Char.myCharz().arrItemShop[num67][num69].compare = GameCanvas.panel.getCompare(Char.myCharz().arrItemShop[num67][num69]);
+								}
+							}
+                                  /*  using (StreamWriter writer = new StreamWriter("D:\\ServerGame\\NroFull\\data\\vinh\\shop\\item.txt", true))
                                     {
-                                        int optId = msg.reader().readUnsignedByte();
-                                        int param = msg.reader().readUnsignedShort();
-                                        if (optId != -1)
-                                        {
-                                            Char.myCharz().arrItemShop[i][num61].itemOption[j] = new ItemOption(optId, param);
-                                            Char.myCharz().arrItemShop[i][num61].compare = GameCanvas.panel.getCompare(Char.myCharz().arrItemShop[i][num61]);
-                                        }
-                                    }
+                                        writer.WriteLine(Char.myCharz().arrItemShop[num67][num69].template.name+"|"+ Char.myCharz().arrItemShop[num67][num69].reason + "|"+ string.Join("|",t));
+                                    }*/
                                 }
-                                sbyte isNew = msg.reader().readByte();
-                                Char.myCharz().arrItemShop[i][num61].newItem = isNew != 0;
-                                sbyte isCT = msg.reader().readByte();
-                                if (isCT == 1)
-                                {
-                                    int headTemp = msg.reader().readShort();
-                                    int bodyTemp = msg.reader().readShort();
-                                    int legTemp = msg.reader().readShort();
-                                    int bagTemp = msg.reader().readShort();
-                                    Char.myCharz().arrItemShop[i][num61].setPartTemp(headTemp, bodyTemp, legTemp, bagTemp);
-                                }
-                            }
-                        }
-                        if (flag5)
-                        {
-                            if (type_shop != 2)
-                            {
-                                GameCanvas.panel2 = new Panel();
-                                GameCanvas.panel2.tabName[7] = new string[1][] { new string[1] { string.Empty } };
-                                GameCanvas.panel2.setTypeBodyOnly();
-                                GameCanvas.panel2.show();
-                            }
-                            else
-                            {
-                                GameCanvas.panel2 = new Panel();
-                                GameCanvas.panel2.setTypeKiGuiOnly();
-                                GameCanvas.panel2.show();
-                            }
-                        }
-                        GameCanvas.panel.tabName[1] = GameCanvas.panel.shopTabName;
-                        if (type_shop == 2)
-                        {
-                            string[][] array5 = GameCanvas.panel.tabName[1];
-                            if (flag5)
-                            {
-                                GameCanvas.panel.tabName[1] = new string[4][]
-                                {
-                            array5[0],
-                            array5[1],
-                            array5[2],
-                            array5[3]
-                                };
-                            }
-                            else
-                            {
-                                GameCanvas.panel.tabName[1] = new string[5][]
-                                {
-                            array5[0],
-                            array5[1],
-                            array5[2],
-                            array5[3],
-                            array5[4]
-                                };
-                            }
-                        }
-                        GameCanvas.panel.setTypeShop(type_shop);
-                        GameCanvas.panel.show();
-                        break;
-                    }
+						sbyte b33 = msg.reader().readByte();
+						Char.myCharz().arrItemShop[num67][num69].newItem = ((b33 != 0) ? true : false);
+						sbyte b34 = msg.reader().readByte();
+						if (b34 == 1)
+						{
+							int headTemp = msg.reader().readShort();
+							int bodyTemp = msg.reader().readShort();
+							int legTemp = msg.reader().readShort();
+							int bagTemp = msg.reader().readShort();
+							Char.myCharz().arrItemShop[num67][num69].setPartTemp(headTemp, bodyTemp, legTemp, bagTemp);
+						}
+					}
+				}
+				if (flag6)
+				{
+					if (b32 != 2)
+					{
+						GameCanvas.panel2 = new Panel();
+						GameCanvas.panel2.tabName[7] = new string[1][] { new string[1] { string.Empty } };
+						GameCanvas.panel2.setTypeBodyOnly();
+						GameCanvas.panel2.show();
+					}
+					else
+					{
+						GameCanvas.panel2 = new Panel();
+						GameCanvas.panel2.setTypeKiGuiOnly();
+						GameCanvas.panel2.show();
+					}
+				}
+				GameCanvas.panel.tabName[1] = GameCanvas.panel.shopTabName;
+				if (b32 == 2)
+				{
+					string[][] array6 = GameCanvas.panel.tabName[1];
+					if (flag6)
+					{
+						GameCanvas.panel.tabName[1] = new string[4][]
+						{
+							array6[0],
+							array6[1],
+							array6[2],
+							array6[3]
+						};
+					}
+					else
+					{
+						GameCanvas.panel.tabName[1] = new string[5][]
+						{
+							array6[0],
+							array6[1],
+							array6[2],
+							array6[3],
+							array6[4]
+						};
+					}
+				}
+				GameCanvas.panel.setTypeShop(b32);
+				GameCanvas.panel.show();
+				break;
+			}
                 case -41:
                     {
                         sbyte b23 = msg.reader().readByte();
