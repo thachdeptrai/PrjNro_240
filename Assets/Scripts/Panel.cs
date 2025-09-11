@@ -11478,6 +11478,10 @@ public class Panel : IActionListener, IChatable
 					GameScr.info1.addInfo("Hiển thị nút không hỗ trợ trên PC", 0);
 				}
 				break;
+			case 5:
+				ModFunc.ChangeDataType();
+				SoundMn.gI().GetStrModFunc();
+				break;
 			}
 			break;
 		case 1:

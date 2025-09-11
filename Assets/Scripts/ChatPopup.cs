@@ -433,7 +433,7 @@ public class ChatPopup : Effect2, IActionListener
 			nMaxslot_duoi = maxStarSlot - nMaxslot_tren;
 			for (int j = 0; j < nMaxslot_tren; j++)
 			{
-				g.drawImage(Panel.imgMaxStar, num + num3 / 2 - nMaxslot_tren * 20 / 2 + j * 20 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 17, 3);
+				g.drawImage(Panel.imgMaxStar, num + num3 / 2 - nMaxslot_tren * 25 / 2 + j * 25 + mGraphics.getImageWidth(Panel.imgMaxStar), num2 + num4 - 17, 3);
 			}
 			for (int k = 0; k < nMaxslot_duoi; k++)
 			{

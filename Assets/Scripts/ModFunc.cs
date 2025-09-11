@@ -27,7 +27,7 @@ public class ModFunc : IActionListener
 		}
 	}
 
-	private static readonly ModFunc Instance = new ModFunc();
+	private static ModFunc Instance;
 
 	public static string homeUrl = "Ngọc Rồng Online";
 
@@ -35,9 +35,18 @@ public class ModFunc : IActionListener
 
 	public static bool ModNotLogoGif = false;
 
-	public static bool isReadInt = false;//đag đọc int
+	public enum DataType
+	{
+		Int = 0,
+		Double = 1,
+		Long = 2
+	}
 
-	public static bool isReadDouble =true;//true = đọc double
+	public static DataType currentDataType = DataType.Double;
+
+	public static bool isReadInt = true;//đag đọc int
+
+	public static bool isReadDouble = false;//true = đọc double
 
 	public static bool isActiveTamBao = true;
 
@@ -102,6 +111,8 @@ public class ModFunc : IActionListener
 	public bool isAutoVQMM;
 
 	public long lastVQMM;
+
+	public bool isQKeyPressed;
 
 	private long lastAutoAttack;
 
@@ -349,6 +360,8 @@ public class ModFunc : IActionListener
 
 	public static string strShowButton = "Hiện Nút Trợ Năng";
 
+	public static string strChangeType = "Change Type";
+
 	public static string strIntroOff = "Tắt Intro";
 
 	public static string strInventoryOFF = "Hiện Hành Trang Lưới";
@@ -431,7 +444,12 @@ public class ModFunc : IActionListener
 
 	public static ModFunc GI()
 	{
-		return Instance ?? new ModFunc();
+		if (Instance == null)
+		{
+			Instance = new ModFunc();
+			LoadDataTypeConfig(); // Load config khi khởi tạo
+		}
+		return Instance;
 	}
 
 	public void OpenMenu()
@@ -841,12 +859,12 @@ public class ModFunc : IActionListener
 			Thread.Sleep(1000);
 			return;
 		}
-		if (Input.GetKey(KeyCode.Q))
+		if (isQKeyPressed)
 		{
 			GameScr.info1.addInfo("Dừng bán vàng", 0);
 			return;
 		}
-		while (Char.myCharz().xu <= 60000000000L && !Input.GetKey(KeyCode.Q))
+		while (Char.myCharz().xu <= 60000000000L && !isQKeyPressed)
 		{
 			if (FindItemIndex(457) == -1)
 			{
@@ -1139,6 +1157,8 @@ public class ModFunc : IActionListener
 	public void Update()
 	{
 		UpdateTouch();
+		// Cập nhật trạng thái phím Q từ main thread
+		isQKeyPressed = Input.GetKey(KeyCode.Q);
 		long currentTime = mSystem.currentTimeMillis();
 		if (isPeanPet && currentTime - lastPeanPet >= 3000)
 		{
@@ -3211,6 +3231,84 @@ public class ModFunc : IActionListener
 			{
 				currentPage++;
 			}
+		}
+	}
+
+	// Hàm cập nhật trạng thái kiểu dữ liệu
+	public static void SetDataType(DataType dataType)
+	{
+		currentDataType = dataType;
+		switch (dataType)
+		{
+			case DataType.Int:
+				isReadInt = true;
+				isReadDouble = false;
+				break;
+			case DataType.Double:
+				isReadInt = false;
+				isReadDouble = true;
+				break;
+			case DataType.Long:
+				isReadInt = false;
+				isReadDouble = false;
+				break;
+		}
+		SaveDataTypeConfig();
+	}
+
+	// Hàm lưu config kiểu dữ liệu
+	public static void SaveDataTypeConfig()
+	{
+		Rms.saveRMSInt("dataType", (int)currentDataType);
+	}
+
+	// Hàm load config kiểu dữ liệu
+	public static void LoadDataTypeConfig()
+	{
+		int savedType = Rms.loadRMSInt("dataType");
+		if (savedType >= 0 && savedType <= 2)
+		{
+			currentDataType = (DataType)savedType;
+			// Cập nhật trạng thái mà không save lại
+			switch (currentDataType)
+			{
+				case DataType.Int:
+					isReadInt = true;
+					isReadDouble = false;
+					break;
+				case DataType.Double:
+					isReadInt = false;
+					isReadDouble = true;
+					break;
+				case DataType.Long:
+					isReadInt = false;
+					isReadDouble = false;
+					break;
+			}
+		}
+	}
+
+	// Hàm chuyển đổi kiểu dữ liệu (cycle through types)
+	public static void ChangeDataType()
+	{
+		DataType nextType = (DataType)(((int)currentDataType + 1) % 3);
+		SetDataType(nextType);
+		GameScr.info1.addInfo("Đã chuyển sang kiểu dữ liệu: " + GetDataTypeString(nextType), 0);
+	}
+
+	// Hàm lấy tên kiểu dữ liệu
+	public static string GetDataTypeString(DataType dataType)
+	{
+		switch (dataType)
+		{
+			case DataType.Int:
+				return "Int";
+			case DataType.Double:
+				return "Double";
+			case DataType.Long:
+				return "Long";
+			default:
+				return "Unknown";
 		}
 	}
 }

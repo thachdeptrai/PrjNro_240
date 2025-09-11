@@ -116,7 +116,6 @@ public class myReader
 		}
 		else if (ModFunc.isReadDouble)
 		{
-			// Debug.Log("đag đọc readDouble");
 			return readDouble2();
 		}
 		else

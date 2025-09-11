@@ -273,13 +273,14 @@ public class SoundMn
 		}
 		(bool, string)[][] modFuncByTab = new(bool, string)[4][]
 		{
-			new(bool, string)[5]
+			new(bool, string)[6]
 			{
 				(ModFunc.GI().isHighFps, ModFunc.strHighFps),
 				(ModFunc.GI().isUpdateZones, ModFunc.strUpdateZones),
 				(ModFunc.GI().showCharsInMap, ModFunc.strCharsInMap),
 				(ModFunc.GI().showInfoMe, ModFunc.strInfoMe),
-				(ModFunc.GI().isShowButton, ModFunc.strShowButton)
+				(ModFunc.GI().isShowButton, ModFunc.strShowButton),
+				(true, ModFunc.strChangeType + " (" + ModFunc.GetDataTypeString(ModFunc.currentDataType) + ")")
 			},
 			new(bool, string)[4]
 			{
