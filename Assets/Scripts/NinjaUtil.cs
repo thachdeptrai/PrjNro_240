@@ -109,7 +109,10 @@ public class NinjaUtil
 		}
 		return empty + "0" + timeRemainS;
 	}
-
+	public static string lamtronDouble(double a)
+	{
+		return getMoneysPower(a);
+	}
 	public static string getMoneys(double value)
 	{
 		double TRILLION = 1000000000.0;

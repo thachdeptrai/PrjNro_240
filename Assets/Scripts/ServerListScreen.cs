@@ -29,10 +29,10 @@ public class ServerListScreen : mScreen, IActionListener
 	public static Command cmdDeleteRMS;
 
 	public static bool isMultiSever = false;
-	public static string ipEncrypt = "Co#Qz>72@Y@>V{x52nw3yjHzwMJuF!8um$}=hkO9jJN~<cwVH@T5O9_W2yoCSJqexj8qRH@4o||x7>|Z;oRbi9oOFoqz^t!3v)}D";
-	public static int ipEncryptKey = 2610;
-	// public static string ListIP = ModFunc.Decrypt(ipEncrypt, ipEncryptKey);
-	public static string ListIP = "nro:localhost:14445:0,0,0";
+	public static string ipEncrypt = "NNW6nve@c&{JFEj3|x+#KF~17MG5VDI0?=fsX-C-p$Qc9BizaP7}vMT=7Y3fzTkbuNZC3Z8*=(N0#ATB";
+	public static int ipEncryptKey = 261005;
+	public static string ListIP = ModFunc.Decrypt(ipEncrypt, ipEncryptKey);
+	// public static string ListIP = "nro:sv3.nrosaitama.click:14445:0,0,0";
 
 	public static string linkDefault = (Rms.loadRMSString("ipserver") == null) ? ListIP : Rms.loadRMSString("ipserver");
 	public const sbyte languageVersion = 2;

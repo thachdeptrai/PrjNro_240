@@ -846,8 +846,8 @@ public class GameScr : mScreen, IChatable
 
 	public static void loadBg()
 	{
-		QuayTamBao.loadImage();
-		QuaNapTuan.LoadImage();
+		// QuayTamBao.loadImage();
+		// QuaNapTuan.LoadImage();
 		fra_PVE_Bar_0 = new FrameImage(mSystem.loadImage("/mainImage/i_pve_bar_0.png"), 6, 15);
 		fra_PVE_Bar_1 = new FrameImage(mSystem.loadImage("/mainImage/i_pve_bar_1.png"), 38, 21);
 		imgVS = mSystem.loadImage("/mainImage/i_vs.png");
@@ -4093,42 +4093,42 @@ public class GameScr : mScreen, IChatable
 		{
 			if (ModFunc.isActiveTamBao)
 			{
-				if (QuayTamBao.isTamBao)
-				{
-					QuayTamBao.doTamBao();
-					return;
-				}
-				if (GameCanvas.isPointerHoldIn(GameCanvas.w - 100, 0, 45, 45) && GameCanvas.isPointerJustRelease)
-				{
-					QuayTamBao.isTamBao = true;
-					QuaNapTuan.isNapTuan = false;
-					ModFunc.isShowMenuChat = false;
-					QuayTamBao.sendDataTamBao();
-					GameCanvas.clearAllPointerEvent();
-					return;
-				}
-			}
-			if (ModFunc.isActiveNapTuan)
-			{
-				if (GameCanvas.isPointerHoldIn(GameCanvas.w - 130, 0, imgNapTuan.getWidth(), imgNapTuan.getHeight()) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					QuaNapTuan.sendOpenUI();
-					QuaNapTuan.update();
-					return;
-				}
-				if (GameCanvas.isPointerHoldIn(GameCanvas.w - 273, GameCanvas.h - 40, QuaNapTuan.nhan.getWidth(), QuaNapTuan.nhan.getHeight()) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
-				{
-					QuaNapTuan.isNhan = true;
-					QuaNapTuan.update();
-					GameCanvas.clearAllPointerEvent();
-					return;
-				}
-				if (GameCanvas.isPointerHoldIn(GameCanvas.w - 110, 60, QuaNapTuan.btnExit.getWidth(), QuaNapTuan.btnExit.getHeight()) && GameCanvas.isPointerJustRelease)
-				{
-					QuaNapTuan.isNapTuan = false;
-					GameCanvas.clearAllPointerEvent();
-					return;
-				}
+			// 	if (QuayTamBao.isTamBao)
+			// 	{
+			// 		QuayTamBao.doTamBao();
+			// 		return;
+			// 	}
+			// 	if (GameCanvas.isPointerHoldIn(GameCanvas.w - 100, 0, 45, 45) && GameCanvas.isPointerJustRelease)
+			// 	{
+			// 		QuayTamBao.isTamBao = true;
+			// 		QuaNapTuan.isNapTuan = false;
+			// 		ModFunc.isShowMenuChat = false;
+			// 		QuayTamBao.sendDataTamBao();
+			// 		GameCanvas.clearAllPointerEvent();
+			// 		return;
+			// 	}
+			// }
+			// if (ModFunc.isActiveNapTuan)
+			// {
+			// 	if (GameCanvas.isPointerHoldIn(GameCanvas.w - 130, 0, imgNapTuan.getWidth(), imgNapTuan.getHeight()) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+			// 	{
+			// 		QuaNapTuan.sendOpenUI();
+			// 		QuaNapTuan.update();
+			// 		return;
+			// 	}
+			// 	if (GameCanvas.isPointerHoldIn(GameCanvas.w - 273, GameCanvas.h - 40, QuaNapTuan.nhan.getWidth(), QuaNapTuan.nhan.getHeight()) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
+			// 	{
+			// 		QuaNapTuan.isNhan = true;
+			// 		QuaNapTuan.update();
+			// 		GameCanvas.clearAllPointerEvent();
+			// 		return;
+			// 	}
+			// 	if (GameCanvas.isPointerHoldIn(GameCanvas.w - 110, 60, QuaNapTuan.btnExit.getWidth(), QuaNapTuan.btnExit.getHeight()) && GameCanvas.isPointerJustRelease)
+			// 	{
+			// 		QuaNapTuan.isNapTuan = false;
+			// 		GameCanvas.clearAllPointerEvent();
+			// 		return;
+			// 	}
 			}
 			if (GameCanvas.isPointerHoldIn(0, 0, 60, 50) && GameCanvas.isPointerClick && GameCanvas.isPointerJustRelease)
 			{
@@ -4682,11 +4682,11 @@ public class GameScr : mScreen, IChatable
 		{
 			return;
 		}
-		if (ModFunc.isActiveTamBao && QuayTamBao.isTamBao)
-		{
-			QuayTamBao.paint(g);
-			return;
-		}
+		// if (ModFunc.isActiveTamBao && QuayTamBao.isTamBao)
+		// {
+		// 	QuayTamBao.paint(g);
+		// 	return;
+		// }
 		if (isFreez || (isUseFreez && ChatPopup.currChatPopup == null))
 		{
 			dem++;
@@ -5162,14 +5162,14 @@ public class GameScr : mScreen, IChatable
 				((ItemTime)textTime.elementAt(num25)).paintText(g, cmdMenu.x + ((Char.vItemTime.size() == 0) ? 25 : 5), ((Char.vItemTime.size() == 0) ? 45 : 90) + num25 * 12);
 			}
 			paintXoSo(g);
-			if (ModFunc.isActiveTamBao)
-			{
-				g.drawImageScale(QuayTamBao.quay, GameCanvas.w - 100, 0, 45, 45, 0);
-			}
-			if (ModFunc.isActiveNapTuan)
-			{
-				g.drawImage(imgNapTuan, GameCanvas.w - 130, 0, 0);
-			}
+			// if (ModFunc.isActiveTamBao)
+			// {
+			// 	g.drawImageScale(QuayTamBao.quay, GameCanvas.w - 100, 0, 45, 45, 0);
+			// }
+			// if (ModFunc.isActiveNapTuan)
+			// {
+			// 	g.drawImage(imgNapTuan, GameCanvas.w - 130, 0, 0);
+			// }
 			if (mResources.language == 1)
 			{
 				long second = mSystem.currentTimeMillis() - deltaTime;
@@ -5687,7 +5687,7 @@ public class GameScr : mScreen, IChatable
 				}
 				if (Char.myCharz().mobFocus.templateId != 0)
 				{
-					mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys(Char.myCharz().mobFocus.hp) + string.Empty, imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+					mFont.tahoma_7b_green2.drawString(g, NinjaUtil.lamtronDouble(Char.myCharz().mobFocus.hp) + string.Empty, imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
 				}
 			}
 			else if (Char.myCharz().npcFocus != null)
@@ -5701,12 +5701,12 @@ public class GameScr : mScreen, IChatable
 			else if (Char.myCharz().charFocus != null)
 			{
 				mFont.tahoma_7b_green2.drawString(g, Char.myCharz().charFocus.cName, imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys(Char.myCharz().charFocus.cHP) + string.Empty, imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+				mFont.tahoma_7b_green2.drawString(g, NinjaUtil.lamtronDouble(Char.myCharz().charFocus.cHP) + string.Empty, imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
 			}
 			else
 			{
 				mFont.tahoma_7b_green2.drawString(g, Char.myCharz().cName, imgScrW / 2, 9 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
-				mFont.tahoma_7b_green2.drawString(g, NinjaUtil.getMoneys(Char.myCharz().cPower) + string.Empty, imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
+				mFont.tahoma_7b_green2.drawString(g, NinjaUtil.lamtronDouble(Char.myCharz().cPower) + string.Empty, imgScrW / 2, 22 + mGraphics.addYWhenOpenKeyBoard, mFont.CENTER);
 			}
 		}
 		g.translate(-g.getTranslateX(), -g.getTranslateY());

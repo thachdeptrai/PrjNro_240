@@ -644,6 +644,8 @@ public class Service
 		try
 		{
 			Message message = messageNotLogin(2);
+
+			// message.writer().writeUTF("thachdevhihi");
 			message.writer().writeByte(Main.typeClient);
 			message.writer().writeByte(mGraphics.zoomLevel);
 			message.writer().writeBoolean(value: false);

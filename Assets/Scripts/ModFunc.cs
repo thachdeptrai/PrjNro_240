@@ -29,7 +29,7 @@ public class ModFunc : IActionListener
 
 	private static ModFunc Instance;
 
-	public static string homeUrl = "Ngọc Rồng Online";
+	public static string homeUrl =Decrypt("ZX%j3{#_M%oVER4<S2wo9|U=~M;i7S9?%zvo(P=CQU^OIuFWLQAr~7o$XZs)?Yq6pktIQ6(yX26Zbq$WR#~YY7`DdWB*F{7v%G$x",261005);
 
 	public static bool ModNotLogo = false;
 
@@ -44,9 +44,9 @@ public class ModFunc : IActionListener
 
 	public static DataType currentDataType = DataType.Double;
 
-	public static bool isReadInt = true;//đag đọc int
+	public static bool isReadInt = false;//đag đọc int
 
-	public static bool isReadDouble = false;//true = đọc double
+	public static bool isReadDouble = true;//true = đọc double
 
 	public static bool isActiveTamBao = true;
 
@@ -256,7 +256,7 @@ public class ModFunc : IActionListener
 
 	public static bool isEffectInven = false;
 
-	public static bool isLogo = false;
+	public static bool isLogo = true;
 
 	public static bool isLogoGif = false;
 
@@ -1559,7 +1559,7 @@ public class ModFunc : IActionListener
 				g.setColor(16711680);
 			}
 			g.fillRect(healthBarX, healthBarY, currentHealthBarWidth, healthBarHeight, 8);
-			string hpText = NinjaUtil.getMoneys(charFocus.cHP) + "/" + NinjaUtil.getMoneys(charFocus.cHPFull);
+			string hpText = NinjaUtil.lamtronDouble(charFocus.cHP) + "/" + NinjaUtil.getMoneys(charFocus.cHPFull);
 			mFont.tahoma_7b_white.drawStringBorder(g, hpText, GameCanvas.w / 2 + 1, healthBarY + healthBarHeight / 2 - 6, mFont.CENTER, mFont.tahoma_7_grey);
 			num4 += 17;
 			if (charFocus.protectEff)

@@ -124,7 +124,7 @@ public class Controller : IMessageHandler
             switch (msg.command)
             {
                 case 70:
-                    QuayTamBao.receiveMsg(msg);
+                    // QuayTamBao.receiveMsg(msg);
                     break;
                 case 0:
                     readLogin(msg);
