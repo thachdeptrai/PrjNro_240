@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 2f1d343cfc98c1f47beb6ca458983e6b
+guid: a36c88ec83fdda94d8e962bebc8e3f4d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -31,7 +31,7 @@ TextureImporter:
   cubemapConvolution: 0
   seamlessCubemap: 0
   textureFormat: 4
-  maxTextureSize: 273
+  maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
     filterMode: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -85,7 +85,20 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,40 +122,7 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: 25.5, y: -69.5}
-      - {x: 25.5, y: -121.5}
-      - {x: -34.5, y: -121.5}
-      - {x: -55.5, y: -121.5}
-      - {x: -136.5, y: -121.5}
-      - {x: -136.5, y: 110.5}
-      - {x: -126.5, y: 121.5}
-      - {x: -48.5, y: 121.5}
-      - {x: -35.5, y: 121.5}
-      - {x: 70.5, y: 121.5}
-      - {x: 72.49998, y: 121.5}
-      - {x: 112.5, y: 121.5}
-      - {x: 130.5, y: 101.5}
-      - {x: 133.5, y: 86.5}
-      - {x: 133.5, y: 69.5}
-      - {x: 121.5, y: 56.5}
-      - {x: 113.5, y: 54.5}
-      - {x: 90.5, y: 54.5}
-      - {x: 81.5, y: 58.5}
-      - {x: 75.49998, y: 76.5}
-      - {x: 37.5, y: 49.5}
-      - {x: 44.5, y: 42.5}
-      - {x: 126.5, y: 42.5}
-      - {x: 136.5, y: 28.5}
-      - {x: 136.5, y: -19.5}
-      - {x: 133.5, y: -19.5}
-      - {x: 133.5, y: -110.5}
-      - {x: 132.5, y: -110.5}
-      - {x: 98.49998, y: -116.5}
-      - {x: 63.5, y: -116.5}
-      - {x: 38.5, y: -88.49998}
-      - {x: 37.5, y: -85.5}
-      - {x: 37.5, y: -59.5}
+    outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000

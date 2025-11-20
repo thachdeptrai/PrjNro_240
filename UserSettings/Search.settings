@@ -11,14 +11,24 @@ showStatusBar = false
 scopes = {
 }
 providers = {
-	asset = {
-		active = true
-		priority = 25
+	log = {
+		active = false
+		priority = 210
+		defaultAction = null
+	}
+	performance = {
+		active = false
+		priority = 100
 		defaultAction = null
 	}
 	scene = {
 		active = true
 		priority = 50
+		defaultAction = null
+	}
+	asset = {
+		active = true
+		priority = 25
 		defaultAction = null
 	}
 	adb = {
@@ -31,11 +41,6 @@ providers = {
 		priority = 25
 		defaultAction = null
 	}
-	packages = {
-		active = false
-		priority = 90
-		defaultAction = null
-	}
 	profilermarkers = {
 		active = false
 		priority = 100
@@ -46,14 +51,9 @@ providers = {
 		priority = 100
 		defaultAction = null
 	}
-	performance = {
+	packages = {
 		active = false
-		priority = 100
-		defaultAction = null
-	}
-	log = {
-		active = false
-		priority = 210
+		priority = 90
 		defaultAction = null
 	}
 }

@@ -5803,7 +5803,7 @@ public class GameScr : mScreen, IChatable
 					g.fillRect(xHP + 9, yHP + 10 - 6, 22, 20);
 					g.setColor(16777215);
 					g.fillRect(xHP + 9, yHP + 10 + ((num3 != 0) ? (20 - num3) : 0) - 6, 22, (num3 == 0) ? 20 : num3);
-					g.drawImage((mScreen.keyTouch != 10) ? imgHP1 : imgHP2, xHP + 5, yHP - 3, 0);
+					g.drawImage((mScreen.keyTouch != 10) ? imgHP1 : imgHP2, xHP , yHP - 5, 0);
 					mFont.tahoma_7_green2.drawString(g, string.Empty + hpPotion, xHP + 22, yHP + 15 - 6, 2);
 				}
 				else

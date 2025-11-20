@@ -29,9 +29,9 @@ public class ModFunc : IActionListener
 
 	private static ModFunc Instance;
 
-	public static string homeUrl =Decrypt("ZX%j3{#_M%oVER4<S2wo9|U=~M;i7S9?%zvo(P=CQU^OIuFWLQAr~7o$XZs)?Yq6pktIQ6(yX26Zbq$WR#~YY7`DdWB*F{7v%G$x",261005);
+	public static string homeUrl = "Ngọc Rồng Black";
 
-	public static bool ModNotLogo = false;
+	public static bool ModNotLogo = true ;
 
 	public static bool ModNotLogoGif = false;
 
@@ -42,11 +42,11 @@ public class ModFunc : IActionListener
 		Long = 2
 	}
 
-	public static DataType currentDataType = DataType.Double;
+	public static DataType currentDataType = DataType.Int;
 
-	public static bool isReadInt = false;//đag đọc int
+	public static bool isReadInt = true;//đag đọc int
 
-	public static bool isReadDouble = true;//true = đọc double
+	public static bool isReadDouble = false;//true = đọc double
 
 	public static bool isActiveTamBao = true;
 
@@ -252,7 +252,7 @@ public class ModFunc : IActionListener
 
 	public bool isIntroOff;
 
-	public static bool isInventory = true;
+	public static bool isInventory = false;
 
 	public static bool isEffectInven = false;
 

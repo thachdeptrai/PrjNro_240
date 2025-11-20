@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 089364a64e49845a8a2743e225c25406
+guid: b5f843a4983d5cf48972cc84aeaeb47d
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 45
+  fontSize: 48
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
   - Staccato
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 946274ef37c34654ea676f16382e4851, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

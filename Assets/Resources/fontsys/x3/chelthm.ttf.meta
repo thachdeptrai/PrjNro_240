@@ -1,16 +1,17 @@
 fileFormatVersion: 2
-guid: 06cdac1e2270d46a0b4bd8cf5f96bafd
+guid: 2114222d9eaa33540b6dde51a55e1445
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 24
+  fontSize: 27
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
   - UTM Nokia Standard
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 40510552a0b536046bd637129460a1c5, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

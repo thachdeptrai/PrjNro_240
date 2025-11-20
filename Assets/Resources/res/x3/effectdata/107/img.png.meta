@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: fbc416556f1f3af439894ef9f3db466a
+guid: 49b3f4e39ad448144a8ef5da1b9c86dd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -31,7 +31,7 @@ TextureImporter:
   cubemapConvolution: 0
   seamlessCubemap: 0
   textureFormat: 4
-  maxTextureSize: 306
+  maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
     filterMode: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -85,7 +85,20 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,44 +122,7 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: -150, y: 56}
-      - {x: -150, y: 56}
-      - {x: -148, y: 60}
-      - {x: -95, y: 60}
-      - {x: -84, y: 55}
-      - {x: -84, y: -60.00001}
-      - {x: -144, y: -60.00001}
-      - {x: -148, y: -36}
-      - {x: -153, y: 16}
-      - {x: -153, y: 47}
-      - {x: -151, y: 52}
-      - {x: -152, y: 54}
-    - - {x: 51, y: -55}
-      - {x: 30, y: -11}
-      - {x: 30, y: 54}
-      - {x: 45, y: 55}
-      - {x: 45, y: 60}
-      - {x: 138, y: 60}
-      - {x: 153, y: 52}
-      - {x: 153, y: -57.99999}
-      - {x: 148, y: -60.00001}
-      - {x: 62.00002, y: -60.00001}
-    - - {x: -68, y: -60.00001}
-      - {x: -73, y: -41}
-      - {x: -73, y: 39}
-      - {x: -60, y: 60}
-      - {x: -15, y: 60}
-      - {x: 11, y: 56}
-      - {x: 21, y: 42}
-      - {x: 22, y: 43}
-      - {x: 27, y: 43}
-      - {x: 28, y: 40}
-      - {x: 26, y: 38}
-      - {x: 24, y: 38}
-      - {x: 27, y: 34}
-      - {x: 27, y: -22}
-      - {x: 16, y: -60.00001}
+    outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
