@@ -4,10 +4,13 @@
 Temp/
 Library/
 .vscode/
+obj/
+.idea/
 *.sln
 *.csproj
 *.htm
 Build/
+backup/
 Library/
 ProjectSettings/
 *.zip
