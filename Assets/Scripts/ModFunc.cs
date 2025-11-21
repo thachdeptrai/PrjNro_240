@@ -29,9 +29,8 @@ public class ModFunc : IActionListener
 
 	private static ModFunc Instance;
 
-	public static string homeUrl = "Ngọc Rồng Black";
-
-	public static bool ModNotLogo = true ;
+	public static string homeUrl ="Ngọc Rồng Black";
+	public static bool ModNotLogo = false;
 
 	public static bool ModNotLogoGif = false;
 

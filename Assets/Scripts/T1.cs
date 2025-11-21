@@ -21,7 +21,7 @@ public class T1 : mResources
 		mResources.xinchucmung = "Xin chúc mừng, bạn đã giành được giải thưởng Con số may mắn";
 		mResources.tang = "tầng";
 		mResources.kquaVongQuay = "Con số may mắn";
-		mResources.quayso = ModFunc.strModFunc;
+		mResources.quayso = "Mini game";
 		mResources.gameInfo = "Thông báo";
 		mResources.useGem = "Tự động hồi sinh";
 		mResources.autoFunction = "Chức năng auto";

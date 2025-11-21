@@ -4570,7 +4570,7 @@ public class Controller : IMessageHandler
     {
         GameScr.vcItem = d.readByte();
         ItemTemplates.itemTemplates.clear();
-        GameScr.gI().iOptionTemplates = new ItemOptionTemplate[d.readInt()];
+        GameScr.gI().iOptionTemplates = new ItemOptionTemplate[d.readUnsignedByte()];
         for (int i = 0; i < GameScr.gI().iOptionTemplates.Length; i++)
         {
             GameScr.gI().iOptionTemplates[i] = new ItemOptionTemplate();

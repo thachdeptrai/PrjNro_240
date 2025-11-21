@@ -125,7 +125,7 @@
 [Debug][OPS.OBF][Setup] Found helper assemblies (1):
   - E:\Nro\PrjNro_240\Temp\StagingArea\Data\Managed\OPS.Obfuscator.dll
 
-[Debug][OPS.OBF][Setup] Found dependency directories (20):
+[Debug][OPS.OBF][Setup] Found dependency directories (21):
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\MonoBleedingEdge\lib\mono\unityjit-win32
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\Managed\UnityEngine
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\MonoBleedingEdge\lib\mono\unityjit-win32\Facades
@@ -134,6 +134,7 @@
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\AndroidPlayer
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\iOSSupport
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport
+  - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport
   - E:\Nro\PrjNro_240\Library\ScriptAssemblies
   - E:\Nro\PrjNro_240\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom
   - E:\Nro\PrjNro_240\Assets\OPS\Editor\Plugins\Mono.Cecil

@@ -125,7 +125,7 @@
 [Debug][OPS.OBF][Setup] Found helper assemblies (1):
   - E:\Nro\PrjNro_240\Temp\StagingArea\Data\Managed\OPS.Obfuscator.dll
 
-[Debug][OPS.OBF][Setup] Found dependency directories (20):
+[Debug][OPS.OBF][Setup] Found dependency directories (21):
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\MonoBleedingEdge\lib\mono\unityjit-win32
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\Managed\UnityEngine
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\MonoBleedingEdge\lib\mono\unityjit-win32\Facades
@@ -134,6 +134,7 @@
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\AndroidPlayer
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\iOSSupport
   - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport
+  - C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\PlaybackEngines\LinuxStandaloneSupport
   - E:\Nro\PrjNro_240\Library\ScriptAssemblies
   - E:\Nro\PrjNro_240\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom
   - E:\Nro\PrjNro_240\Assets\OPS\Editor\Plugins\Mono.Cecil
@@ -242,6 +243,7 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectChar]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectCharPaint]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectData]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectFeet]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectInfoPaint]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectManager]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectPaint]  Analyse Type References in Custom Attribute References...
@@ -335,8 +337,10 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] NpcTemplate]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Paint]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/PlayerChat]  Analyse Type References in Custom Attribute References...
-[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass469_0]  Analyse Type References in Custom Attribute References...
-[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass470_0]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass477_0]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass478_0]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass505_0]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Part]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] PartImage]  Analyse Type References in Custom Attribute References...
@@ -411,6 +415,8 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Mod.XMAP.XmapController]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Mod.XMAP.XmapData/<>c]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Mod.XMAP.XmapData]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.Scripts.Mod.BossCustom]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.Scripts.Mod.CustomBossNotification]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.src.g.BigBoss]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.src.g.ClientInput]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.src.g.GameInfo]  Analyse Type References in Custom Attribute References...
@@ -464,6 +470,7 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] EffectChar] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] EffectCharPaint] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] EffectData] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] EffectFeet] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] EffectInfoPaint] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] EffectManager] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] EffectPaint] Because of the type skipping settings.
@@ -562,12 +569,16 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] NpcTemplate] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Paint] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/PlayerChat] Because of the type skipping settings.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass469_0] Because of the type skipping settings.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass470_0] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass477_0] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass478_0] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass505_0] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/PlayerChat] Because of the type skipping settings.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass469_0] Because of the type skipping settings.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass470_0] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass477_0] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass478_0] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Panel/<>c__DisplayClass505_0] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Part] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] PartImage] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] PKFlag] Because of the type skipping settings.
@@ -651,6 +662,8 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Mod.XMAP.XmapData/<>c] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Mod.XMAP.XmapData] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Mod.XMAP.XmapData/<>c] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Assets.Scripts.Mod.BossCustom] Because of the type skipping settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Assets.Scripts.Mod.CustomBossNotification] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Assets.src.g.BigBoss] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Assets.src.g.ClientInput] Because of the type skipping settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Full Type [[Assembly-CSharp] Assets.src.g.GameInfo] Because of the type skipping settings.
@@ -702,6 +715,7 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] EffectChar] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] EffectCharPaint] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] EffectData] Obfuscator Free is used.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] EffectFeet] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] EffectInfoPaint] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] EffectManager] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] EffectPaint] Obfuscator Free is used.
@@ -795,8 +809,10 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] NpcTemplate] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Paint] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel/PlayerChat] Obfuscator Free is used.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel/<>c__DisplayClass469_0] Obfuscator Free is used.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel/<>c__DisplayClass470_0] Obfuscator Free is used.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel/<>c] Obfuscator Free is used.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel/<>c__DisplayClass477_0] Obfuscator Free is used.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel/<>c__DisplayClass478_0] Obfuscator Free is used.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel/<>c__DisplayClass505_0] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Panel] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Part] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] PartImage] Obfuscator Free is used.
@@ -871,6 +887,8 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Mod.XMAP.XmapController] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Mod.XMAP.XmapData/<>c] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Mod.XMAP.XmapData] Obfuscator Free is used.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Assets.Scripts.Mod.BossCustom] Obfuscator Free is used.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Assets.Scripts.Mod.CustomBossNotification] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Assets.src.g.BigBoss] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Assets.src.g.ClientInput] Obfuscator Free is used.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Types Namespace [[Assembly-CSharp] Assets.src.g.GameInfo] Obfuscator Free is used.
@@ -927,6 +945,7 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectChar]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectCharPaint]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectData]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectFeet]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectInfoPaint]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectManager]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] EffectPaint]  Analyse Type References in Custom Attribute References...
@@ -1020,8 +1039,10 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] NpcTemplate]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Paint]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/PlayerChat]  Analyse Type References in Custom Attribute References...
-[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass469_0]  Analyse Type References in Custom Attribute References...
-[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass470_0]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass477_0]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass478_0]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel/<>c__DisplayClass505_0]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Panel]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Part]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] PartImage]  Analyse Type References in Custom Attribute References...
@@ -1096,6 +1117,8 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Mod.XMAP.XmapController]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Mod.XMAP.XmapData/<>c]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Mod.XMAP.XmapData]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.Scripts.Mod.BossCustom]  Analyse Type References in Custom Attribute References...
+[Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.Scripts.Mod.CustomBossNotification]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.src.g.BigBoss]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.src.g.ClientInput]  Analyse Type References in Custom Attribute References...
 [Info][OPS.OBF][OnAnalyse_Assemblies] [[Assembly-CSharp] Assets.src.g.GameInfo]  Analyse Type References in Custom Attribute References...
@@ -1113,6 +1136,8 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] ItemAuto] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] ItemAutoFilter] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] ModFunc/<>c] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] Panel/<>c] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] Panel/<>c__DisplayClass505_0] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] ServerListScreen/<>c] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] Session_ME/<NetworkInit>d__34] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Type [[Assembly-CSharp] UnitySourceGeneratedAssemblyMonoScriptTypes_v1/MonoScriptData] Because of compatibility component: .Net Framework - Compatibility : Because of the 'Do not obfuscate serializable classes' settings.
@@ -1205,6 +1230,8 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectChar::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectCharPaint::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectData::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectFeet::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectFeet::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectInfoPaint::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectManager::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void EffectManager::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
@@ -1343,8 +1370,10 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Paint::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Paint::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel/PlayerChat::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel/<>c__DisplayClass469_0::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
-[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel/<>c__DisplayClass470_0::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel/<>c::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel/<>c::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel/<>c__DisplayClass477_0::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel/<>c__DisplayClass478_0::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Panel::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Part::.ctor(System.Int32)] Because of compatibility component: .Net Framework - Compatibility : Is Special.
@@ -1446,6 +1475,9 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Mod.XMAP.XmapData/<>c::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Mod.XMAP.XmapData/<>c::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Mod.XMAP.XmapData::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Assets.Scripts.Mod.BossCustom::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Assets.Scripts.Mod.BossCustom::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Assets.Scripts.Mod.CustomBossNotification::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Assets.src.g.BigBoss::.ctor(System.Int32,System.Int16,System.Int16,System.Int32,System.Double,System.Double,System.Int32)] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Assets.src.g.BigBoss::.cctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Method [[Assembly-CSharp] System.Void Assets.src.g.ClientInput::.ctor()] Because of compatibility component: .Net Framework - Compatibility : Is Special.
@@ -1559,6 +1591,9 @@
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] ModFunc/<>c ModFunc/<>c::<>9] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] System.Func`2<System.Threading.Tasks.Task,System.Boolean> ModFunc/<>c::<>9__205_0] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] System.Threading.ThreadStart ModFunc/<>c::<>9__235_0] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] Panel/<>c Panel/<>c::<>9] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] System.Func`2<ItemOption,System.Boolean> Panel/<>c::<>9__480_0] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
+[Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] System.Collections.Generic.Dictionary`2<System.String,Image> Panel/<>c__DisplayClass505_0::imageCache] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] ServerListScreen/<>c ServerListScreen/<>c::<>9] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] ActionChat ServerListScreen/<>c::<>9__43_0] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
 [Info][OPS.OBF][OnAnalyse_Assemblies] Skip Field [[Assembly-CSharp] System.Int32 Session_ME/<NetworkInit>d__34::<>1__state] Because of compatibility component: Unity - Compatibility : The field is serializable and the settings 'Obfuscate SerializeAble fields' got deactivated.
@@ -1761,21 +1796,3 @@
 [Debug][OPS.OBF][OnPostAssetsBuild] Unload Obfuscator Settings
 [Debug][OPS.OBF][OnPostAssetsBuild] Unload DataContainer
 [Info][OPS.OBF][OnPostAssetsBuild] Finished PostAssetsBuild!
-[Info][OPS.OBF][Setup] Active Editor Platform: WindowsEditorPlatform
-[Info][OPS.OBF][Setup] Active Build Platform: DefaultBuildPlatform
-[Info][OPS.OBF][Setup] Start 'PostBuild' process.
-[Info][OPS.OBF][Setup] Load Project
-[Debug][OPS.OBF][Setup] Load DataContainer
-[Debug][OPS.OBF][Setup] Load Obfuscator Settings
-[Debug][OPS.OBF][Setup] Load Pipeline Components
-[Debug][OPS.OBF][Setup] Found Components (1):
-  - Post Process Unity MonoBehaviour Assets (Post Process Unity MonoBehaviour Assets)
-
-[Debug][OPS.OBF][Setup] Load Pipeline
-[Info][OPS.OBF][OnPostBuild] Process component Post Process Unity MonoBehaviour Assets
-[Info][OPS.OBF][OnPostBuild] Unload Project
-[Debug][OPS.OBF][OnPostBuild] Unload Pipeline
-[Debug][OPS.OBF][OnPostBuild] Unload Pipeline Components
-[Debug][OPS.OBF][OnPostBuild] Unload Obfuscator Settings
-[Debug][OPS.OBF][OnPostBuild] Unload DataContainer
-[Info][OPS.OBF][OnPostBuild] Finished PostBuild!

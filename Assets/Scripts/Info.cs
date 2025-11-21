@@ -64,152 +64,161 @@ public class Info : IActionListener
 		infoWaitToShow.removeAllElements();
 	}
 
-	public void paint(mGraphics g, int x, int y, int dir)
-	{
-		if (infoWaitToShow.size() == 0)
-		{
-			return;
-		}
-		g.translate(x, y);
-		if (says != null && says.Length != 0 && type != 1)
-		{
-			if (outSide)
-			{
-				cx -= GameScr.cmx;
-				cy -= GameScr.cmy;
-				cy += 35;
-			}
-			int num = ((mGraphics.zoomLevel != 1) ? 10 : 0);
-			if (info.charInfo == null)
-			{
-				PopUp.paintPopUp(g, X, Y, W, H, 16777215, isButton: false);
-			}
-			else
-			{
-				mSystem.paintPopUp2(g, X - 23, Y - num / 2, W + 15, H + ((!GameCanvas.isTouch) ? 14 : 0) + num);
-			}
-			if (info.charInfo == null)
-			{
-				g.drawRegion(gocnhon, 0, 0, 9, 8, (dir != 1) ? 2 : 0, cx - 3 + ((dir != 1) ? 20 : (-15)), cy - ch - 20 + sayRun + 2, mGraphics.TOP | mGraphics.HCENTER);
-			}
-			int num2 = -1;
-			for (int i = 0; i < says.Length; i++)
-			{
-				mFont mFont2 = mFont.tahoma_7;
-				string text = says[i];
-				int num4 = 0;
-				if (says[i].StartsWith("|"))
-				{
-					string[] array = Res.split(says[i], "|", 0);
-					if (array.Length == 3)
-					{
-						text = array[2];
-					}
-					if (array.Length == 4)
-					{
-						text = array[3];
-						int.Parse(array[2]);
-					}
-					num4 = int.Parse(array[1]);
-					num2 = num4;
-				}
-				else
-				{
-					num4 = num2;
-				}
-				switch (num4)
-				{
-				case -1:
-					mFont2 = mFont.tahoma_7;
-					break;
-				case 0:
-					mFont2 = mFont.tahoma_7b_dark;
-					break;
-				case 1:
-					mFont2 = mFont.tahoma_7b_green;
-					break;
-				case 2:
-					mFont2 = mFont.tahoma_7b_blue;
-					break;
-				case 3:
-					mFont2 = mFont.tahoma_7_red;
-					break;
-				case 4:
-					mFont2 = mFont.tahoma_7_green;
-					break;
-				case 5:
-					mFont2 = mFont.tahoma_7_blue;
-					break;
-				case 7:
-					mFont2 = mFont.tahoma_7b_red;
-					break;
-				}
-				if (info.charInfo == null)
-				{
-					mFont2.drawString(g, text, cx, cy - ch - 15 + sayRun + i * 12 - says.Length * 12 - 9, 2);
-					continue;
-				}
-				int num5 = X - 23;
-				int num6 = Y - num / 2;
-				int num7 = ((mSystem.clientType != 1) ? (W + 25) : (W + 28));
-				int num8 = H + ((!GameCanvas.isTouch) ? 14 : 0) + num;
-				g.setColor(4465169);
-				g.fillRect(num5, num6 + num8, num7, 2);
-				int num9 = info.timeCount * num7 / info.maxTime;
-				if (num9 < 0)
-				{
-					num9 = 0;
-				}
-				g.setColor(43758);
-				g.fillRect(num5, num6 + num8, num9, 2);
-				if (info.timeCount == 0)
-				{
-					return;
-				}
-				info.charInfo.paintHead(g, X + 5, Y + H / 2, 0);
-				if (mGraphics.zoomLevel == 1)
-				{
-					((!info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2).drawString(g, (info.charInfo.isTichXanh ? "     " : string.Empty) + info.charInfo.cName, X + 12, Y + 3, 0);
-					if (info.charInfo.isTichXanh)
-					{
-						ModFunc.PaintTicks(g, X + 8, Y + 2);
-					}
-				}
-				else
-				{
-					((!info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2).drawString(g, (info.charInfo.isTichXanh ? "     " : string.Empty) + info.charInfo.cName, X + 12, Y - 3, 0);
-					if (info.charInfo.isTichXanh)
-					{
-						ModFunc.PaintTicks(g, X + 9, Y - 2);
-					}
-				}
-				if (!GameCanvas.isTouch)
-				{
-					if (!TField.isQwerty)
-					{
-						mFont.tahoma_7b_green2Small.drawString(g, "Nhấn # để chat", X + W / 2 + 10, Y + H, mFont.CENTER);
-					}
-					else
-					{
-						mFont.tahoma_7b_green2Small.drawString(g, "Nhấn Y để chat", X + W / 2 + 10, Y + H, mFont.CENTER);
-					}
-				}
-				if (mGraphics.zoomLevel == 1)
-				{
-					TextInfo.paint(g, text, X + 14, Y + H / 2 + 2, W - 16, H, mFont.tahoma_7_whiteSmall);
-					continue;
-				}
-				string[] array2 = mFont.tahoma_7_whiteSmall.splitFontArray(text, 120);
-				for (int j = 0; j < array2.Length; j++)
-				{
-					mFont.tahoma_7_whiteSmall.drawString(g, array2[j], X + 12, Y + 12 + j * 12 - 3, 0);
-				}
-				GameCanvas.resetTrans(g);
-			}
-			_ = info.charInfo;
-		}
-		g.translate(-x, -y);
-	}
+    public void paint(mGraphics g, int x, int y, int dir) 
+    {
+        if (infoWaitToShow.size() == 0)
+        {
+            return;
+        }
+
+        g.translate(x, y);
+
+        if (says != null && says.Length != 0 && type != 1)
+        {
+            if (outSide)
+            {
+                cx -= GameScr.cmx;
+                cy -= GameScr.cmy;
+                cy += 35;
+            }
+
+            int zoomOffset = (mGraphics.zoomLevel != 1) ? 10 : 0;
+
+            if (info.charInfo == null)
+            {
+                PopUp.paintPopUp(g, X, Y, W, H, 16777215, isButton: false);
+            }
+            else
+            {
+                mSystem.paintPopUp2(g, X - 23, Y - zoomOffset / 2, W + 15, H + ((!GameCanvas.isTouch) ? 14 : 0) + zoomOffset);
+            }
+
+            if (info.charInfo == null)
+            {
+                g.drawRegion(
+                    gocnhon, 0, 0, 9, 8,
+                    (dir != 1) ? 2 : 0,
+                    cx - 3 + ((dir != 1) ? 20 : (-15)),
+                    cy - ch - 20 + sayRun + 2,
+                    mGraphics.TOP | mGraphics.HCENTER
+                );
+            }
+
+            int lastColorType = -1; 
+
+            for (int i = 0; i < says.Length; i++)
+            {
+                mFont font = mFont.tahoma_7;
+                int fontSize = 2;
+                string text = says[i];
+                int colorType = 0;
+
+                if (says[i].StartsWith("|"))
+                {
+                    string[] arr = Res.split(says[i], "|", 0);
+                    if (arr.Length == 3)
+                    {
+                        text = arr[2];
+                    }
+                    if (arr.Length == 4)
+                    {
+                        text = arr[3];
+                        fontSize = int.Parse(arr[2]);
+                    }
+                    colorType = int.Parse(arr[1]);
+                    lastColorType = colorType;
+                }
+                else
+                {
+                    colorType = lastColorType;
+                }
+
+                switch (colorType)
+                {
+                    case -1: font = mFont.tahoma_7; break;
+                    case 0: font = mFont.tahoma_7b_dark; break;
+                    case 1: font = mFont.tahoma_7b_green; break;
+                    case 2: font = mFont.tahoma_7b_blue; break;
+                    case 3: font = mFont.tahoma_7_red; break;
+                    case 4: font = mFont.tahoma_7_green; break;
+                    case 5: font = mFont.tahoma_7_blue; break;
+                    case 7: font = mFont.tahoma_7b_red; break;
+                }
+
+                if (info.charInfo == null)
+                {
+                    font.drawString(
+                        g, text, cx, cy - ch - 15 + sayRun + i * 12 - says.Length * 12 - 9, 2
+                    );
+                    continue;
+                }
+
+                int popupX = X - 23;
+                int popupY = Y - zoomOffset / 2;
+                int popupWidth = ((mSystem.clientType != 1) ? (W + 25) : (W + 28));
+                int popupHeight = H + ((!GameCanvas.isTouch) ? 14 : 0) + zoomOffset;
+
+                g.setColor(4465169); 
+                g.fillRect(popupX, popupY + popupHeight, popupWidth, 2);
+
+                int timeWidth = info.timeCount * popupWidth / info.maxTime;
+                if (timeWidth < 0) timeWidth = 0;
+
+                g.setColor(43758);  
+                g.fillRect(popupX, popupY + popupHeight, timeWidth, 2);
+
+                if (info.timeCount == 0)
+                {
+                    return;
+                }
+
+                info.charInfo.paintCharBody(g, X - 7, Y + H + 5, 1, 0, true);
+
+                if (mGraphics.zoomLevel == 1)
+                {
+                    ((!info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2)
+                        .drawString(g, (info.charInfo.isTichXanh ? "     " : string.Empty) + info.charInfo.cName, X + 12, Y + 3, 0);
+
+                    if (info.charInfo.isTichXanh)
+                        ModFunc.PaintTicks(g, X + 8, Y + 2);
+                }
+                else
+                {
+                    ((!info.isChatServer) ? mFont.tahoma_7b_greenSmall : mFont.tahoma_7b_yellowSmall2)
+                        .drawString(g, (info.charInfo.isTichXanh ? "     " : string.Empty) + info.charInfo.cName, X + 12, Y - 3, 0);
+
+                    if (info.charInfo.isTichXanh)
+                        ModFunc.PaintTicks(g, X + 9, Y - 2);
+                }
+
+                if (!GameCanvas.isTouch)
+                {
+                    if (!TField.isQwerty)
+                        mFont.tahoma_7b_green2Small.drawString(g, "Nhấn # để chat", X + W / 2 + 10, Y + H, mFont.CENTER);
+                    else
+                        mFont.tahoma_7b_green2Small.drawString(g, "Nhấn Y để chat", X + W / 2 + 10, Y + H, mFont.CENTER);
+                }
+
+                if (mGraphics.zoomLevel == 1)
+                {
+                    TextInfo.paint(g, text, X + 14, Y + H / 2 + 2, W - 16, H, mFont.tahoma_7_whiteSmall);
+                }
+                else
+                {
+                    string[] arrLines = mFont.tahoma_7_whiteSmall.splitFontArray(text, 120);
+                    for (int j = 0; j < arrLines.Length; j++)
+                    {
+                        mFont.tahoma_7_whiteSmall.drawString(g, arrLines[j], X + 12, Y + 12 + j * 12 - 3, 0);
+                    }
+                }
+
+                GameCanvas.resetTrans(g);
+            }
+        }
+
+        g.translate(-x, -y);
+    }
+
 
 	public void update()
 	{
